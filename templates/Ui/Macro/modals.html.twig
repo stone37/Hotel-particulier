@@ -1,0 +1,48 @@
+{% macro simple(form, data, message, icon, type, yes_class, no_class) %}
+    {% import 'Ui/Macro/messages.html.twig' as message %}
+
+    {{ form_start(form) }}
+    <div class="modal fade" id="confirm{{ data.id }}" tabindex="-1" role="dialog" aria-labelledby="confirm" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-notify {{ type }}" role="document">
+            <div class="modal-content text-center">
+                <div class="modal-header d-flex justify-content-center">
+                    {{ message.modal(message) }}
+                </div>
+                <div class="modal-body">
+                    <div class="mt-3"><i class="{{ icon }} fa-4x animated rotateIn"></i></div>
+                    <input type="hidden" name="referer" value="{{app.request.headers.get('referer')}}"/>
+                </div>
+                <div class="modal-footer flex-center">
+                    <button type="submit" class="btn {{ yes_class }} font-weight-stone waves-effect">Oui</button>
+                    <button type="button" class="btn {{ no_class }} font-weight-stone" data-dismiss="modal">Non</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endmacro %}
+
+{% macro bulk(form, data, message, icon, type, yes_class, no_class) %}
+    {% import 'Ui/Macro/messages.html.twig' as message %}
+
+    {{ form_start(form, data, message, icon, type, yes_class, no_class) }}
+    <div class="modal fade" id="confirmMulti{{ data|length }}" tabindex="-1" role="dialog" aria-labelledby="confirmMulti" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-notify {{ type }}" role="document">
+            <div class="modal-content text-center">
+                <div class="modal-header d-flex justify-content-center">
+                    {{ message.modal(message) }}
+                </div>
+                <div class="modal-body">
+                    <div class="mt-3"><i class="{{ icon }} fa-4x animated rotateIn"></i></div>
+                    <input type="hidden" name="referer" value="{{app.request.headers.get('referer')}}"/>
+                </div>
+                <div class="modal-footer flex-center">
+                    <button type="submit" class="btn {{ yes_class }} font-weight-stone waves-effect">Oui</button>
+                    <button type="button" class="btn {{ no_class }} font-weight-stone" data-dismiss="modal">Non</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endmacro %}
+

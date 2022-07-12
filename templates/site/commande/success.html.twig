@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Felicitation, votre paiement a été effectué avec succès' %}
+
+{% set settings = config.get %}
+
+{% block meta %}
+    {% set content = "Felicitation, votre paiement a été effectué avec succès" %}
+    <meta name="description" content="{{ content }}"/>
+    <meta property="og:description" content="{{ content }}" />
+{% endblock %}
+
+{% block app_flashes %}{% endblock %}
+{% block app_booking %}{% endblock %}
+{% block app_footer %}{% endblock %}
+{% block app_intro %}
+
+    <section class="view intro-2 intro-success" style="background-image: url({{ asset('images/img3.jpg') }}); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+        <div class="mask rgba-gradient7 h-100 d-flex justify-content-center align-items-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-7 col-md-10 col-sm-12 mx-auto">
+                        <div class="card wow fadeIn" data-wow-delay="0.3s">
+                            <div class="card-body text-center py-4 px-4">
+                                <div class="d-flex justify-content-center mb-2">
+                                    <img src="{{ asset('images/payment.svg') }}" alt="" style="max-width: 200px;" />
+                                </div>
+                                <h5 class="h5-responsive font-weight-stone-600 text-center my-3">Felicitation, votre paiement a été effectué avec succès</h5>
+                                <p class="text-center mb-4">
+                                    Un message vous sera envoyer par mail, une fois votre reservation confirmer.
+                                    Ce message contiendra votre <strong class="font-weight-stone-600">numéro de reservation</strong>.
+                                </p>
+
+                                <div class="d-flex {% if app.user %}justify-content-between{% else %}justify-content-center{% endif %}">
+                                    <a href="{{ path('app_home') }}" class="btn btn-outline-primary btn-lg {% if app.user %}btn-block mr-1{% endif %}">
+                                        <i class="fas fa-home mr-2"></i> Retour à l'accueil
+                                    </a>
+
+                                    {% if app.user %}
+                                        <a href="{{ path('app_dashboard_booking_index') }}" class="btn btn-primary btn-lg btn-block ml-1">
+                                            Mes reservations <i class="fas fa-long-arrow-alt-right ml-2"></i>
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+
+{% block app_body %}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        html, body, header, .view {
+            height: 100vh !important;
+        }
+
+        @media (max-width: 740px) {
+            html, body, header, .view {
+                height: 700px;
+            }
+        }
+        @media (min-width: 800px) and (max-width: 850px) {
+            html, body, header, .view {
+                height: 650px;
+            }
+        }
+
+        main {
+            display: none !important;
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+
+
+
+
+
+
+

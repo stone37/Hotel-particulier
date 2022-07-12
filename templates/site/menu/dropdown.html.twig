@@ -1,0 +1,38 @@
+<li class="nav-item avatar dropdown">
+    <a class="nav-link dropdown-toggle" id="userDropdownMenu" data-toggle="dropdown"
+       aria-haspopup="true" aria-expanded="false">
+        {% if vich_uploader_asset(user, 'file') %}
+            <img src="{{ image_url(user, 110, 110) }}" class="rounded-circle z-depth-2" alt="avatar image">
+        {% else %}
+            <span class="user-prefix d-inline-block rounded-circle">
+                {{ app_prefix_user_name(user) }}
+            </span>
+        {% endif %}
+    </a>
+    <div class="dropdown-menu dropdown-menu-right dropdown-primary"
+         aria-labelledby="userDropdownMenu" style="margin-top: 1px !important;">
+        {% if is_granted("ROLE_ADMIN") %}
+            <a class="dropdown-item" href="{{ path('app_admin_dashboard') }}">
+                <i class="fas fa-user-secret mr-2"></i>
+                Administration
+            </a>
+        {% else %}
+            <a class="dropdown-item" href="{{ path('app_dashboard_index') }}">
+                <i class="fas fa-th-large mr-2"></i>
+                Tableau de bord
+            </a>
+            <a class="dropdown-item" href="{{ path('app_dashboard_booking_index') }}">
+                <i class="fas fa-calendar mr-2"></i>
+                Mes reservations
+            </a>
+            <a class="dropdown-item" href="{{ path('app_user_profil_edit') }}">
+                <i class="fas fa-user mr-2"></i>
+                Mon profil
+            </a>
+        {% endif %}
+        <a class="dropdown-item" href="{{ path('app_logout') }}">
+            <i class="fas fa-power-off mr-2"></i>
+            Déconnexion
+        </a>
+    </div>
+</li>

@@ -1,0 +1,75 @@
+html,
+body,
+header,
+.view {
+    height: 100%;
+}
+
+@media (max-width: 740px) {
+    html,
+    body,
+    header,
+    .view {
+        height: 100vh;
+    }
+}
+@media (min-width: 800px) and (max-width: 850px) {
+    html,
+    body,
+    header,
+    .view {
+        height: 600px;
+    }
+}
+
+/*
+.btn .fa {
+    margin-left: 3px;
+}
+
+.top-nav-collapse {
+    background-color: #424f95 !important;
+}
+
+.navbar:not(.top-nav-collapse) {
+    background: transparent !important;
+}
+
+@media (max-width: 991px) {
+    .navbar:not(.top-nav-collapse) {
+        background: #424f95 !important;
+    }
+}
+
+
+.btn-white {
+    color: black !important;
+}
+
+h6 {
+    line-height: 1.7;
+}*/
+
+.skin-light .rgba-gradient {
+    background: -moz-linear-gradient(45deg, rgba(65, 44, 133, 0.7), rgba(65, 44, 133, 0.7) 100%);
+    background: -webkit-linear-gradient(45deg, rgba(65, 44, 133, 0.7), rgba(65, 44, 133, 0.7) 100%);
+    background: -webkit-gradient(linear, 45deg, from(rgba(65, 44, 133, 0.7)), to(rgba(65, 44, 133, 0.7)));
+    background: -o-linear-gradient(45deg, rgba(65, 44, 133, 0.7), rgba(65, 44, 133, 0.7) 100%);
+    background: linear-gradient(to 45deg, rgba(65, 44, 133, 0.7), rgba(65, 44, 133, 0.7) 100%);
+}
+
+.skin-light .content-color {
+    /*background-color: rgba(255, 154, 22, .9) !important;*/
+    background-color: rgba(48, 55, 55, .98) !important;
+}
+
+.skin-light ul a.btn {
+    width: 3.1rem !important;
+    height: 3rem !important;
+    padding: 14px 0 0 0 !important;
+}
+
+.skin-light ul a.btn i {
+    font-size: 1.4rem !important;
+}
+

@@ -1,0 +1,32 @@
+{% macro default(message, icon, type) %}
+    <div class="alert {{ type|default('alert-dark') }} text-center mx-2 my-3">
+        <i class="fas {{ icon }} mr-1"></i>
+        {{ message|trans }}
+    </div>
+{% endmacro %}
+
+{% macro info(message) %}
+    {% import _self as messages %}
+    {{ messages.default(message, 'fa-exclamation-triangle', 'alert-info') }}
+{% endmacro %}
+
+{% macro success(message) %}
+    {% import _self as messages %}
+    {{ messages.default(message, 'fa-check', 'alert-success') }}
+{% endmacro %}
+
+{% macro error(message) %}
+    {% import _self as messages %}
+    {{ messages.default(message, 'fa-times', 'alert-danger') }}
+{% endmacro %}
+
+{% macro modal(message) %}
+    <p class="heading font-weight-stone">
+        {{ message|trans }}
+    </p>
+{% endmacro %}
+
+
+
+
+

@@ -1,0 +1,19 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}
+    Voir une reservation | Reservations | {{ parent() }}
+{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/booking/show/_header.html.twig' %}
+
+    {% include 'admin/booking/show/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

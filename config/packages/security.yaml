@@ -1,17 +1,40 @@
 security:
+    enable_authenticator_manager: true
+
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
-        users_in_memory: { memory: null }
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: username
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
+            entry_point: App\Security\AuthenticationEntryPoint
             lazy: true
-            provider: users_in_memory
+            user_checker: App\Security\UserChecker
+            provider: app_user_provider
+            switch_user: { role: CAN_SWITCH_USER, parameter: _ninja }
+            custom_authenticator:
+                - App\Auth\Authenticator
+                - App\Authenticator\GoogleAuthenticator
+                - App\Authenticator\FacebookAuthenticator
+            logout:
+                path: app_logout
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800 # 1 week in seconds
+                path: /
+                samesite: strict
+            access_denied_handler: App\Security\AccessDeniedHandler
+                # where to redirect after logout
+                # target: app_any_route
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
@@ -37,3 +60,16 @@ when@test:
                 cost: 4 # Lowest possible value for bcrypt
                 time_cost: 3 # Lowest possible value for argon
                 memory_cost: 10 # Lowest possible value for argon
+
+#    - main:
+#          anonymous: true
+#          oauth:
+#              resource_owners:
+#                  my_github:          "/login/check-github"
+#              login_path:        /login
+#              use_forward:       false
+#              failure_path:      /login
+#
+#              oauth_user_provider:
+#                  service: hwi_oauth.user.provider
+

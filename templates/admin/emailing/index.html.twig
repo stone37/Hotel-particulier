@@ -1,0 +1,27 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}
+    {% if type == '1' %}
+        Liste des email envoyer
+    {% elseif type == '2' %}
+        Liste des email envoyés aux utilisateurs
+    {% else %}
+        Liste des email envoyés aux abonnés de la newsletters
+    {% endif %}
+    | {{ parent() }}
+{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/emailing/index/_header.html.twig' %}
+
+    {% include 'admin/emailing/index/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+

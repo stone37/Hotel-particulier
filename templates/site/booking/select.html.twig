@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Sélectionnez votre date de séjour' %}
+
+{% set settings = config.get %}
+
+{% block meta %}
+    {% set content = "Sélectionnez votre date de séjour" %}
+    <meta name="description" content="{{ content }}"/>
+    <meta property="og:description" content="{{ content }}" />
+{% endblock %}
+
+{% block app_flashes %}{% endblock %}
+{% block app_intro %}{% endblock %}
+{% block app_booking %}{% endblock %}
+{% block app_footer %}{% endblock %}
+
+{% block app_body %}
+   <main>
+       {{ include('site/booking/select/content.html.twig') }}
+   </main>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        window.hostel.MAX_ADULT = parseInt("{{ room.maximumAdults }}");
+        window.hostel.MAX_CHILDREN = parseInt("{{ room.maximumOfChildren }}");
+    </script>
+    {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/site/booking.js'} %}
+{% endblock %}
+
+
+
+
+
+
+
+

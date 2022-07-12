@@ -1,0 +1,25 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+{% block app_navbar_first %}
+    {% include 'admin/menu/sidebar.html.twig' %}
+
+    {% include 'admin/menu/top.html.twig' %}
+{% endblock %}
+
+{% block app_navbar_second %}{% endblock %}
+
+{% block app_footer %}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% include 'Ui/_stylesheets.html.twig' with {'path': 'assets/css/admin/admin.css'} %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/admin/admin.js'} %}
+{% endblock %}

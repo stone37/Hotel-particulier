@@ -1,0 +1,23 @@
+<div class="row d-flex justify-content-center">
+    <div class="col-12 col-md-10">
+        <div class="form-row">
+            <div class="col-12">
+                {{ form_row(form.name) }}
+            </div>
+        </div>
+        <div class="form-row mt-1">
+            <div class="col-12 text-center text-md-left">
+                <div class="grey-text pb-1">{{ form.enabled.vars.label|trans }}</div>
+                <div class="switch stone-switch mt-1 ml-md-2">
+                    <label>
+                        Non
+                        <input type="checkbox" name="{{ form.enabled.vars.full_name }}" id="{{ form.enabled.vars.id }}"
+                               value="{{ form.enabled.vars.value }}" {% if form.enabled.vars.checked %}checked="checked{% endif %}">
+                        <span class="lever"></span>
+                        Oui
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

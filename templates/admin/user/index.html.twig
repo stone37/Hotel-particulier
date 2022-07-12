@@ -1,0 +1,21 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}
+    Comptes clients
+    {% if type == 1 %}actif{% elseif type == 2 %}non confirmés{% else %}retirés{% endif %}
+    | {{ parent() }}
+{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/user/index/_header.html.twig' %}
+
+    {% include 'admin/user/index/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}
+    Voir un compte client
+    {% if type == 1 %}actif{% elseif type == 2 %}non confirmés{% else %}retirés{% endif %} | {{ parent() }}
+{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/user/show/_header.html.twig' %}
+
+    {% include 'admin/user/show/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

@@ -1,0 +1,99 @@
+<div class="row mb-4">
+    <div class="col-12 d-flex justify-content-center justify-content-md-between">
+        <div id="entity-list-delete-bulk-btn" class="mr-3 d-none entity-order-delete-bulk-btn">
+            {% include 'Ui/Grid/Action/delete.html.twig' with {'action': {'label': 'Supprimer'}} %}
+        </div>
+    </div>
+</div>
+
+{% if orders|length > 0 %}
+    <div class="row app-user mb-5">
+        <div class="col-12">
+            <table class="table table-responsive-sm">
+                <thead class="text-primary">
+                <tr>
+                    <th scope="col" class="text-center">
+                        <div class="" style="position: relative; right: 10px; top: 2px">
+                            <input type="checkbox" name="principal" class="form-check-input filled-in" id="principal-checkbox" value="" style="margin: 0 !important;" />
+                            <label class="form-check-label" for="principal-checkbox" style="padding-left: 0!important; "></label>
+                        </div>
+                    </th>
+                    <th scope="col" class="font-weight-stone-500 text-center">Date</th>
+                    <th scope="col" class="font-weight-stone-500 text-center">Client</th>
+                    <th scope="col" class="font-weight-stone-500 text-center">Reference</th>
+                    <th scope="col" class="font-weight-stone-500 text-center">Montant</th>
+                    <th scope="col" class="font-weight-stone-500 text-center">Etat du paiement</th>
+                    <th scope="col" class="font-weight-stone-500 text-center"></th>
+                </tr>
+                </thead>
+                <tbody id="list-checkbook-container">
+                {% for order in orders %}
+                    {% dump(order) %}
+                    <tr>
+                        <td class="text-center">
+                            <div class="" style="position: relative; right: 10px; top: 2px">
+                                <input type="checkbox" name="checkbox{{ loop.index }}" class="form-check-input filled-in list-checkbook"
+                                       id="checkbox{{ loop.index }}" value="{{ order.id }}" style="margin: 0 !important;" />
+                                <label class="form-check-label" for="checkbox{{ loop.index }}" style="padding-left: 0!important; "></label>
+                            </div>
+                        </td>
+                        <td class="text-center">{{ order.createdAt|date('d/m/Y H:i:s') }}</td>
+                        <td class="text-center">
+                            {% if order.user %}
+                                <div class="text-primary font-weight-500">{{ order.user.firstName|capitalize ~ ' ' ~ order.user.lastName|capitalize  }}</div>
+                                <div class="small">{{ order.user.email }}</div>
+                            {% endif %}
+                        </td>
+                        <td class="text-center">
+                            {% if order.reference %}
+                                {{ order.reference }}
+                            {% else %}
+                                <span class="badge badge-grey">Aucun</span>
+                            {% endif %}
+                        </td>
+                        <td class="text-center">{{ order.amountTotal|format_currency('XOF') }}</td>
+                        <td class="text-center">
+                            {% if order.validated %}
+                                <span class="badge badge-success">
+                                    <i class="fas fa-check mr-1"></i> Payée
+                                </span>
+                            {% else %}
+                                <span class="badge badge-warning">
+                                    <i class="fas fa-clock mr-1"></i> En attente de règlement
+                                </span>
+                            {% endif %}
+                        </td>
+                        <td class="text-center">
+                            <div class="dropdown">
+                                <a class="dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-ellipsis-h text-primary"></i></a>
+                                <div class="dropdown-menu dropdown-primary dropdown-menu-right mt-0">
+                                    <a href="{{ path('app_admin_commande_show', {'id': order.id}) }}" class="dropdown-item">
+                                        <i class="fas fa-eye mr-1"></i> Voir
+                                    </a>
+                                    <a class="dropdown-item entity-order-delete" id="{{ order.id }}">
+                                        <i class="fas fa-trash mr-1 text-danger"></i> Supprimer
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-12 d-flex justify-content-start mt-2">
+            <div class="font-weight-stone-500 text-secondary">{{ orders.totalItemCount }} resultats</div>
+        </div>
+        <div class="col-12 d-flex justify-content-center mt-2 mb-5">
+            {{ knp_pagination_render(orders, 'Ui/_pagination.html.twig') }}
+        </div>
+    </div>
+{% else %}
+    <div class="row app-user d-flex justify-content-center">
+        <div class="col-12 col-md-8 text-center mt-3 mt-md-5">
+            <h3 class="h3-responsive font-weight-stone-600">
+                Vous n'avez aucune commande.
+            </h3>
+        </div>
+    </div>
+{% endif %}

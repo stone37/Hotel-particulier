@@ -1,0 +1,17 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Comptes administrateurs | {{ parent() }}{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/admin/index/_header.html.twig' %}
+
+    {% include 'admin/admin/index/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

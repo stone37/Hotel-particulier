@@ -1,0 +1,283 @@
+<section class="row">
+    <div class="col-12">
+        <h4 class="h4-responsive font-weight-stone-500 text-primary mb-3">Hébergement, reservations et performance</h4>
+    </div>
+    <div class="col-lg-3 col-md-6 col-12 mb-4">
+        <div class="card">
+            <div class="row mt-3">
+                <div class="col-md-4 col-5 text-left pl-4">
+                    <a href="{{ path('app_admin_booking_index') }}" type="button" class="btn-floating btn-lg blue ml-4"><i class="fas fa-calendar-day" aria-hidden="true"></i></a>
+                </div>
+                <div class="col-md-8 col-7 text-right mb-2">
+                    <h5 class="ml-4 mt-4 mb-2 font-weight-bold dark-grey-text pr-3">{{ bookingNewNumber }}</h5>
+                    <p class="font-small grey-text font-weight-normal pr-3">Nouvelle reservations</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-12 mb-4">
+        <div class="card">
+            <div class="row mt-3">
+                <div class="col-md-4 col-5 text-left pl-4">
+                    <a href="{{ path('app_admin_booking_confirmed_index') }}" type="button"  class="btn-floating btn-lg success-color ml-4"><i class="fas fa-calendar-check" aria-hidden="true"></i></a>
+                </div>
+                <div class="col-md-8 col-7 text-right mb-2">
+                    <h5 class="ml-4 mt-4 mb-2 font-weight-bold dark-grey-text pr-3">{{ bookingConfirmNumber }}</h5>
+                    <p class="font-small grey-text font-weight-normal pr-3">Reservations confirmer</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-12 mb-4">
+        <div class="card">
+            <div class="row mt-3">
+                <div class="col-md-4 col-5 text-left pl-4">
+                    <a href="{{ path('app_admin_booking_cancel_index') }}" type="button"  class="btn-floating btn-lg danger-color ml-4"><i class="fas fa-calendar-times" aria-hidden="true"></i></a>
+                </div>
+                <div class="col-md-8 col-7 text-right mb-2">
+                    <h5 class="ml-4 mt-4 mb-2 font-weight-bold dark-grey-text pr-3">{{ bookingCancelNumber }}</h5>
+                    <p class="font-small grey-text font-weight-normal pr-3">Reservations annuler</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-12 mb-4">
+        <div class="card">
+            <div class="row mt-3">
+                <div class="col-md-4 col-5 text-left">
+                    <a href="{{ path('app_admin_booking_archive_index') }}" type="button"  class="btn-floating btn-lg amber ml-4"><i class="fas fa-calendar-alt" aria-hidden="true"></i></a>
+                </div>
+                <div class="col-md-8 col-7 text-right mb-2">
+                    <h5 class="ml-4 mt-4 mb-2 font-weight-bold dark-grey-text pr-3">{{ bookingArchiveNumber }}</h5>
+                    <p class="font-small grey-text font-weight-normal pr-3">Anciennes reservations</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-5">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="h5-responsive mb-3 text-primary">
+                    Occupation <span class="small-9">(Du {{ today|format_datetime('full', 'none', locale='fr') }} au {{ nextMonth|format_datetime('full', 'none', locale='fr') }})</span>
+                </h5>
+                <canvas id="room-stats-chart"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-7">
+        <div class="row app-admin-performance mt-lg-5">
+            <div class="col-12 col-md-4">
+                <div class="data revenu text-center d-flex justify-content-center align-items-center">
+                    <div>
+                        <div class="dark-grey-text font-weight-stone-500 title mb-1">Revenu</div>
+                        <div class="content">{{ revenus|format_currency('XOF') }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="data reduction text-center d-flex justify-content-center align-items-center">
+                    <div>
+                        <div class="dark-grey-text font-weight-stone-500 title mb-1">Reduction</div>
+                        <div class="content">{{ reduction|format_currency('XOF') }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="data cancel text-center d-flex justify-content-center align-items-center">
+                    <div>
+                        <div class="dark-grey-text font-weight-stone-500 title mb-1">Taux d'annulation</div>
+                        <div class="content">{{ bookingCancelPercent }} %</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="row mt-md-4">
+    <div class="col-12">
+        <h4 class="h4-responsive font-weight-stone-500 text-primary mb-3">
+            Utilisateurs, newsletters, commandes, ...
+        </h4>
+    </div>
+    <div class="col-lg-4 col-md-6 col-12 mb-4">
+        <div class="card">
+            <div class="row mt-3">
+                <div class="col-md-4 col-5 text-left">
+                    <a href="{{ path('app_admin_user_index') }}" type="button" class="btn-floating btn-lg bg-primary ml-4"><i class="fas fa-users" aria-hidden="true"></i></a>
+                </div>
+                <div class="col-md-8 col-7 text-right mb-2">
+                    <h5  class="ml-4 mt-4 mb-2 font-weight-bold dark-grey-text pr-3">{{ users }}</h5>
+                    <p class="font-small grey-text pr-3">Utilisateur(s)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6 col-12 mb-4">
+        <div class="card">
+            <div class="row mt-3">
+                <div class="col-md-4 col-5 text-left">
+                    <a href="{{ path('app_admin_payment_index') }}" type="button" class="btn-floating btn-lg success-color-dark ml-4"><i class="fas fa-shopping-cart" aria-hidden="true"></i></a>
+                </div>
+                <div class="col-md-8 col-7 text-right mb-2">
+                    <h5 class="ml-4 mt-4 mb-2 font-weight-bold dark-grey-text pr-3">{{ orders }}</h5>
+                    <p class="font-small grey-text pr-3">Commande payée</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6 col-12 mb-4">
+        <div class="card">
+            <div class="row mt-3">
+                <div class="col-md-4 col-5 text-left">
+                    <a href="{{ path('app_admin_emailing_newsletters') }}" type="button" class="btn-floating btn-lg grey ml-4"><i class="fas fa-newspaper" aria-hidden="true"></i></a>
+                </div>
+                <div class="col-md-8 col-7 text-right mb-2">
+                    <h5 class="ml-4 mt-4 mb-2 font-weight-bold dark-grey-text pr-3">{{ newsletterData }}</h5>
+                    <p class="font-small grey-text pr-3">Nombre total d'abonnés</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-lg-6">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title h5-responsive text-center text-primary">Nouveaux clients</h5>
+                <div class="">
+                    {% if lastClients|length > 0 %}
+                        <ul class="list-group list-group-flush px-0">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div class="font-weight-600 grey-text">
+                                    Nom
+                                </div>
+                                <div class=""></div>
+                            </li>
+
+                            {% for user in lastClients %}
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div class="">
+                                        <div class="">{{ user }}</div>
+                                        <div class="small grey-text font-weight-500">{{ user.email }}</div>
+                                    </div>
+                                    <div class="">
+                                        <a href="{{ path('app_admin_user_show', {'id': user.id, 'type': 1}) }}" class="btn btn-grey btn-sm">
+                                            <i class="fas fa-eye mr-1"></i> Lister
+                                        </a>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <div class="grey-text text-center mt-4 mb-3">Aucun client pour le moment</div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-lg-6">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title h5-responsive text-primary text-center">Nouvelles commandes validées</h5>
+
+                {% if lastOrders|length > 0 %}
+                    <table class="table table-responsive-md btn-table">
+                        <thead>
+                        <tr>
+                            <th class="font-weight-600 grey-text">Commande</th>
+                            <th class="font-weight-600 grey-text">Produits</th>
+                            <th class="font-weight-600 grey-text">Total</th>
+                            <th class="font-weight-600 grey-text"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for payment in lastOrders %}
+                            <tr>
+                                <th scope="row">
+                                    <div class="">{{ payment.commande.user }}</div>
+                                    <div class="small grey-text font-weight-500">{{ payment.commande.user.email }}</div>
+                                </th>
+                                <td>{{ payment.commande.booking|length }}</td>
+                                <td>{{ payment.price }} CFA</td>
+                                <td>
+                                    <a href="{{ path('app_admin_commande_show', {'id': payment.commande.id}) }}" class="btn btn-grey btn-sm m-0">
+                                        <i class="fas fa-eye mr-1"></i> Lister
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <div class="text-center grey-text mt-4 mb-3">Aucune commande pour le moment</div>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+    <div class="col-12 col-lg-6">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title h5-responsive text-primary text-center">Commandes validées 30 derniers jours</h5>
+                <div class="my-4 px-2">
+                    <canvas id="orderDailyLineChart" style="width: 100% !important; height: 375px;"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-lg-6">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title h5-responsive text-primary text-center">Commandes validées 24 derniers mois</h5>
+                <div class="my-4 px-2">
+                    <canvas id="orderMonthlyLineChart" style="width: 100% !important; height: 375px;"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mt-4 mb-5">
+    <div class="row">
+        <div class="col-12 col-lg-6">
+            <div class="card mb-4">
+                <div class="card-body text-center">
+                    <h5 class="card-title h5-responsive text-primary text-center mb-4">Actions</h5>
+                    <div class="mt-3">
+                        <form action="{{ path('app_admin_cache_clean') }}" method="post">
+                            <button class="btn btn-small btn-danger"><i class="fas fa-trash mr-2"></i> Vider le cache</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-6">
+            <div class="card mb-4">
+                <div class="card-body text-center">
+                    <h5 class="card-title h5-responsive text-primary text-center mb-4">
+                        <a href="https://www.mail-tester.com/" rel="noreferrer" class="card-link">Tester les emails</a>
+                    </h5>
+
+                    <div class="mt-3">
+                        <form action="{{ path('app_admin_mailtest') }}" method="post" class="flex stretch">
+                            <div class="md-form md-outline form-lg input-with-pre-icon">
+                                <i class="fas fa-envelope input-prefix"></i>
+                                <input type="text" placeholder="Email" name="email" id="inputEmail"
+                                       class="form-control form-control-lg" required>
+                                <label for="inputEmail"></label>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Envoyer <i class="fas fa-paper-plane ml-2"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="row">
+
+</section>
+
+

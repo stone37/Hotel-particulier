@@ -1,0 +1,94 @@
+.skin-light form.advert-form button {
+    font-weight: 600 !important;
+}
+
+.skin-light form .app-radio-block {
+    display: inline-block;
+    border: 2px solid #dadce0;
+    width: 115px;
+    height: 105px;
+}
+
+.skin-light form .app-radio-block .label {
+    line-height: 20px;
+}
+
+.ap-input ~ .ap-input-icon {
+    position: absolute;
+    bottom: 8px;
+}
+
+.ap-input:hover ~ .ap-input-icon,
+.ap-input:focus ~ .ap-input-icon,
+.ap-input-icon:hover {
+    position: absolute;
+    bottom: 8px;
+}
+
+#app-ad-option .app-option-data .img-bulk img {
+    width: 37px;
+    height: 38px;
+    position: relative;
+    bottom: 5px;
+}
+
+#app-ad-option .app-option-data i {
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+
+#app-ad-option .option-price {
+    position: relative;
+    bottom: 5px;
+}
+
+#app-ad-option .durante .select-outline {
+    position: relative;
+    bottom: 10px;
+}
+
+#app-ad-option .option-price.select {
+    position: relative;
+    bottom: 4px;
+}
+
+@media (max-width: 767px) {
+    #app-ad-option .durante .select-outline, #app-ad-option .durante .data {
+        position: relative;
+        bottom: 0 !important;
+        left: 35px;
+        margin-top: 8px;
+    }
+
+    #app-ad-option .option-price {
+        position: relative;
+        bottom: 0;
+    }
+
+    #app-ad-option .app-option-data .text {
+        margin-top: -5px;
+    }
+
+    #app-ad-option .option-price {
+        position: relative;
+        bottom: 0;
+        margin-top: -30px;
+    }
+}
+
+#app-option-carousel .img-bulk img {
+    width: 80px;
+}
+
+#app-option-carousel .carousel-control-prev,
+#app-option-carousel .carousel-control-next {
+    width:auto;
+    color: #9e9e9e !important;
+    text-align:center;
+    opacity: 1;
+    -webkit-transition:opacity .15s ease;
+    transition:opacity .15s ease
+}
+
+

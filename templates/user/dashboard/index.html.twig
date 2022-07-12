@@ -1,0 +1,101 @@
+{% extends 'user/layout.html.twig' %}
+
+{% block title 'Tableau de bord' %}
+{% block meta %}
+    <meta name="google" content="nositelinkssearchbox">
+{% endblock %}
+
+{% block app_body %}
+    <section class="row mb-5 d-flex justify-content-center">
+        <div class="col-12">
+            <h3 class="h3-responsive font-weight-stone-600 mt-lg-4 mt-md-2 mb-md-2 mb-4">Tableau de bord</h3>
+        </div>
+        <div class="col-12 info col-md-6 col-lg-4 mb-5">
+            <div class="card promoting-card">
+                <div class="card-body d-flex flex-row ">
+                    {% if vich_uploader_asset(user, 'file') %}
+                        <img src="{{ image_url(user, 110, 110) }}" class="rounded-circle mr-3" height="50px" width="50px" alt="avatar">
+                    {% else %}
+                        <div class="avatar pr-2">
+                            <div class="user-prefix d-inline-block rounded-circle">
+                                {{ app_prefix_user_name(user) }}
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div>
+                        <h4 class="card-title dark-grey-text font-weight-stone-600 mb-1">{{ user }}</h4>
+                        <p class="card-text small-9" data-toggle="tooltip" title="Date d'inscription">
+                            <i class="fas fa-clock pr-1"></i> Inscrit {{ user.createdAt|ago }}
+                        </p>
+                    </div>
+                </div>
+                <div class="card-body pt-2">
+                    <ul class="card-text list-unstyled text-center">
+                        <li class="font-weight-stone-500">
+                            <i class="fas fa-envelope mr-1"></i> {{ user.email }}
+                        </li>
+                        <li class="font-weight-stone-500 mt-3">
+                            <i class="fas fa-phone-alt mr-1"></i> {{ user.phone }}
+                        </li>
+                        <li class="font-weight-stone-500 mt-3"
+                            data-toggle="tooltip" title="Ville">
+                            <i class="fas fa-map-marker-alt mr-1"></i>
+                            {% if user.city and user.country %}
+                                {{ user.city }} ({{ user.country|country_name }})
+                            {% elseif user.country %}
+                                {{ user.country|country_name }}
+                            {% elseif user.city %}
+                                {{ user.city }}
+                            {% else %}
+                                <span class="badge badge-grey">Aucun</span>
+                            {% endif %}
+                        </li>
+                        <li class="font-weight-stone-500 mt-3"
+                            data-toggle="tooltip" title="Nom d'utilisation">
+                            {% if user.username %}
+                                @{{ user.username }}
+                            {% else %}
+                                @ <span class="badge badge-grey">Aucun</span>
+                            {% endif %}
+                        </li>
+                        <li class="font-weight-stone-500 mt-3"
+                            data-toggle="tooltip" title="Adresse">
+                            <i class="fas fa-address-book mr-1"></i>
+                            {% if user.address %}{{ user.address }}{% else %}
+                                <span class="badge badge-grey">Aucun</span>
+                            {% endif %}
+                        </li>
+                        <li class="mt-4">
+                            <a href="{{ path('app_user_profil_edit') }}" class="card-link">Editer votre profil</a>
+                        </li>
+                        <li class="mt-3">
+                            <a href="{{ path('app_user_change_password') }}" class="card-link">Modifier votre mot de passe</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 mb-5">
+            <div class="card weather-card">
+                <div class="card-body text-center">
+                    <h4 class="card-title dark-grey-text font-weight-stone-600">Reservation confirmer</h4>
+                    <p class="display-1 dark-grey-text font-weight-stone-600 degree">{{ booking }}</p>
+
+                    <hr class="my-3">
+
+                    <a href="{{ path('app_dashboard_booking_confirmed_index') }}" class="card-link">Vos reservations confirmer</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+

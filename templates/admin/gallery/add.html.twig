@@ -1,0 +1,21 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %} Ajouter des images à la galerie | Galerie | {{ parent() }}{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/gallery/add/_header.html.twig' %}
+
+    {% include 'admin/gallery/add/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/jquery.dm-uploader.min.js'} %}
+    {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/admin/create.js'} %}
+    {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/admin/gallery.js'} %}
+{% endblock %}

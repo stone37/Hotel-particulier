@@ -15,6 +15,17 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'App\Entity'
                 alias: App
+        dql:
+            numeric_functions:
+                ROUND: DoctrineExtensions\Query\Mysql\Round
+            datetime_functions:
+                EXTRACT: DoctrineExtensions\Query\Mysql\Extract
+                DATE_FORMAT: DoctrineExtensions\Query\Mysql\DateFormat
+                NOW: DoctrineExtensions\Query\Mysql\Now
+                TO_CHAR: DoctrineExtensions\Query\Postgresql\DateFormat
+            string_functions:
+                LPAD: DoctrineExtensions\Query\Mysql\Lpad
+                CAST: DoctrineExtensions\Query\Mysql\Cast
 
 when@test:
     doctrine:

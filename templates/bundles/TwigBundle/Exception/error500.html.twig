@@ -1,0 +1,7 @@
+{% extends 'bundles/TwigBundle/Exception/layout.html.twig' %}
+
+{% set settings = config.get %}
+
+{% block title 'Erreur serveur | ' ~ settings.name %}
+{% block subTitle 'Erreur serveur' %}
+{% block description "Oops une erreur s'est glissée dans le code :(" %}

@@ -1,0 +1,20 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Nouveau envoie d'email | Envoie d'email | {{ parent() }}{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/emailing/create/_header.html.twig' %}
+
+    {% include 'admin/emailing/create/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/admin/create.js'} %}
+{% endblock %}
+

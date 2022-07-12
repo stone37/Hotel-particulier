@@ -1,0 +1,141 @@
+{% import 'Ui/Macro/buttons.html.twig' as buttons %}
+
+<div class="row app-user mt-5">
+    <div class="col-12">
+        <table class="table table-sm table-bordered table-responsive-sm table-responsive-md">
+            <tbody>
+                <tr>
+                    <td class="table-dark text-center font-weight-normal">Id</td>
+                    <td class="text-center font-weight-normal">{{ booking.id }}</td>
+                    <td class="table-dark text-center font-weight-normal">Nom et prénom</td>
+                    <td class="text-center font-weight-normal">{{ booking.lastName }} {{ booking.firstname }}</td>
+                    <td class="table-dark text-center font-weight-normal">Email</td>
+                    <td class="text-center font-weight-normal">
+                        <a href="mailto:{{ booking.email }}" class="card-link" data-toggle="tooltip" title="Envoyer un mail">{{ booking.email }}</a>
+                    </td>
+                    <td class="table-dark text-center font-weight-normal">Téléphone</td>
+                    <td class="text-center font-weight-normal">{{ booking.phone }}</td>
+                </tr>
+                <tr>
+                    <td class="table-dark text-center font-weight-normal">Arrivée</td>
+                    <td class="text-center font-weight-normal">{{ booking.checkin|format_datetime('medium', 'none', locale='fr') }}</td>
+                    <td class="table-dark text-center font-weight-normal">Départ</td>
+                    <td class="text-center font-weight-normal">{{ booking.checkout|format_datetime('medium', 'none', locale='fr') }}</td>
+                    <td class="table-dark text-center">Hébergement</td>
+                    <td class="text-center font-weight-normal">
+                        <a href="{{ path('app_admin_room_show', {'id': booking.room.id}) }}" class="card-link">{{ booking.room.name }}</a>
+                    </td>
+                    <td class="table-dark text-center font-weight-normal">Nombre de chambre</td>
+                    <td class="text-center font-weight-normal">{{ booking.roomNumber }}</td>
+                </tr>
+                <tr>
+                    <td class="table-dark text-center font-weight-normal">Adultes</td>
+                    <td class="text-center font-weight-normal">{{ booking.adult }}</td>
+                    <td class="table-dark text-center font-weight-normal">Enfants</td>
+                    <td class="text-center font-weight-normal">{{ booking.children }}</td>
+                    <td class="table-dark text-center font-weight-normal">Numéro de reservation</td>
+                    <td class="text-center font-weight-normal"><span class="badge badge-primary font-weight-normal small-9">{{ booking.reference }}</span></td>
+                    <td class="table-dark text-center font-weight-normal">Durée</td>
+                    <td class="text-center font-weight-normal">{{ booking.days }} jour(s)</td>
+                </tr>
+                <tr>
+                    <td class="table-dark text-center font-weight-normal">Ip</td>
+                    <td class="text-center font-weight-normal">{{ booking.ip }}</td>
+                    <td class="table-dark text-center font-weight-normal">Pays</td>
+                    <td class="text-center font-weight-normal">
+                        {% if booking.country %}
+                            {{ booking.country|country_name }}
+                        {% else %}
+                            <span class="badge badge-grey">Aucun</span>
+                        {% endif %}
+                    </td>
+                    <td class="table-dark text-center font-weight-normal">Ville</td>
+                    <td class="text-center font-weight-normal">{{ booking.city }}</td>
+                    <td class="table-dark text-center font-weight-normal">Prix</td>
+                    <td class="text-center font-weight-normal">{{ booking.commande.amountTotal|format_currency('XOF') }}</td>
+                </tr>
+                <tr>
+                    <td class="table-dark text-center font-weight-normal">Date de creation</td>
+                    <td class="text-center font-weight-normal">{{ booking.createdAt|date('d/m/Y H:i:s') }}</td>
+                    <td class="table-dark text-center font-weight-normal">Date d'annulation</td>
+                    <td {% if type != '3' %}colspan="2"{% endif%} class="text-center font-weight-normal">
+                        {% if booking.cancelledAt %}
+                            {{ booking.cancelledAt|date('d/m/Y H:i:s') }}
+                        {% else %}
+                            <span class="badge badge-grey">Aucune</span>
+                        {% endif %}
+                    </td>
+                    <td class="table-dark text-center font-weight-normal">Date de confirmation</td>
+                    <td {% if type != '3' %}colspan="2"{% endif%} class="text-center">
+                        {% if booking.confirmedAt %}
+                            {{ booking.confirmedAt|date('d/m/Y H:i:s') }}
+                        {% else %}
+                            <span class="badge badge-grey">Aucune</span>
+                        {% endif %}
+                    </td>
+                    {% if type == '3' %}
+                        <td class="table-dark text-center font-weight-normal">Rembourser</td>
+                        <td class="text-center">
+                            {% if booking.commande.payment.refunded %}
+                                <span class="badge badge-success">Oui</span>
+                            {% else %}
+                                <span class="badge badge-danger">Non</span>
+                            {% endif %}
+                        </td>
+                    {% endif%}
+                </tr>
+                <tr>
+                    <td class="table-dark text-center font-weight-normal">Message spécial</td>
+                    <td colspan="7" class="text-left font-weight-normal px-2">{{ booking.message }}</td>
+                </tr>
+                <tr>
+                    <td class="table-dark text-center font-weight-normal">Occupants</td>
+                    <td colspan="7" class="text-left px-2">
+                        <ol class="mb-0 list-inline">
+                            {% for occupant in booking.occupants %}
+                                <li class="list-inline-item">
+                                    {{ occupant.name }} {% if occupant.email %}(<a href="mailto:{{ booking.email }}" class="card-link" data-toggle="tooltip" title="Envoyer un mail">{{ occupant.email }}</a>){% endif %}
+                                </li>
+                            {% endfor %}
+                        </ol>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row mb-5">
+    <div class="col-12 mb-5">
+        <div class="d-flex justify-content-end mt-4">
+            {% if type == 2 %}
+                {% set path = path('app_admin_booking_confirmed_index') %}
+            {% elseif type == 3 %}
+                {% set path = path('app_admin_booking_cancel_index') %}
+            {% elseif type == 4 %}
+                {% set path = path('app_admin_booking_archive_index') %}
+            {% elseif type == 5 %}
+                {% set path = path('app_admin_booking_user') %}
+            {% elseif type == 7 %}
+                {% set path = path('app_admin_booking_room') %}
+            {% else %}
+                {% set path = path('app_admin_booking_index') %}
+            {% endif %}
+            <div class="text-center mr-3">{{ buttons.default(path, 'Retour à la liste', 'app-entity-list-btn', 'fas fa-angle-left', 'btn-outline-primary') }}</div>
+
+            {% if booking.user|length > 0 %}
+                <div class="text-center mr-3">
+                    {{ buttons.default(path('app_admin_user_show', {'id': booking.user.id, 'type': 1}), 'Utilisateur',
+                        'app-entity-list-order-btn', 'fas fa-user', 'btn-primary') }}
+                </div>
+            {% endif %}
+
+            <div class="text-center">
+                {{ buttons.default(path('app_admin_commande_user', {'id': booking.commande.id}), 'Commande',
+                    'app-entity-list-order-btn', 'fas fa-shopping-cart', 'btn-grey') }}
+            </div>
+        </div>
+    </div>
+</div>
+
+

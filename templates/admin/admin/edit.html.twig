@@ -1,0 +1,19 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %} Edition d'un compte administrateur | Comptes administrateurs | {{ parent() }}{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/admin/edit/_header.html.twig' %}
+
+    {% include 'admin/admin/edit/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/admin/create.js'} %}
+{% endblock %}

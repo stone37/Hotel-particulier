@@ -1,0 +1,36 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}
+    {% if type == '1' %}
+        Renvoie du mail
+    {% elseif type == '2' %}
+        Renvoie du mail aux utilisateurs
+    {% else %}
+        Renvoie du mail aux abonnés de la newsletters
+    {% endif %}
+    |
+    {% if type == '1' %}
+        Email envoyer
+    {% elseif type == '2' %}
+        Email aux utilisateurs
+    {% else %}
+        Email aux abonnés de la newsletters
+    {% endif %}
+    | {{ parent() }}{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/emailing/edit/_header.html.twig' %}
+
+    {% include 'admin/emailing/edit/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/admin/create.js'} %}
+{% endblock %}
+

@@ -1,0 +1,159 @@
+<section class="bg-white">
+    <div class="row mx-lg-5 mx-md-2 mx-1 py-3 py-md-4 ">
+        <div class="col-12">
+            <h1 class="h1-responsive font-weight-stone-600 text-center text-primary mb-4">
+                Nos installations
+            </h1>
+        </div>
+        <div class="col-12 col-md-6 hostel-facilities">
+            <h5 class="h5-responsive text-primary font-weight-stone-500 text-center p-2 mb-4"
+                style="border-width: 2px !important">
+                Installations de l'hotel
+            </h5>
+
+            <div class="content">
+                <div id="carousel-hostel-facilities" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        {% for image in equipmentImages %}
+                            <li data-target="#carousel-hostel-facilities"
+                                data-slide-to="{{ loop.index0 }}" {% if loop.first %}class="active"{% endif %}></li>
+                        {% endfor %}
+                    </ol>
+                    <div class="carousel-inner">
+                        {% for image in equipmentImages %}
+                            <div class="carousel-item {% if loop.first %}active{% endif %}">
+                                <img class="d-block w-100" src="{{ asset(image.webPath) }}" alt="{{ image.name }}">
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <a class="carousel-control-prev" href="#carousel-hostel-facilities" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carousel-hostel-facilities" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+
+            {% if equipments|length > 0 %}
+                <div class="my-4 dark-grey-text">
+                    {% for equipment in equipments %}
+                        <div class="font-weight-stone-500 mb-2">
+                            <i class="far fa-heart mr-3 text-primary"></i> {{ equipment.name }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-12 col-md-6 room-facilities">
+            <h5 class="h5-responsive text-primary font-weight-stone-500 text-center p-2 mb-4">
+                Installations des chambres
+            </h5>
+            <div class="content">
+                <div id="carousel-room-facilities" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        {% for image in roomEquipmentImages %}
+                            <li data-target="#carousel-room-facilities"
+                                data-slide-to="{{ loop.index0 }}" {% if loop.first %}class="active"{% endif %}></li>
+                        {% endfor %}
+                    </ol>
+                    <div class="carousel-inner">
+                        {% for image in roomEquipmentImages %}
+                            <div class="carousel-item {% if loop.first %}active{% endif %}">
+                                <img class="d-block w-100" src="{{ asset(image.webPath) }}" alt="{{ image.name }}">
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <a class="carousel-control-prev" href="#carousel-room-facilities" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carousel-room-facilities" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+
+
+            {#<div class="">
+                <div id="carousel-room-facilities" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel-room-facilities" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel-room-facilities" data-slide-to="1"></li>
+                        <li data-target="#carousel-room-facilities" data-slide-to="2"></li>
+                        <li data-target="#carousel-room-facilities" data-slide-to="3"></li>
+                        <li data-target="#carousel-room-facilities" data-slide-to="4"></li>
+                        <li data-target="#carousel-room-facilities" data-slide-to="5"></li>
+                        <li data-target="#carousel-room-facilities" data-slide-to="6"></li>
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
+                        <div class="carousel-item active">
+                            <div class="view"
+                                 style="background-image: url({{ asset('images/img4.jpg') }});
+                                         background-repeat: no-repeat;
+                                         background-size: cover;"></div>
+                            #}{#<div class="view" style="background-image: url('https://mdbootstrap.com/img/Photos/Others/nature7.jpg'); background-repeat: no-repeat; background-size: cover;">
+                            </div>#}{#
+                        </div>
+
+                        <div class="carousel-item">
+                            <div class="view"
+                                 style="background-image: url({{ asset('images/img3.jpg') }});
+                                         background-repeat: no-repeat;
+                                         background-size: cover;"></div>
+                        </div>
+
+                        <div class="carousel-item">
+                            <div class="view"
+                                 style="background-image: url({{ asset('images/img1.jpg') }});
+                                         background-repeat: no-repeat;
+                                         background-size: cover;">
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="view"
+                                 style="background-image: url({{ asset('images/img2.jpg') }});
+                                         background-repeat: no-repeat;
+                                         background-size: cover;">
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="view"
+                                 style="background-image: url({{ asset('images/5.jpg') }});
+                                         background-repeat: no-repeat;
+                                         background-size: cover;">
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="view"
+                                 style="background-image: url({{ asset('images/6.jpg') }});
+                                         background-repeat: no-repeat;
+                                         background-size: cover;">
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="view"
+                                 style="background-image: url({{ asset('images/7.jpg') }});
+                                         background-repeat: no-repeat;
+                                         background-size: cover;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>#}
+            {% if roomEquipments|length > 0 %}
+                <div class="my-4 dark-grey-text">
+                    {% for roomEquipment in roomEquipments %}
+                        <div class="font-weight-stone-500 mb-2">
+                            <i class="far fa-heart mr-3 text-primary"></i> {{ roomEquipment.name }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+

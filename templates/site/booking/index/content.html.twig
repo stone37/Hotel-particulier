@@ -1,0 +1,310 @@
+{% form_theme booking_form 'Ui/Form/theme.html.twig' %}
+{% form_theme discount_form 'Ui/Form/theme.html.twig' %}
+
+{% set promotion = get_promotion(room) %}
+
+<section class="container booking-data-info">
+    <div class="row">
+        <div class="col-12 col-md-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card mb-4 booking-detail">
+                        <div class="card-body px-3 py-3">
+                            <h5 class="font-weight-stone-600 h5-responsive mb-4">Les détails de votre reservation</h5>
+                            <div>
+                                <div class="d-flex justify-content-between checkin mb-2">
+                                    <div class="title font-weight-stone-500 dark-grey-text">Arrivée</div>
+                                    <div class="data font-weight-bold">{{ booking.checkin|format_datetime('full', 'none', locale='fr') }}</div>
+                                </div>
+                                <div class="d-flex justify-content-between checkout mb-2">
+                                    <div class="title font-weight-stone-500 dark-grey-text">Départ</div>
+                                    <div class="data font-weight-bold">{{ booking.checkout|format_datetime('full', 'none', locale='fr') }}</div>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <div class="small-9 font-weight-stone-500 dark-grey-text">Durée totale du séjour:</div>
+                                <div class="small-9 font-weight-bold text-dark mt-1">{{ booking.days }} nuits</div>
+                            </div>
+                            <hr>
+                            <div class="mb-3 room-select">
+                                <div class="small-9 font-weight-bold">Vous avez sélectionnée:</div>
+                                <div class="font-weight-stone-500 dark-grey-text mt-1 room">
+                                    {{ booking.roomNumber }} <span class="small-7" style="padding-left: 1px; padding-right: 1px;">X</span>
+                                    {{ room.name }}
+                                </div>
+                            </div>
+                            <div class="mb-3 room-occupant">
+                                <div class="small-9 font-weight-bold">Pour</div>
+                                <div class="font-weight-stone-500 dark-grey-text occupant">
+                                    {% if booking.children %}
+                                        {{ booking.adult }} adultes et {{ booking.children }} enfant par chambre
+                                    {% else %}
+                                        {{ booking.adult }} adultes par chambre
+                                    {% endif %}
+                               </div>
+                            </div>
+                            <div class="small-8 font-weight-stone-600 info-data">
+                                <span class=""><i class="fas fa-check"></i></span> Cette option est tout à fait adaptée pour vous !
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="card booking-price-detail mb-4">
+                        <div class="card-body p-0">
+                            <div class="px-3 pt-3">
+                                <h5 class="font-weight-stone-600 h5-responsive mb-4">Récapitulatif du montant</h5>
+                                <div class="d-flex justify-content-between font-weight-stone-500 small-9 mb-2">
+                                    <div class="dark-grey-text">{{ booking.roomNumber }} chambres</div>
+                                    <div class="font-weight-stone-600">{{ booking.amount|format_currency('XOF') }}</div>
+                                </div>
+
+                                {% if promotion %}
+                                    <div class="d-flex justify-content-between font-weight-stone-500 small-9 mb-2">
+                                        <div class="dark-grey-text">{{ promotion }} % de remise</div>
+                                        <div class="font-weight-stone-600">{{ booking.discountAmount|format_currency('XOF') }}</div>
+                                    </div>
+                                {% endif %}
+
+                                {% if commande.discount %}
+                                    <div class="d-flex justify-content-between font-weight-stone-500 small-9 mb-2">
+                                        <div class="dark-grey-text">Reduction</div>
+                                        <div class="font-weight-stone-600">{{ commande.discount|format_currency('XOF') }}</div>
+                                    </div>
+                                {% endif %}
+
+                                {% if room.taxe|length > 0 %}
+                                    <div class="d-flex justify-content-between font-weight-stone-500 small-9 mb-2">
+                                        <div class="dark-grey-text">{{ room.taxe.value }} % de {{ room.taxe.name|upper }}</div>
+                                        <div class="font-weight-stone-600">{{ commande.taxeAmount|format_currency('XOF') }}</div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class=" mt-3 px-3 py-4">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="font-weight-stone-600 dark-grey-text price-title">Montant total</div>
+                                    <div class="font-weight-bold text-danger text-right price">{{ commande.amountPaid|format_currency('XOF') }}</div>
+                                </div>
+                                <div class="font-weight-stone-500 grey-text text-right price-info">
+                                    pour {{ booking.roomNumber }} chambres,
+                                    {{ (booking.adult + booking.children)*booking.roomNumber }} personnes,
+                                    {{ booking.days }} nuits
+                                </div>
+                                <div class="small text-right mt-1">
+                                    <div class="badge badge-default font-weight-stone-500" style="font-size: .66rem;">Aucune surprise ! <span class="font-weight-normal">Prix final</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% if not promotion %}
+                    <div class="col-12">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                {{ form_start(discount_form, {'attr': {'novalidate': 'novalidate', 'class': 'discount-form'}}) }}
+                                <h5 class="font-weight-stone-600 h5-responsive mb-0">Ajouter un code de réduction</h5>
+                                <div class="form-row">
+                                    <div class="col-12">
+                                        {{ form_row(discount_form.discountCode) }}
+                                    </div>
+                                </div>
+                                {{ form_widget(discount_form._token) }}
+                                <div class=""><button type="submit" class="btn btn-primary btn-sm btn-block">Appliquer</button></div>
+                                {{ form_end(discount_form, {'render_rest': false}) }}
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-12 col-md-8">
+            {{ form_start(booking_form, {'attr': {'novalidate': 'novalidate', 'class': 'admin-form'}}) }}
+                <div class="form-row">
+                    <div class="col-12">
+                        {% if (booking_form.lastname is defined) or (booking_form.firstname is defined) or
+                            (booking_form.email is defined) or (booking_form.phone is defined) or
+                            (booking_form.country is defined) or (booking_form.city is defined) %}
+                            <div class="card mb-4">
+                                <div class="card-body pt-3 pb-0 px-3">
+                                    <h4 class="h4-responsive font-weight-stone-600">
+                                        Saisissez vos informations
+                                    </h4>
+
+                                    <div class="small-8 success-color text-white px-3 py-1 d-inline-block">
+                                        Vous y etes presque ! Complétez simplement les informations requises.
+                                    </div>
+
+                                    <div class="form-row">
+                                        {% if booking_form.lastname is defined %}
+                                            <div class="col-12 col-md-6 mb-2">
+                                                {{ form_row(booking_form.lastname) }}
+                                                <small class="form-text text-muted" style="margin-top: -4px">
+                                                    Ce champ est obligatoire
+                                                </small>
+                                            </div>
+                                        {% endif %}
+
+                                        {% if booking_form.firstname is defined %}
+                                            <div class="col-12 col-md-6 mb-2">
+                                                {{ form_row(booking_form.firstname) }}
+                                                <small class="form-text text-muted" style="margin-top: -4px">
+                                                    Ce champ est obligatoire
+                                                </small>
+                                            </div>
+                                        {% endif %}
+
+                                        {% if booking_form.email is defined %}
+                                            <div class="col-12 col-md-6">
+                                                <small class="form-text text-primary" style="position: absolute; top: -5px;">
+                                                    L'email de confirmation sera envoyée à cette adresse
+                                                </small>
+                                                {{ form_row(booking_form.email) }}
+                                                <small class="form-text text-muted" style="margin-top: -4px">
+                                                    Ce champ est obligatoire
+                                                </small>
+                                            </div>
+                                        {% endif %}
+
+                                        {% if booking_form.phone is defined %}
+                                            <div class="col-12 col-md-6">
+                                                <small class="form-text text-primary" style="position: absolute; top: -5px;">
+                                                    Nous ne vous contacterons qu'en d'urgence
+                                                </small>
+                                                {{ form_row(booking_form.phone) }}
+                                                <small class="form-text text-muted" style="margin-top: -5px">
+                                                    Ce champ est obligatoire
+                                                </small>
+                                            </div>
+                                        {% endif %}
+
+                                        {% if booking_form.country is defined %}
+                                            <div class="col-12 col-md-6">
+                                                <div class="d-flex flex-wrap">
+                                                    <div class="select-outline position-relative w-100">
+                                                        {{ form_widget(booking_form.country) }}
+                                                        <label>{{ booking_form.country.vars.label }}</label>
+                                                    </div>
+                                                    <div style="margin-top: -15px;" class="red-text font-weight-stone-500">{{ form_errors(booking_form.country) }}</div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+
+                                        {% if booking_form.city is defined %}
+                                            <div class="col-12 col-md-6 mb-2">
+                                                {{ form_row(booking_form.city) }}
+                                            </div>
+                                        {% endif %}
+
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-12">
+                        {#  <div class="card mb-4">
+                            <div class="card-body">
+                                <h4 class="h4-responsive font-weight-stone-600">{{ booking.room.name }}</h4>
+                                <ul class="list-unstyled dark-grey-text list-inline small-8 mb-1">
+                                    {% if booking.room.area %}<li class="list-inline-item"><i class="fas fa-border-style mr-2 my-2"></i> {{ booking.room.area }} m²</li>{% endif %}
+                                    {% if booking.room.couchage %}<li class="list-inline-item ml-2"><i class="fas fa-bed mr-2 my-2"></i> {{ booking.room.couchage }}</li>{% endif %}
+                                    <li class="list-inline-item ml-2"><i class="fas fa-wifi mr-2 mt-2 mb-1"></i> Accès Wi-Fi gratuit</li>
+                                    {% if booking.room.smoker %}
+                                        <li class="list-inline-item ml-2">
+                                            {% if booking.room.smoker == 'Fumeurs' %}<i class="fas fa-smoking mr-2 mt-2 mb-1"></i>
+                                            {% else %}<i class="fas fa-smoking-ban mr-2 mt-2 mb-1" style="font-size: .95rem"></i>{% endif %}
+                                            {{ booking.room.smoker }}
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                                {% for equipments in booking.room.equipments %}
+                                    <div class="badge badge-primary font-weight-normal mr-2">
+                                        {{ equipments.name }}
+                                    </div>
+                                {% endfor %}
+
+                                <div class="mt-3 font-weight-bold">
+                                    <div class="small-9 font-weight-bold">
+                                        Pour: <span class="font-weight-normal dark-grey-text">2 adultes et 1 enfant</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>#}
+
+                        <div id="booking-form-occupant-wrapper" class="booking-form-occupant-wrapper row"
+                             data-prototype="{{ form_widget(booking_form.occupants.vars.prototype)|e('html_attr') }}">
+
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="card mb-4">
+                            <div class="card-body pt-1 pb-0 px-3">
+                                <h4 class="h4-responsive font-weight-stone-600">Demande spéciales</h4>
+                                <div class="small-8">
+                                    Les demandes speciales ne peuvent pas etre garanties mais nous ferons tout nos possible pour
+                                    vous satisfaire.
+                                </div>
+                                <div class="">
+                                    <div class="md-form md-outline">
+                                        {{ form_widget(booking_form.message) }}
+                                        {{ form_label(booking_form.message) }}
+                                        <div class="red-text font-weight-stone-500">{{ form_errors(booking_form.message) }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h4 class="h4-responsive font-weight-stone-600">Méthodes de paiement</h4>
+                                <div class="small-9 mb-2 dark-grey-text">Nous acceptons les modes de paiement suivants</div>
+                                <div class="row">
+                                    <div class="col-12 col-md-6 app-brand-logo">
+                                        <img src="{{ asset('images/brand/mtn.png') }}" class="img-fluid mb-2" data-toggle="tooltip" title="MTN mobile money" alt="MTN mobile money logo">
+                                        <img src="{{ asset('images/brand/orange.png') }}" class="img-fluid mx-2 mb-2 orange" data-toggle="tooltip" title="Orange money" alt="Orange money logo">
+                                        <img src="{{ asset('images/brand/moov.png') }}" class="img-fluid mx-2 mb-2 moov" data-toggle="tooltip" title="Moov money" alt="Moov money logo">
+                                        <img src="{{ asset('images/brand/visa.png') }}" class="img-fluid mx-2 mb-2 visa" data-toggle="tooltip" title="Visa" alt="Visa logo">
+                                        <img src="{{ asset('images/brand/masterCard.png') }}" class="img-fluid mx-2 mb-2 mastercard" data-toggle="tooltip" title="Mastercard" alt="Mastercard logo">
+                                        <img src="{{ asset('images/brand/wari.png') }}" class="img-fluid mx-2 mb-2 wari" data-toggle="tooltip" title="Wari" alt="wari logo">
+                                        <img src="{{ asset('images/brand/yup.png') }}" class="img-fluid yup mb-2" data-toggle="tooltip" title="Yup" alt="Yup logo">
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="border rounded px-2 pt-2 pb-0">
+                                            <h6 class="font-weight-stone-600">Comptez sur nous</h6>
+                                            <div class="">
+                                                <ul class="list-unstyled small-8">
+                                                    <li class="dark-grey-text mb-2"><i class="fas fa-check mx-2  text-success"></i> Nous utilisons une transmission sécurisée</li>
+                                                    <li class="dark-grey-text"><i class="fas fa-check mx-2 text-success"></i> Nous protégeons vos informations personnelles</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mb-5">
+                        <div class="mx-1 mx-md-3 small-9 dark-grey-text mb-3">
+                            En cliquant sur "Confirmer et payer maintenant", vous confirmer avoir lu et accepté nos
+                            <a href="{{ path('app_cgu') }}" class="font-weight-stone-500 link">conditions d'utilisation</a>,
+                            notre <a href="" class="font-weight-stone-500 link">politique de confidentialité</a> et nos
+                            <a href="" class="font-weight-stone-500 link pl-0">conditions de réservation</a>.
+                        </div>
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-primary font-weight-stone-600 mb-3">
+                                <i class="fas fa-lock mr-2"></i> Confirmer et payer maintenant
+                            </button>
+                        </div>
+                    </div>
+
+
+
+                </div>
+                {{ form_widget(booking_form._token) }}
+            {{ form_end(booking_form, {'render_rest': false}) }}
+        </div>
+    </div>
+</section>
+
+

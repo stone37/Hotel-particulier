@@ -1,0 +1,40 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% if isActive('app_admin_booking_confirmed_index') %}
+    {% set data = "Reservations confirmées" %}
+    {% set type = 2 %}
+{% elseif isActive('app_admin_booking_cancel_index') %}
+    {% set data = "Reservations annulées" %}
+    {% set type = 3 %}
+{% elseif isActive('app_admin_booking_archive_index') %}
+    {% set data = "Anciennes reservations" %}
+    {% set type = 4 %}
+{% elseif isActive('app_admin_booking_user') %}
+    {% set data = "Reservations d'un utilisateur" %}
+    {% set type = 5 %}
+{% elseif isActive('app_admin_booking_hostel') %}
+    {% set data = "Reservations d'un hotel" %}
+    {% set type = 6 %}
+{% elseif isActive('app_admin_booking_room') %}
+    {% set data = "Reservations d'un hébergement" %}
+    {% set type = 7 %}
+{% else %}
+    {% set data = "Nouvelles reservations" %}
+    {% set type = 1 %}
+{% endif %}
+
+{% block title %}Reservations | {{ parent() }}{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/booking/index/_header.html.twig' %}
+
+    {% include 'admin/booking/index/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

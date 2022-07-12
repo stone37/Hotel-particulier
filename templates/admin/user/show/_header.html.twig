@@ -1,0 +1,21 @@
+<section class="card header mt-lg-70 mt-70 mb-4">
+    <div class="card-body py-2">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex">
+                    <span class="btn-floating btn-lg btn-primary d-none d-md-inline my-0" style="cursor: default;">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                    <h2 class="h2-responsive font-weight-stone-600 text-primary ml-md-3 mt-2 pt-1">
+                        Voir un compte
+                        {% if type == 1 %}client actif
+                        {% elseif type == 2 %}client non confirmés
+                        {% elseif type == 3 %}client retirés
+                        {% elseif type == 4 %}client pro actif
+                        {% else %}client pro retirés{% endif %}
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

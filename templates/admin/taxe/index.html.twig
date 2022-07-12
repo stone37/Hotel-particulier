@@ -1,0 +1,17 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Taxes | {{ parent() }}{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/taxe/index/_header.html.twig' %}
+
+    {% include 'admin/taxe/index/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

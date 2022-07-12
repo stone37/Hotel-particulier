@@ -1,0 +1,91 @@
+{% extends 'site/layout.html.twig' %}
+
+{% block title 'Notre gallerie' %}
+
+{% set settings = config.get %}
+
+{% block meta %}
+    {% set content = "Notre gallerie photo de nos installations et équipements" %}
+    <meta name="description" content="{{ content }}"/>
+    <meta property="og:description" content="{{ content }}" />
+{% endblock %}
+
+{% block app_intro %}
+    <div class="view intro" style="background-image: url({{ asset('images/intro2.jpg') }}); background-repeat: no-repeat; background-size: cover;">
+        <div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
+            <div class="container">
+                <div class="row d-flex justify-content-center wow fadeIn">
+                    <div class="col-12 col-md-10 col-lg-9 mb-4 text-primary text-center">
+                        <h1 class="display-3 font-weight-bold d-none d-md-block mt-lg-5 pt-md-2 pt-lg-5 mt-md-0 text-center">Notre gallerie</h1>
+                        <h1 class="display-5 font-weight-bold d-block d-md-none text-center">Notre gallerie</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bc">
+        <div class="mx-md-5">
+            {{ wo_render_breadcrumbs({viewTemplate: '_breadcrumb.html.twig', listClass: 'breadcrumb',
+                itemClass: 'breadcrumb-item', separator: '>', separatorClass: 'fas fa-angle-right'}) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block app_body %}
+<section>
+    <div class="row mx-md-5 mb-4">
+        <div class="col-12">
+            <div class="wow fadeIn">
+                <h2 class="h2-responsive font-weight-stone-600 text-primary mb-4 text-center">
+                    <strong class="font-weight-bold">Decouvrez notre gallerie photo de nos installations et équipements</strong>
+                </h2>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    {% if galleries|length > 0 %}
+        <div class="row mx-md-5">
+            <div class="col-md-12">
+                <div id="mdb-lightbox-ui"></div>
+
+                <div class="mdb-lightbox no-margin">
+                    {% for gallery in galleries %}
+                        <figure class="col-md-4 col-lg-3">
+                            <a href="{{ asset(gallery.webPath) }}" data-size="1600x1067">
+                                <img alt="picture" src="{{ asset(gallery.webPath) }}" class="img-fluid"
+                                     style="height: 190px !important; width: 300px;" />
+                            </a>
+                        </figure>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="alert alert-grey mx-md-5 mb-5 text-center">
+            <i class="fas fa-exclamation-triangle mr-2"></i> Aucune photo dans notre gallerie
+        </div>
+    {% endif %}
+</section>
+
+{{ include('site/newsletter/_subscribe.html.twig') }}
+
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% include 'Ui/_stylesheets.html.twig' with {'path': 'assets/css/site/intro.css'} %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        $("#mdb-lightbox-ui").load("/assets/mdb-addons/mdb-lightbox-ui.html");
+    </script>
+{% endblock %}
+
+
+
+

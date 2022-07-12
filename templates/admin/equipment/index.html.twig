@@ -1,0 +1,17 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Equipements | {{ parent() }}{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/equipment/index/_header.html.twig' %}
+
+    {% include 'admin/equipment/index/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

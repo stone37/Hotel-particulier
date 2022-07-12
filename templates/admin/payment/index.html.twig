@@ -1,0 +1,17 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Paiements | {{ parent() }}{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/payment/index/_header.html.twig' %}
+
+    {% include 'admin/payment/index/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

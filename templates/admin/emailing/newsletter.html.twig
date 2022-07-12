@@ -1,0 +1,23 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}
+    Nouveau envoie d'email aux abonnés de la newsletter |
+    Email envoyés aux abonnés de la newsletter |
+    {{ parent() }}
+{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/emailing/newsletter/_header.html.twig' %}
+
+    {% include 'admin/emailing/newsletter/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/admin/create.js'} %}
+{% endblock %}

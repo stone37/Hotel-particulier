@@ -1,0 +1,135 @@
+{% apply inline_css(source('mails/theme.css')) %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<style>
+  @media only screen and (max-width: 600px) {
+    .inner-body {
+      width: 100% !important;
+    }
+
+    .footer {
+      width: 100% !important;
+    }
+  }
+
+  @media only screen and (max-width: 500px) {
+    .button {
+      width: 100% !important;
+    }
+  }
+</style>
+
+{% set settings = config.get %}
+
+<table class="wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation">
+  <tr>
+    <td align="center">
+      <table class="content" width="100%" cellpadding="0" cellspacing="0" role="presentation">
+        <!-- Header -->
+        <tr>
+          <td class="header">
+            <a href="{{ absolute_url('/') }}" style="display: inline-block;">
+              <img src="{{ absolute_url('/public/images/logo/email.png') }}" class="logo" alt="Logo oblackmarket">
+            </a>
+          </td>
+        <!-- Email Body -->
+        <tr>
+          <td class="body" width="100%" cellpadding="0" cellspacing="0">
+            <table class="inner-body" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation">
+              <!-- Body content -->
+              <tr>
+                <td class="content-cell">
+                  {% block body '' %}
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <table class="footer" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation">
+              <tr>
+                <td class="content-cell" align="center">
+                  <table border="0" width="300" align="left" cellpadding="0" cellspacing="0"
+                         style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
+                    <tr>
+                      <td align="left">
+                        <a href="{{ absolute_url('/') }}" style="display: inline-block;">
+                          <img width="50" height="25" border="0" style="display: block; width: 50px; height: 25px"
+                               src="{{ absolute_url('/public/images/logo/email_footer.png') }}" alt="" />
+                        </a>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
+                    </tr>
+
+                    <tr>
+                      <td align="left" style="color: #888888; font-size: 14px; line-height: 23px;" class="text_color">
+                        <div style="color: #333333; font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif;
+                                font-weight: 600; mso-line-height-rule: exactly; line-height: 23px;">
+                          Envoyez-nous un email: <br/>
+                          <a href="mailto:{{ settings.email }}" style="color: #888888; font-size: 14px; font-weight: 400;">{{ settings.email }}</a>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+
+                  <table border="0" width="200" align="right" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"
+                         class="container590">
+                    <tr>
+                      <td class="hide" height="45" style="font-size: 45px; line-height: 45px;">&nbsp;</td>
+                    </tr>
+
+                    <tr>
+                      <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <table border="0" align="right" cellpadding="0" cellspacing="0">
+                          <tr>
+                            {% if settings.facebookAddress %}
+                              <td>
+                                <a href="{{ settings.facebookAddress }}" style="display: block; border-style: none !important; border: 0 !important;"><img width="24" border="0" style="display: block;" src="http://i.imgur.com/Qc3zTxn.png" alt=""></a>
+                              </td>
+                              <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            {% endif %}
+
+                            {% if settings.twitterAddress %}
+                              <td>
+                                <a href="{{ settings.twitterAddress }}" style="display: block; border-style: none !important; border: 0 !important;"><img width="24" border="0" style="display: block;" src="http://i.imgur.com/RBRORq1.png" alt=""></a>
+                              </td>
+                            {% endif %}
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
+                    </tr>
+                  </table>
+
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>
+
+{% endapply %}
+
+

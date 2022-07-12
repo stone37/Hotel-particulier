@@ -1,0 +1,88 @@
+<div class="form-row">
+    <div class="col-12">
+        <div class="h5-responsive border border-dark border-top-0 border-left-0 border-right-0">
+            <div class="badge badge-dark d-inline-block mr-1" style="position: relative; bottom: 6px;">1</div>
+            <div class="text-dark d-inline-block font-weight-stone-500">Information de base</div>
+        </div>
+    </div>
+</div>
+<div class="row d-flex justify-content-center justify-content-md-start mb-5">
+    <div class="col-12 col-md-4">
+        {{ form_row(form.lastName) }}
+        <small class="form-text text-muted" style="margin-top: -4px">
+            Ce champ est obligatoire
+        </small>
+    </div>
+    <div class="col-12 col-md-4">
+        {{ form_row(form.firstName) }}
+        <small class="form-text text-muted" style="margin-top: -4px">
+            Ce champ est obligatoire
+        </small>
+    </div>
+    <div class="col-12 col-md-4">
+        {{ form_row(form.email) }}
+        <small class="form-text text-muted" style="margin-top: -4px">
+            Ce champ est obligatoire
+        </small>
+    </div>
+    <div class="col-12 col-md-4">
+        {{ form_row(form.phone) }}
+        <small class="form-text text-muted" style="margin-top: -4px">
+            Ce champ est obligatoire
+        </small>
+    </div>
+    <div class="col-12 col-md-4">
+        <div>
+            <div>
+                {{ form_widget(form.roles) }}
+                <label class=" ml-3">{{ form.roles.vars.label|raw }}</label>
+            </div>
+            <small class="form-text text-muted" style="margin-top: -20px">
+                Ce champ est obligatoire
+            </small>
+            <div style="margin-top: -15px;" class="red-text font-weight-stone-500">{{ form_errors(form.roles) }}</div>
+        </div>
+    </div>
+</div>
+
+<div class="form-row">
+    <div class="col-12">
+        <div class="h5-responsive border border-dark border-top-0 border-left-0 border-right-0">
+            <div class="badge badge-dark d-inline-block mr-1" style="position: relative; bottom: 6px;">2</div>
+            <div class="text-dark d-inline-block font-weight-stone-500">Mot de passe</div>
+        </div>
+    </div>
+</div>
+<div id="password-bulk" class="form-row">
+    <div class="col-12 col-md-4">
+        <div class="md-form md-outline input-with-post-icon mb-0">
+            <i class="fas fa-eye input-prefix"></i>
+            <input type="password" id="{{ form.plainPassword.first.vars.id }}"
+                   value="{{ form.plainPassword.first.vars.value }}"
+                   name="{{ form.plainPassword.first.vars.full_name }}" required
+                   class="form-control"  />
+            <label for="{{ form.plainPassword.first.vars.id }}">{{ form.plainPassword.first.vars.label|trans }}</label>
+        </div>
+        <small class="form-text text-muted" style="margin-top: -4px">
+            Ce champ est obligatoire
+        </small>
+    </div>
+    <div class="col-12 col-md-4">
+        <div class="md-form md-outline input-with-post-icon mb-0">
+            <i class="fas fa-eye input-prefix"></i>
+            <input type="password" id="{{ form.plainPassword.second.vars.id }}"
+                   value="{{ form.plainPassword.second.vars.value }}"
+                   name="{{ form.plainPassword.second.vars.full_name }}" required
+                   class="form-control"  />
+            <label for="{{ form.plainPassword.second.vars.id }}">{{ form.plainPassword.second.vars.label|trans }}</label>
+        </div>
+        <small class="form-text text-muted" style="margin-top: -4px">
+            Ce champ est obligatoire
+        </small>
+    </div>
+    <div class="col-12 col-md-4 d-flex align-items-center">
+        <a id="password-generate-btn" href="" class="btn btn-grey-medium btn-sm">Générer le mot de passe</a>
+    </div>
+</div>
+
+

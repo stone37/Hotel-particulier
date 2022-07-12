@@ -1,0 +1,113 @@
+<section class="row mb-5">
+    <div class="col-lg-9 col-12">
+        <div class="card mb-4">
+            <div class="card-body">
+                {% for label, messages in app.flashes(['success']) %}
+                    {% for message in messages %}
+                        <div class="alert alert-success alert-dismissible fade show mb-3" role="alert">
+                            {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                <h1 class="h1-responsive mb-3 text-secondary text-center font-weight-stone-600 pb-3">Se connecter</h1>
+
+                <form method="post">
+                    {% if error %}
+                        <div class="text-center text-danger font-weight-stone-500">
+                            {{ error.messageKey|trans(error.messageData, 'security') }}
+                        </div>
+                    {% endif %}
+
+                    <div class="mx-1 mx-md-3">
+                        <div class="row">
+                            <div class="col-md-8 col-lg-9 pr-md-0">
+                                <div class="md-form md-outline form-lg input-with-pre-icon">
+                                    <i class="fas fa-envelope input-prefix"></i>
+                                    <input type="text" value="{{ last_username }}" name="email" id="inputEmail"
+                                           class="form-control form-control-lg" required autofocus>
+                                    <label for="inputEmail">Nom d'utilisateur ou e-mail</label>
+                                </div>
+
+                                <div class="md-form md-outline form-lg input-with-pre-icon mb-0">
+                                    <i class="fas fa-unlock input-prefix"></i>
+                                    <i class="fas fa-eye input-prefix"></i>
+                                    <input type="password" id="inputPassword" name="password" required
+                                           class="form-control form-control-lg"  />
+                                    <label for="inputPassword">Mot de passe</label>
+                                </div>
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
+
+                                <div class="switch stone-switch">
+                                    <label for="remember_me">
+                                        <input type="checkbox" id="remember_me" name="_remember_me" value="on" checked />
+                                        <span class="lever"></span>
+                                        Se souvenir de moi
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-3 d-md-flex justify-content-md-end align-items-md-center">
+                                <div class="">
+                                    <div class="text-center mt-3">
+                                        <button type="submit" name="_submit" class="btn btn-primary">Se connecter</button>
+                                    </div>
+
+                                    <div class="text-center mt-3">
+                                        <a href="{{ path('app_password_reset') }}" class="card-link small-9">Mot de passe oublié ?</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <section class="my-2">
+                    <h5 class="h5-responsive text-secondary font-weight-stone-600 text-center mb-3">Ou</h5>
+                    <div class="mx-md-5 px-lg-5">
+                        <div class="mx-lg-5 px-lg-4 mb-3">
+                            <a class="btn btn-outline-secondary btn-md btn-google btn-block d-none d-md-inline-block"
+                               href="{{ path('oauth_connect', {service: 'google'}) }}" style="border-width: 1.4px !important">
+                                <img src='https://developers.google.com/identity/images/g-logo.png' class="img-fluid mr-1 my-0" alt="Google icon">
+                                Se connecter avec Google
+                            </a>
+                            <a class="btn btn-outline-secondary btn-sm btn-google btn-block d-inline-block d-md-none"
+                               href="{{ path('oauth_connect', {service: 'google'}) }}" style="border-width: 1.4px !important">
+                                <img src='https://developers.google.com/identity/images/g-logo.png' class="img-fluid mr-1 my-0" alt="Google icon">
+                                Se connecter avec Google
+                            </a>
+                        </div>
+
+                        <div class="mx-lg-5 px-lg-4">
+                            <a href="{{ path('oauth_connect', {service: 'facebook'}) }}"
+                               class="btn btn-primary btn-md btn-facebook btn-block d-none d-md-inline-block">
+                                <i class="fab fa-facebook-square mr-1"></i>
+                                Se connecter avec Facebook
+                            </a>
+                            <a href="{{ path('oauth_connect', {service: 'facebook'}) }}"
+                               class="btn btn-primary btn-sm btn-facebook btn-block d-inline-block d-md-none">
+                                <i class="fab fa-facebook-square mr-1"></i>
+                                Se connecter avec Facebook
+                            </a>
+                        </div>
+
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-12">
+        <div class="card mb-4">
+            <div class="card-body text-center">
+                <div class="text-secondary font-weight-stone-500 pb-2">
+                    Vous n'avez toujours pas de compte ?
+                </div>
+                <div class="mt-3">
+                    <a href="{{ path('app_register') }}" class="btn btn-outline-primary ">Créer un compte</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

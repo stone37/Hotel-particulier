@@ -1,0 +1,275 @@
+<footer class="page-footer text-center text-md-left mt-5 pt-md-5 pt-4">
+
+    {% set settings = config.get %}
+
+    <div class="container-fluid">
+        <h6 class="grey-text">
+            <i class="fas fa-wifi mr-3"></i> Connexion Wi-Fi gratuite dans tout l'établissement.
+        </h6>
+
+        <div class="mt-4 d-block d-md-flex justify-content-between">
+            <nav>
+                <ul class="list-inline list-unstyled">
+                    <li class="list-inline-item">
+                        <a href="{{ path('app_room_index') }}" class="mr-xl-4 font-weight-stone-500">Hébergements</a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="{{ path('app_service_index') }}" class="mr-xl-4 font-weight-stone-500">Services</a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="" class="mr-xl-4 font-weight-stone-500">Restaurants</a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="{{ path('app_gallery_index') }}" class="mr-xl-4 font-weight-stone-500">Galerie</a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="" class="mr-xl-4 font-weight-stone-500">Nos offres</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="social-section text-center text-md-left">
+                <ul class="list-unstyled list-inline">
+                    {% if settings.facebookAddress %}
+                        <li  class="list-inline-item mx-0">
+                            <a target="_blank" href="{{ settings.facebookAddress }}" class="btn btn-sm btn-primary">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% if settings.twitterAddress %}
+                        <li class="list-inline-item mx-0">
+                            <a target="_blank" href="{{ settings.twitterAddress }}" class="btn btn-sm btn-primary">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% if settings.youtubeAddress %}
+                        <li class="list-inline-item mx-0">
+                            <a target="_blank" href="{{ settings.youtubeAddress }}" class="btn btn-sm btn-primary">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% if settings.instagramAddress %}
+                        <li class="list-inline-item mx-0">
+                            <a target="_blank" href="{{ settings.instagramAddress }}" class="btn btn-sm btn-primary">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% if settings.linkedinAddress %}
+                        <li class="list-inline-item mx-0">
+                            <a target="_blank" href="{{ settings.linkedinAddress }}" class="btn btn-sm btn-primary">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+
+        <hr class="w-100 clearfix grey darken-2">
+
+        <nav class="second">
+            <ul class="list-inline list-unstyled">
+                <li class="list-inline-item">
+                    <a href="" class="mr-xl-4 font-weight-stone-500">Politique de Confidentialité</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="" class="mr-xl-4 font-weight-stone-500">Condition d'utilisation</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="{{ path('app_contact') }}" class="mr-xl-4 font-weight-stone-500">Contactez-nous</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="mt-4">
+            {% if settings.address %}
+                <p class="mb-2 grey-text">
+                    <i class="fas fa-home mr-2"></i> {{ settings.address }}
+                </p>
+            {% endif %}
+            <p class="mb-2 grey-text">
+                <i class="fas fa-envelope mr-2"></i> {{ settings.email }}
+            </p>
+            <p class="mb-2 grey-text">
+                <i class="fas fa-phone-alt mr-2"></i> {{ settings.phone }}
+            </p>
+            {% if settings.fax %}
+                <p class="mb-2 grey-text">
+                    <i class="fas fa-print mr-2"></i> {{ settings.fax }}
+                </p>
+            {% endif %}
+        </div>
+        <div class="row py-3 d-flex justify-content-center align-items-center">
+            <p class="text-center grey-text">
+                © 2022 {{ settings.name }} {{ settings.city }} | Créer par
+                <a href="https://octaix.com/" target="_blank">Octaix</a>, tous droits réservés
+            </p>
+        </div>
+</div>
+
+{#<div class="container-fluid font-weight-normal">
+    <div class="row text-center text-md-left mt-3 pb-3">
+        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+            <a href="{{ path('app_home') }}" class="d-block">
+                <img src="{{ asset('images/logo/3.png') }}" alt="{{ settings.name }}" title="{{ settings.name }}" class="logo img-fluid">
+            </a>
+            <p>
+                <a href="{{ path('app_env') }}" class="footer-link">À propos de nous</a>
+            </p>
+               #}{# <p>
+                    <a href="{{ path('app_help') }}#register" class="footer-link">Avantage de l'inscription</a>
+                </p>
+                <p>
+                    <a href="{{ path('app_review_index') }}" class="footer-link">Avis {{ settings.name|lower }}</a>
+                </p>
+
+                {{ render(controller('App\\Controller\\ReviewController::suggestion')) }}#}{#
+                #}{#  <p>
+                    <a href="" class="footer-link">Publicité sur {{ settings.name|lower }}</a>
+                </p>#}{#
+            </div>
+
+            <hr class="w-100 clearfix d-md-none">
+
+            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                <h5 class="h5-responsive mb-4 text-uppercase">Annonces</h5>
+               #}{# <p>
+                    <a href="{{ path('app_advert_category') }}" class="footer-link">Annonces gratuites</a>
+                </p>
+                <p>
+                    <a href="{{ path('app_advert_index', {'category_slug': 'immobilier'}) }}" class="footer-link">Immobilier</a>
+                </p>
+                <p>
+                    <a href="{{ path('app_advert_index_s', {'category_slug': 'auto-moto', 'sub_category_slug': 'voiture-doccasion'}) }}" class="footer-link">Voiture d'occasion</a>
+                </p>
+                <p>
+                    <a href="{{ path('app_advert_index', {'category_slug': 'acheter-et-vendre'}) }}" class="footer-link">Achat et vente</a>
+                </p>
+                <p>
+                    <a href="{{ path('app_advert_index', {'category_slug': 'services'}) }}" class="footer-link">Services</a>
+                </p>
+                <p>
+                    <a href="{{ path('app_advert_index', {'category_slug': 'emplois'}) }}" class="footer-link">Emplois</a>
+                </p>
+                <p>
+                    <a href="{{ path('app_advert_index', {'category_slug': 'animaux'}) }}" class="footer-link">Animaux</a>
+                </p>#}{#
+            </div>
+
+            <hr class="w-100 clearfix d-md-none">
+
+            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                <h5 class="h5-responsive mb-4 text-uppercase">Liens utiles</h5>
+                <p>
+                    <a href="{{ path('app_cgu') }}" class="footer-link">Condition d'utilisation</a>
+                </p>
+               #}{# <p>
+                    <a href="{{ path('app_confidentialite') }}" class="footer-link">Politique de Confidentialité</a>
+                </p>#}{#
+                <p>
+                    <a href="{{ path('app_mention_legale') }}" class="footer-link">Mentions Légales</a>
+                </p>
+               #}{# <p>
+                    <a href="{{ path('app_advertiser_charte') }}" class="footer-link">Charte du bon annonceur</a>
+                </p>
+                <p>
+                    <a href="{{ path('app_help') }}" class="footer-link">Centre d'aide</a>
+                </p>#}{#
+                <p>
+                    <a href="{{ path('app_contact') }}" class="footer-link">Contactez-nous</a>
+                </p>
+            </div>
+
+
+            <hr class="w-100 clearfix d-md-none">
+
+            <!--Fourth column-->
+            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                <h5 class="h5-responsive mb-4 text-uppercase">Contact</h5>
+                {% if settings.address %}
+                    <p>
+                        <i class="fas fa-home mr-2"></i> {{ settings.address }}
+                    </p>
+                {% endif %}
+                #}{#<p>
+                    <i class="fas fa-envelope mr-2"></i> {{ settings.email }}
+                </p>#}{#
+                <p>
+                    <i class="fas fa-phone-alt mr-2"></i> {{ settings.phone }}
+                </p>
+
+                {% if settings.fax %}
+                    <p>
+                        <i class="fas fa-print mr-2"></i> {{ settings.fax }}
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+        <hr>
+
+        <div class="row py-3 d-flex align-items-center">
+            <div class="col-md-7 col-lg-8">
+                <p class="text-center text-md-left grey-text">
+                    © 2021 Copyright: <a href="https://octaix.com/" target="_blank">octaix.com</a> | Tous droits réservés
+                </p>
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-md-5 col-lg-4 ml-lg-0">
+
+                <!--Social buttons-->
+                <div class="social-section text-center text-md-left">
+                    <ul class="list-unstyled list-inline">
+                        {% if settings.facebookAddress %}
+                            <li  class="list-inline-item mx-0">
+                                <a target="_blank" href="{{ settings.facebookAddress }}" class="btn-floating btn-sm rgba-white-slight mr-xl-4">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>
+                        {% endif %}
+
+                        {% if settings.twitterAddress %}
+                            <li class="list-inline-item mx-0">
+                                <a target="_blank" href="{{ settings.twitterAddress }}" class="btn-floating btn-sm rgba-white-slight mr-xl-4">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </li>
+                        {% endif %}
+
+                        {% if settings.youtubeAddress %}
+                            <li class="list-inline-item mx-0">
+                                <a target="_blank" href="{{ settings.youtubeAddress }}" class="btn-floating btn-sm rgba-white-slight mr-xl-4">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            </li>
+                        {% endif %}
+
+                        {% if settings.instagramAddress %}
+                            <li class="list-inline-item mx-0">
+                                <a target="_blank" href="{{ settings.instagramAddress }}" class="btn-floating btn-sm rgba-white-slight mr-xl-4">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </li>
+                        {% endif %}
+
+                        {% if settings.linkedinAddress %}
+                            <li class="list-inline-item mx-0">
+                                <a target="_blank" href="{{ settings.linkedinAddress }}" class="btn-floating btn-sm rgba-white-slight mr-xl-4">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>#}
+</footer>

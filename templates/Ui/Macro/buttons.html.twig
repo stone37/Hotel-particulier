@@ -1,0 +1,54 @@
+{% macro default(url, message, id, icon, class, size) %}
+    <a class="btn
+            {% if class is not empty %} {{ class }} {% endif %}
+            {% if message is not empty %}{{ size }} {% endif %}
+            {% if message is not empty %}labeled {% endif %}
+            {% if icon is not empty %}icon {% endif %}"
+            {% if id is not null %} id="{{ id }}"{% endif %} href="{{ url }}">
+        {% if icon is not empty %}
+            <i class="{{ icon }} mr-1" aria-hidden="true"></i>
+        {% endif %}
+        {% if message is not empty %}
+            {{ message|trans }}
+        {% endif %}
+    </a>
+{% endmacro %}
+
+{% macro show(url, message, id, class, labeled = true) %}
+    {% import _self as buttons %}
+
+    {% if message is empty and labeled %}
+        {% set message = 'sylius.ui.show' %}
+    {% endif %}
+
+    {{ buttons.default(url, message, id, 'search') }}
+{% endmacro %}
+
+{% macro create(url, message, id, labeled = true, size = '') %}
+    {% import _self as buttons %}
+
+    {% if message is empty and labeled %}
+        {% set message = 'Créer' %}
+    {% endif %}
+
+    {{ buttons.default(url, message, id, 'fas fa-plus', 'btn-primary', size) }}
+{% endmacro %}
+
+{% macro edit(url, message, id, labeled = true, size = '') %}
+    {% import _self as buttons %}
+
+    {% if message is empty and labeled %}
+        {% set message = 'Editer' %}
+    {% endif %}
+
+    {{ buttons.default(url, message, id, 'fas fa-edit', 'btn-default', size) }}
+{% endmacro %}
+
+{% macro validate(message, icon, class = '', size = '') %}
+    <button class="btn {% if class %}{{ class }}{% else %}btn-primary{% endif %} {{ size }}" type="submit">
+        {% if icon %}<i class="{{ icon }} mr-1"></i>{% endif %}
+        {{ message is empty ? 'Valider' : message|trans }}
+    </button>
+{% endmacro %}
+
+

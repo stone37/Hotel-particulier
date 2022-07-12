@@ -1,0 +1,17 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Suppléments | {{ parent() }}{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/supplement/index/_header.html.twig' %}
+
+    {% include 'admin/supplement/index/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

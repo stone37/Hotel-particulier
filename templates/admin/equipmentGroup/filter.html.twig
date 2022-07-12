@@ -1,0 +1,31 @@
+{% form_theme form 'Ui/Form/theme.html.twig' %}
+
+{{ form_start(form) }}
+<div class="modal fade" id="entity-search" tabindex="-1" role="dialog" aria-labelledby="confirm" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content text-center">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Filtres</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body pt-0">
+                {% include 'admin/equipmentGroup/filter/form.html.twig' %}
+            </div>
+            <div class="modal-footer d-flex justify-content-between">
+                <a href="{{ path('app_admin_equipment_group_index') }}" class="btn btn-md btn-danger">
+                    <i class="fas fa-times mr-1"></i> Effacer
+                </a>
+                <button type="submit" class="btn btn-secondary btn-md waves-effect">
+                    <i class="fas fa-check mr-1"></i>
+                    Appliquer
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{{ form_end(form, {'render_rest': false}) }}
+
+
+

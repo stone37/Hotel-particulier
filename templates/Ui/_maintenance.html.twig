@@ -1,0 +1,90 @@
+{% extends '__base.html.twig' %}
+
+{% set settings = config.get %}
+
+{% block title %}Site en maintenance | {{ settings.name }}{% endblock %}
+
+{% block app_navbar_first %}{% endblock %}
+{% block app_navbar_second %}{% endblock %}
+{% block app_footer %}{% endblock %}
+
+{% block app_body %}
+    <header>
+        <div class="view" style="background-image: url({{ asset('images/img1.jpg') }});
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    background-position: center center;">
+            <div class="mask content-color d-flex justify-content-center align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-center">
+                            <img src="{{ asset('images/logo_w2.png') }}" alt="logo" class="img-fluid" style="width: 400px;">
+                        </div>
+                        <div class="col-md-12 white-text text-center mt-xl-5 mb-5 wow fadeInLeft" data-wow-delay="0.3s">
+                            <h1 class="font-weight-stone-600 mt-5 display-5 d-none d-md-block">Notre est en maintenance</h1>
+                            <h1 class="font-weight-stone-600 h1-responsive mt-5 d-block d-md-none">Notre est en maintenance</h1>
+                            <p>{{ custom_message|raw }}</p>
+                            <div class="mt-4">
+                                <ul class="list-unstyled list-inline">
+                                    {% if settings.facebookAddress %}
+                                        <li  class="list-inline-item mx-1">
+                                            <a target="_blank" href="{{ settings.facebookAddress }}" class="btn btn-md btn-primary">
+                                                <i class="fab fa-facebook-f"></i>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+
+                                    {% if settings.twitterAddress %}
+                                        <li class="list-inline-item mx-1">
+                                            <a target="_blank" href="{{ settings.twitterAddress }}" class="btn btn-md btn-primary">
+                                                <i class="fab fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+
+                                    {% if settings.youtubeAddress %}
+                                        <li class="list-inline-item mx-1">
+                                            <a target="_blank" href="{{ settings.youtubeAddress }}" class="btn btn-md btn-primary">
+                                                <i class="fab fa-youtube"></i>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+
+                                    {% if settings.instagramAddress %}
+                                        <li class="list-inline-item mx-1">
+                                            <a target="_blank" href="{{ settings.instagramAddress }}" class="btn btn-md btn-primary">
+                                                <i class="fab fa-instagram"></i>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+
+                                    {% if settings.linkedinAddress %}
+                                        <li class="list-inline-item mx-0">
+                                            <a target="_blank" href="{{ settings.linkedinAddress }}" class="btn btn-md btn-primary">
+                                                <i class="fab fa-linkedin-in"></i>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </header>
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% include 'Ui/_stylesheets.html.twig' with {'path': 'assets/css/site/maintenance.css'} %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+

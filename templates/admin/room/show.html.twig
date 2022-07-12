@@ -1,0 +1,19 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}
+    Voir un hébergement | Hébergements | {{ parent() }}
+{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/room/show/_header.html.twig' %}
+
+    {% include 'admin/room/show/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

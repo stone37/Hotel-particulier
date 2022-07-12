@@ -1,0 +1,85 @@
+{% if room.gallery|length %}
+    <div id="mdb-lightbox-ui"></div>
+
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="mdb-lightbox">
+                <div class="row">
+                    <figure class="col-md-12 principale">
+                        <a href="{{ asset(room.gallery.first.webPath) }}" data-size="1400x1067">
+                            <img id="principale" src="{{  asset(room.gallery.first.webPath) }}"
+                                 class="img-fluid z-depth-2" alt="{{ room.gallery.first.name }}" />
+                        </a>
+                    </figure>
+                    {% for gallery in room.gallery %}
+                        {% if gallery != room.gallery.first %}
+                            <figure class="col-md-3 d-none">
+                                <a href="{{ asset(gallery.webPath) }}" data-size="1400x1067">
+                                    <img {% if loop.index == 8 %} id="img-plus"{% endif %}
+                                         src="{{ asset(gallery.webPath) }}" class="img-fluid" alt="{{ gallery.name }}" />
+                                </a>
+                            </figure>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="row mdb-lightbox {#mt-lg-4 pl-2 pl-lg-0 pr-2#}">
+                <figure class="col-lg-3 children">
+                    <a href="{{ asset(room.gallery.first.webPath) }}" data-size="1400x1067">
+                        <img src="{{ asset(room.gallery.first.webPath) }}" class="img-fluid z-depth-2" alt="{{ room.gallery.first.name }}" />
+                    </a>
+                </figure>
+                {% for key, gallery in room.gallery %}
+                    {% if gallery != room.gallery.first %}
+                        {% if key <= 7 %}
+                            <figure class="col-lg-3 children">
+                                <a href="{{ asset(gallery.webPath) }}" data-size="1400x1067">
+                                    <img src="{{ asset(gallery.webPath) }}" class="img-fluid z-depth-2" alt="{{ gallery.name }}" />
+                                </a>
+                            </figure>
+                            {% if key == 7 %}
+                                {% if room.gallery|length > 7 %}
+                                    <div class="lightbox-plus">
+                                        <div>
+                                            <i class="fas fa-images"></i>
+                                            <span class="nbr-image">{{ room.gallery|length - 7 }}</span>
+                                            <i class="fas fa-plus"></i>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        {% else %}
+                            <figure class="col-lg-3 d-none">
+                                <a href="{{ asset(gallery.webPath) }}" data-size="1400x1067">
+                                    <img src="{{ asset(gallery.webPath) }}" class="img-fluid" alt="{{ gallery.name }}" />
+                                </a>
+                            </figure>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                {#{% if room.gallery|length > 7 %}
+                    <div id="lightbox-plus" class="col-lg-3 lightbox-plus d-flex justify-content-center align-items-center">
+                        <span class="text">
+                            Encore {{ room.gallery|length - 7 }} photos disponibles
+                        </span>
+                        <i class="fas fa-long-arrow-alt-right ml-2"></i>
+                    </div>
+                {% endif %}#}
+            </div>
+            {#{% if room.gallery|length > 7 %}
+                <div class="row">
+                    <div id="lightbox-plus" class="col-lg-12 lightbox-plus d-flex justify-content-center align-items-center">
+                        <span class="text">
+                            Encore {{ room.gallery|length - 7 }} photos disponibles
+                        </span>
+                        <i class="fas fa-long-arrow-alt-right ml-2"></i>
+                    </div>
+                </div>
+            {% endif %}#}
+        </div>
+    </div>
+{% endif %}
+
+

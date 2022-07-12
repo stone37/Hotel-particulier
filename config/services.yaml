@@ -4,6 +4,14 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
+    app.path.settings: /uploads/images/logo
+    app.path.promotion: /uploads/images/promotion
+    app.path.user: /uploads/images/user
+    image_resize_key: '%env(resolve:IMAGE_RESIZE_KEY)%'
+    app.path.image_orphanage: '%kernel.cache_dir%/uploader/orphanage'
+    dkim_key: '%env(resolve:default::MAILER_DKIM)%'
+    maintenance_dir: '%env(resolve:MAINTENANCE_DIR)%'
 
 services:
     # default configuration for services in *this* file
@@ -20,5 +28,15 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+
+    App\Mailing\Mailer:
+        class: App\Mailing\Mailer
+        arguments:
+            $dkimKey: '%dkim_key%'
+
+    App\Manager\ConfigurationFileManager:
+        arguments:
+            $maintenanceDirectory: '%maintenance_dir%'
+
+
+

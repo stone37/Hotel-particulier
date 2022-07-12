@@ -1,0 +1,96 @@
+{% extends 'site/layout.html.twig' %}
+
+{% block title 'Réservation' %}
+
+{% set settings = config.get %}
+
+{% block meta %}
+    {% set content = "" %}
+    <meta name="description" content="{{ content }}"/>
+    <meta property="og:description" content="{{ content }}" />
+{% endblock %}
+
+{% block app_intro %}
+    <div class="view intro" style="background-image: url({{ asset(room.gallery.first.webPath) }}); background-repeat: no-repeat; background-size: cover;">
+        <div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
+            <div class="container">
+                <div class="row d-flex justify-content-center wow fadeIn">
+                    <div class="col-12 col-md-10 col-lg-9 mb-4 text-primary text-center">
+                        <h1 class="display-5 font-weight-bold d-none d-md-block mt-md-5 pt-md-5 text-center">
+                            Réservation: {{ room.name }}
+                        </h1>
+                        <h1 class="h1-responsive font-weight-bold d-block d-md-none text-center mt-5 pt-5"
+                            style="font-size: 2.8rem !important">Réservation: {{ room.name }}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bc">
+        <div class="mx-md-5 mx-3">
+            {{ wo_render_breadcrumbs({ viewTemplate: '_breadcrumb.html.twig', listClass: 'breadcrumb',
+                itemClass: 'breadcrumb-item', separator: '>', separatorClass: 'fas fa-angle-right'}) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block app_body %}
+    {{ include('site/booking/index/content.html.twig') }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        html, body, .view.intro {
+            min-height: 250px !important
+        }
+
+        @media (min-width: 992px) {
+            html, body, .view.intro {
+                height: 70% !important;
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        function content(index) {
+            let $content = '<div class="col-12"><div id="booking_room_booker_info_'+index+'" class="card mb-4"><div class="card-body pt-1 pb-3 px-3">' +
+                '<h4 class="h4-responsive font-weight-stone-600">{{ room.name }}</h4>';
+                $content += ' <ul class="list-unstyled dark-grey-text list-inline small-8 mb-1">';
+
+                {% if room.area %}$content += '<li class="list-inline-item"><i class="fas fa-border-style mr-2 my-2"></i> {{ room.area }} m²</li>';{% endif %}
+                {% if room.couchage %}$content += '<li class="list-inline-item ml-2"><i class="fas fa-bed mr-2 my-2"></i> {{ room.couchage }}</li>';{% endif %}
+                $content += '<li class="list-inline-item ml-2"><i class="fas fa-wifi mr-2 mt-2 mb-1"></i> Accès Wi-Fi gratuit</li>';
+
+                {% if room.smoker %}
+                    $content += '<li class="list-inline-item ml-2">';
+                        {% if room.smoker == 'Fumeurs' %}
+                            $content += '<i class="fas fa-smoking mr-2 mt-2 mb-1"></i> {{ room.smoker }}';
+                        {% else %}
+                            $content += '<i class="fas fa-smoking-ban mr-2 mt-2 mb-1" style="font-size: .95rem"></i> {{ room.smoker }}';
+                        {% endif %}
+                    $content += '</li>';
+                {% endif %}
+                $content += '</ul>';
+
+                {% if room.equipments|length > 0 %}
+                    {% for equipments in room.equipments %}
+                        $content += '<div class="badge badge-primary font-weight-normal mr-2">{{ equipments.name }}</div>';
+                    {% endfor %}
+                {% endif %}
+
+                $content += '<div class="mt-3 font-weight-bold"><div class="small-9 font-weight-bold">Pour: ' +
+                    '<span class="font-weight-normal dark-grey-text">{{ booking.adult + booking.children }} personnes</span> </div></div>' +
+                    '<div class="font-weight-normal dark-grey-text small-9 mt-3 mb-0">Veuillez indiquer les informations de l\'une des personnes séjournant dans cette chambre.</div>' +
+                    '</div></div></div>';
+
+            return $content;
+        }
+    </script>
+
+   {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/site/booking.js'} %}
+{% endblock %}

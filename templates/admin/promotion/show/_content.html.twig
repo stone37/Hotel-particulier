@@ -1,0 +1,60 @@
+{% import 'Ui/Macro/buttons.html.twig' as buttons %}
+
+<div class="row app-user mt-5">
+    <div class="col-12">
+        <table class="table table-sm table-bordered table-responsive-sm table-responsive-md">
+            <tbody>
+            <tr>
+                <td class="table-dark text-center font-weight-normal">Id</td>
+                <td class="text-center font-weight-normal">{{ promotion.id }}</td>
+                <td class="table-dark text-center font-weight-normal">Nom</td>
+                <td class="text-center font-weight-normal">{{ promotion.name }}</td>
+                <td class="table-dark text-center font-weight-normal">Début</td>
+                <td class="text-center font-weight-normal">{{ promotion.start|date('d/m/Y') }}</td>
+                <td class="table-dark text-center font-weight-normal">Fin</td>
+                <td class="text-center font-weight-normal">{{ promotion.end|date('d/m/Y') }}</td>
+            </tr>
+            <tr>
+                <td class="table-dark text-center font-weight-normal">Reduction</td>
+                <td class="text-center font-weight-normal">{{ promotion.discount }} %</td>
+                <td class="table-dark text-center font-weight-normal">Status</td>
+                <td class="text-center font-weight-normal">
+                    {% if promotion.enabled %}
+                        <span class="badge badge-success"><i class="fas fa-check mr-1"></i> Actif</span>
+                    {% else %}
+                        <span class="badge badge-danger"><i class="fas fa-times mr-1"></i> Inactif</span>
+                    {% endif %}
+                </td>
+                <td class="table-dark text-center font-weight-normal">Date de création</td>
+                <td class="text-center font-weight-normal">{{ promotion.createdAt|date('d/m/Y H:i:s') }}</td>
+                <td class="table-dark text-center font-weight-normal">Dernière modification</td>
+                <td class="text-center font-weight-normal">{{ promotion.updatedAt|date('d/m/Y H:i:s') }}</td>
+            </tr>
+            <tr>
+                <td class="table-dark text-center font-weight-normal">Description</td>
+                <td class="text-center font-weight-normal" colspan="7">{{ promotion.description }}</td>
+            </tr>
+            <tr>
+                <td class="table-dark text-center font-weight-normal">Hébergement</td>
+                <td class="text-center font-weight-normal">
+                    <a href="{{ path('app_admin_room_show', {'id': promotion.room.id}) }}" class="card-link">{{ promotion.room.name }}</a>
+                </td>
+                <td class="table-dark text-center font-weight-normal">Image</td>
+                <td class="text-center font-weight-normal">
+                    <a href="{{ vich_uploader_asset(promotion, 'file') }}" class="" target="_blank"><img src="{{ vich_uploader_asset(promotion, 'file') }}" alt="" class="img-fluid table-img"></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-end mt-4 mb-5">
+            <div class="text-center mr-3">{{ buttons.default(path('app_admin_promotion_index'), 'Retour à la liste', 'app-entity-list-btn', 'fas fa-angle-left', 'btn-outline-primary') }}</div>
+        </div>
+    </div>
+</div>
+
+

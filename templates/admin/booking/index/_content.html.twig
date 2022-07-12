@@ -1,0 +1,128 @@
+<div class="row mb-4">
+    <div class="col-12 d-flex justify-content-center justify-content-md-between">
+        {% if type == '1' or type == '3' %}
+            <div class="mr-3 d-none entity-booking-confirm-bulk-btn entity-list-delete-bulk-btn">
+                {% include 'Ui/Grid/Action/confirmed.html.twig' with {'action': {'label': 'Confirmer'}} %}
+            </div>
+        {% endif %}
+
+        {% if type == '1' or type == '2' %}
+            <div class="mr-3 d-none entity-booking-cancel-bulk-btn entity-list-delete-bulk-btn">
+                {% include 'Ui/Grid/Action/cancel.html.twig' with {'action': {'label': 'Annuler'}} %}
+            </div>
+        {% endif %}
+
+        {% if type == '3' or type == '4' %}
+            <div id="entity-list-delete-bulk-btn" class="mr-3 d-none entity-booking-delete-bulk-btn entity-list-delete-bulk-btn">
+                {% include 'Ui/Grid/Action/delete.html.twig' with {'action': {'label': 'Supprimer'}} %}
+            </div>
+        {% endif %}
+
+        <div class="d-flex ml-auto">
+            <div class="">
+                {% include 'admin/booking/filter.html.twig' with {'form': searchForm}  %}
+            </div>
+            <div class="mr-3">
+                <a href="" class="btn btn-grey" data-toggle="modal" data-target="#entity-search">
+                    <i class="fas fa-filter mr-1" aria-hidden="true"></i> Filtres
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if bookings|length > 0 %}
+    <div class="row app-user mb-5">
+        <div class="col-12">
+            <table class="table table-responsive-sm">
+                <thead class="text-primary">
+                <tr>
+                    <th scope="col" class="text-center">
+                        <div class="" style="position: relative; right: 10px; top: 2px">
+                            <input type="checkbox" name="principal" class="form-check-input filled-in" id="principal-checkbox" value="" style="margin: 0 !important;" />
+                            <label class="form-check-label" for="principal-checkbox"
+                                   style="padding-left: 0!important; "></label>
+                        </div>
+                    </th>
+                    <th scope="col" class="font-weight-stone-500 text-center">Arrivée</th>
+                    <th scope="col" class="font-weight-stone-500 text-center">Depart</th>
+                    <th scope="col" class="font-weight-stone-500 text-center">Hébergement</th>
+                    <th scope="col" class="font-weight-stone-500 text-center">Adultes</th>
+                    <th scope="col" class="font-weight-stone-500 text-center">Enfants</th>
+                    <th scope="col" class="font-weight-stone-500 text-center">Client</th>
+                    <th scope="col" class="font-weight-stone-500 text-center">Nombre de chambre</th>
+                    <th scope="col" class="font-weight-stone-500 text-center">Montant</th>
+                    <th scope="col" class="font-weight-stone-500 text-center"></th>
+                </tr>
+                </thead>
+                <tbody id="list-checkbook-container">
+                {% for booking in bookings %}
+                    <tr>
+                        <td class="text-center">
+                            <div class="" style="position: relative; right: 10px; top: 2px">
+                                <input type="checkbox" name="checkbox{{ loop.index }}" class="form-check-input filled-in list-checkbook"
+                                       id="checkbox{{ loop.index }}" value="{{ booking.id }}" style="margin: 0 !important;" />
+                                <label class="form-check-label" for="checkbox{{ loop.index }}" style="padding-left: 0!important; "></label>
+                            </div>
+                        </td>
+                        <td class="text-center">{{ booking.checkin|format_datetime('medium', 'none', locale='fr') }}</td>
+                        <td class="text-center">{{ booking.checkout|format_datetime('medium', 'none', locale='fr') }}</td>
+                        <td class="text-center">
+                            <a href="{{ path('app_admin_room_show', {'id': booking.room.id}) }}" class="card-link">
+                                {{ booking.room.name }}
+                            </a>
+                        </td>
+                        <td class="text-center">{{ booking.adult }}</td>
+                        <td class="text-center">{{ booking.children }}</td>
+                        <td class="text-center">{{ booking.firstname }} {{ booking.lastName }}</td>
+                        <td class="text-center">{{ booking.roomNumber }}</td>
+                        <td class="text-center">{{ booking.commande.amountTotal|format_currency('XOF') }}</td>
+                        <td class="text-center">
+                            <div class="dropdown">
+                                <a class="dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-ellipsis-h text-primary"></i></a>
+                                <div class="dropdown-menu dropdown-primary dropdown-menu-right mt-0">
+                                    <a href="{{ path('app_admin_booking_show', {'id': booking.id, 'type': type}) }}" class="dropdown-item">
+                                        <i class="fas fa-eye mr-1"></i> Voir
+                                    </a>
+
+                                    {% if type == '1' or type == '3' %}
+                                        <a class="dropdown-item entity-booking-confirm" id="{{ booking.id }}">
+                                            <i class="fas fa-check mr-1 text-success"></i> Confirmer
+                                        </a>
+                                    {% endif %}
+
+                                    {% if type == '1' or type == '2' %}
+                                        <a class="dropdown-item entity-booking-cancel" id="{{ booking.id }}">
+                                            <i class="fas fa-times mr-1 text-danger"></i> Annuler
+                                        </a>
+                                    {% endif %}
+
+                                    {% if type == '3' or type == '4' %}
+                                        <a class="dropdown-item entity-booking-delete" id="{{ booking.id }}">
+                                            <i class="fas fa-trash mr-1 text-danger"></i> Supprimer
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-12 d-flex justify-content-start mt-2">
+            <div class="font-weight-stone-500 text-secondary">{{ bookings.totalItemCount }} resultats</div>
+        </div>
+        <div class="col-12 d-flex justify-content-center mt-2 mb-5">
+            {{ knp_pagination_render(bookings, 'Ui/_pagination.html.twig') }}
+        </div>
+    </div>
+{% else %}
+    <div class="row app-user d-flex justify-content-center">
+        <div class="col-12 col-md-8 text-center mt-3 mt-md-5">
+            <h3 class="h3-responsive font-weight-stone-600">
+                Vous n'avez aucune reservation.
+            </h3>
+        </div>
+    </div>
+{% endif %}

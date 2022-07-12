@@ -1,0 +1,8 @@
+{% extends 'bundles/TwigBundle/Exception/layout.html.twig' %}
+
+{% set settings = config.get %}
+
+{% block title 'Méthode non autorisée | ' ~ settings.name %}
+{% block subTitle 'Méthode non autorisée' %}
+{% block description "Mais rassurez vous tout espoir n'est pas perdu" %}
+

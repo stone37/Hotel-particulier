@@ -1,0 +1,19 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Edition d'un code de réduction | Code de réduction | {{ parent() }}{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/discount/edit/_header.html.twig' %}
+
+    {% include 'admin/discount/edit/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/admin/create.js'} %}
+{% endblock %}

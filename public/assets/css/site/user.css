@@ -1,0 +1,445 @@
+@media (max-width: 767px) {
+
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+}
+
+.skin-light .navbar.dashboard-navbar {
+    background-color: #303737 !important;
+    min-height: 30px !important;
+}
+
+.skin-light .navbar.dashboard-navbar .nav-item {
+
+}
+
+.skin-light .navbar.dashboard-navbar .navbar-nav .nav-item {
+    margin-right: 0;
+    margin-left: 0;
+    min-width: 170px;
+    text-align: center;
+}
+
+.skin-light .navbar.dashboard-navbar .navbar-nav .nav-item.active .nav-link {
+    background-color: #FF9A16;
+    color: #FFFFFF !important;
+}
+
+.skin-light .navbar.dashboard-navbar .nav-item .nav-link {
+    color: #ffffff !important;
+    font-size: .9rem;
+    font-weight: 400 !important;
+    /*overflow-x: auto;*/
+    padding: 12px 25px !important;
+}
+
+
+.skin-light .navbar.dashboard-navbar .nav-item .nav-link:hover,
+.skin-light .navbar.dashboard-navbar .nav-item .nav-link:focus,
+.skin-light .navbar.dashboard-navbar .nav-item .nav-link:active {
+    background-color: #FF9A16;
+    color: #FFFFFF !important;
+    -webkit-transition:all .2s ease-in-out;
+    transition:all .2s ease-in-out
+}
+
+.skin-light .app-user-booking-view {
+    border: 1.5px solid #FF9A16;
+}
+
+.skin-light .app-user-booking-view .booking-number {
+    border-radius: 5px;
+}
+
+.skin-light .app-user-booking-view .booking-number i {
+    cursor: pointer;
+    font-size: 1rem;
+    position: relative;
+    bottom: 2px;
+}
+
+
+
+
+
+
+
+
+
+
+
+/*.skin-light .btn-group.title a.btn:hover,
+.skin-light .btn-group.title a.btn:focus,
+.skin-light .btn-group.title a.btn.active {
+    border-bottom: 2px solid #1266f1 !important;
+}*/
+
+
+/*
+.skin-light .navbar.second.user {
+    background-color: #ffffff !important;
+}
+
+.skin-light .navbar.second.user .nav-item .nav-link {
+    font-size: .95rem;
+    color: #9e9e9e !important;
+    font-weight: 500 !important;
+    border-radius: 0;
+}
+
+.skin-light .navbar.second.user .nav-item .nav-link:hover,
+.skin-light .navbar.second.user .nav-item.active .nav-link {
+    color: #1266f1 !important;
+}
+
+.skin-light .navbar .nav-item.active>.nav-link,
+.skin-light .navbar .nav-item.selected>.nav-link {
+    background-color: transparent !important;
+    border-bottom-color: #1266f1;
+}
+
+.skin-light .navbar.navbar-transparent .navbar-nav .nav-item .nav-link {
+    color:#fff
+}
+
+.skin-light .navbar .navbar-nav .nav-item.active>.nav-link {
+    background-color: transparent;
+    color: #1266f1
+}
+
+.skin-light .navbar .mega-dropdown .nav-link {
+    color: #ffffff !important;
+    margin-right: 40px;
+    font-size: .97rem;
+    font-weight: 500 !important;
+    margin-top: 3.8px;
+    padding-bottom: 15px;
+    padding-top: 13px;
+    padding-left: 0;
+    padding-right: 0;
+    border-bottom: 2px solid #ffffff;
+}
+
+.skin-light .navbar .mega-dropdown .nav-link:hover {
+    border-bottom: 2px solid #1266f1;
+}
+
+@media (max-width: 767px) {
+    .skin-light .breadcrumb {
+        margin-top: -28px;
+    }
+}
+
+.skin-light .btn-group.title a.btn {
+    margin-right: 4px !important;
+}
+
+.skin-light .btn-group.title a.btn:hover,
+.skin-light .btn-group.title a.btn:focus,
+.skin-light .btn-group.title a.btn.active {
+    border-bottom: 2px solid #1266f1 !important;
+}
+
+.skin-light .app-user .info i.fa-whatsapp {
+    position: relative;
+    bottom: 6px;
+}
+
+.skin-light .app-user .info li a {
+
+}
+
+.skin-light .app-user {
+
+}
+
+.skin-light .app-user {
+
+}
+
+.skin-light .app-advert-list-block {
+    cursor: pointer;
+    border-radius: 0 !important;
+}
+
+.skin-light .app-advert-list-block:hover {
+    -webkit-box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.18), 0 2px 13px 0 rgba(0, 0, 0, 0.15) !important;
+    box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.18), 0 2px 13px 0 rgba(0, 0, 0, 0.15) !important;
+    border-radius: 0 !important;
+}
+
+
+.skin-light .app-advert-list-block img {
+    height: 150px;
+}
+
+@media (max-width: 767px) {
+    .skin-light .app-advert-list-block img {
+        height: 110px;
+    }
+
+    .skin-light .app-advert-list-block .nbr-photo {
+        position: absolute;
+        right: 0 !important;
+        top: 5.4rem !important;
+        font-size: .888rem;
+        font-weight: 600;
+    }
+
+    .skin-light .app-advert-list-block .price {
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 1rem;
+        border-top-right-radius: .375rem;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .skin-light .app-advert-list-block .price span {
+        font-size: .7rem !important;
+    }
+
+    .skin-light .app-advert-list-block .title {
+        margin-top: 2.5rem;
+    }
+
+    .skin-light .app-advert-list-block .title a {
+        color: #4f4f4f !important;
+        font-size: .82rem;
+    }
+
+    .skin-light .app-advert-list-block .title a:hover {
+        text-decoration: underline;
+    }
+
+    .skin-light .app-advert-list-block .location {
+
+    }
+
+    .skin-light .app-advert-list-block .location i {
+        font-size: 1rem !important;
+    }
+
+    .skin-light .app-advert-list-block .info img {
+        height: 22px;
+        border-radius: 0;
+        cursor: default;
+    }
+
+    .skin-light .app-advert-list-block .info.user img {
+        height: 30px;
+        cursor: default;
+    }
+
+    .skin-light .app-advert-list-block .info .ad {
+        font-weight: 600;
+        padding-left: 10px;
+        line-height: 15px;
+    }
+
+    .skin-light .app-advert-list-block .info.user .ad {
+        padding-left: 10px;
+        padding-top: 10px;
+    }
+
+    .skin-light .app-advert-list-block .info .ad a {
+        color: #4f4f4f;
+        text-decoration: underline;
+        font-size: .7rem;
+    }
+
+    .skin-light .app-advert-list-block .info .ad a:hover {
+        color: #212121;
+    }
+
+    .skin-light .app-advert-list-block .info .ad a i {
+        font-size: .8rem;
+    }
+}
+
+@media (min-width: 768px) {
+
+    .skin-light .app-advert-list-block .advert-image {
+        width: 100% !important;
+    }
+
+    .skin-light .app-advert-list-block .nbr-photo {
+        position: absolute;
+        right: 10px;
+        top: 8.5rem;
+        font-size: .888rem;
+        font-weight: 600;
+    }
+
+    .skin-light .app-advert-list-block .nbr-photo i {
+        font-size: 1.1rem;
+    }
+
+    .skin-light .app-advert-list-block .title {
+        padding-top: 7px;
+    }
+
+    .skin-light .app-advert-list-block .title a {
+        font-size: 1.2rem;
+        color: #4f4f4f !important;
+    }
+
+    .skin-light .app-advert-list-block .title a:hover {
+        text-decoration: underline;
+    }
+
+    .skin-light .app-advert-list-block .location {
+        position: relative;
+        bottom: 3px;
+    }
+
+    .skin-light .app-advert-list-block .price {
+        font-size: 1.6rem;
+    }
+
+    .skin-light .app-advert-list-block .price span {
+        font-size: 1.1rem !important;
+    }
+
+    .skin-light .app-advert-list-block .content {
+        font-size: .9rem !important
+    }
+
+    .skin-light .app-advert-list-block .info img {
+        height: 58px;
+        border-radius: 0;
+        padding-top: 8px;
+        padding-bottom: 6px;
+        padding-left: 10px;
+        cursor: default;
+    }
+
+    .skin-light .app-advert-list-block .info.user img {
+        height: 53px;
+        border-radius: 0;
+        padding-top: 8px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        cursor: default;
+    }
+
+    .skin-light .app-advert-list-block .info .ad {
+        padding-top: 18px;
+        padding-left: 18px;
+        font-weight: 600;
+    }
+
+    .skin-light .app-advert-list-block .info.user .ad {
+        padding-left: 10px;
+    }
+
+    .skin-light .app-advert-list-block .info .ad a {
+        font-size: .9rem;
+        color: #4f4f4f;
+        text-decoration: underline;
+    }
+
+    .skin-light .app-advert-list-block .info .ad a:hover {
+        color: #212121;
+    }
+
+    .skin-light .app-advert-list-block .info .ad a i {
+        font-size: 1.2rem;
+        position: relative;
+        top: 2px;
+    }
+
+    .skin-light .app-advert-list-block .location i {
+        font-size: 1rem !important;
+    }
+}
+
+.skin-light .app-advert-message-bulk {
+    cursor: pointer;
+    border-radius: 0 !important;
+}
+
+.skin-light .app-advert-message-bulk:hover {
+    -webkit-box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.18), 0 2px 13px 0 rgba(0, 0, 0, 0.15) !important;
+    box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.18), 0 2px 13px 0 rgba(0, 0, 0, 0.15) !important;
+    border-radius: 0 !important;
+}
+
+.skin-light .app-advert-message-bulk .mail:hover {
+    color: #1266f1 !important;
+    font-weight: 600 !important;
+}
+
+.skin-light .app-advert-message-bulk .phone:hover {
+    color: #1266f1 !important;
+    font-weight: 600 !important;
+}
+
+.skin-light .app-advert-message-bulk .dropdown-menu.user {
+    min-width: 5rem !important;
+}
+
+.skin-light .app-credit-bulk {
+    cursor: pointer !important;
+}
+
+.skin-light .app-credit-bulk .credit {
+    border-radius: 5px !important;
+    color: #4f4f4f !important;
+    border: 1.5px solid #b0bec5 !important;
+}
+
+.skin-light .app-credit-bulk .credit:hover,
+.skin-light .app-credit-bulk .credit.active {
+    -webkit-box-shadow: 0 5px 11px 0 rgba(18, 102, 241, 0.18), 0 4px 15px 0 rgba(18, 102, 241, 0.15) !important;
+    box-shadow: 0 5px 11px 0 rgba(18, 102, 241, 0.18), 0 4px 15px 0 rgba(18, 102, 241, 0.15) !important;
+    color: #1266f1 !important;
+    border: 1.5px solid #1266f1 !important;
+}
+
+.skin-light .app-credit-bulk .credit .form-check {
+    padding-top: 27px;
+    padding-bottom: 25px;
+}
+
+.skin-light .app-credit-bulk .credit .offre {
+    border-bottom-left-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
+    margin-left: -.6px !important;
+    margin-right: -.6px !important;
+    margin-bottom: -.5px !important;
+    line-height: normal !important;
+    padding-top: 9px !important;
+    padding-bottom: 6px; !important;
+    background-color: #b0bec5 !important;
+    color: #4f4f4f !important;;
+}
+
+.skin-light .app-credit-bulk .credit:hover .offre,
+.skin-light .app-credit-bulk .credit.active .offre {
+    background-color: #1266f1 !important;
+    color: #ffffff !important;;
+}
+
+.form-check-input[type="radio"]:checked+label:after,
+.form-check-input[type="radio"].with-gap:checked+label:before,
+.form-check-input[type="radio"].with-gap:checked+label:after,
+label.btn input[type="radio"]:checked+label:after,
+label.btn input[type="radio"].with-gap:checked+label:before,
+label.btn input[type="radio"].with-gap:checked+label:after {
+    border: 2px solid #1266f1 !important;
+}
+
+.skin-light .form-check-input[type=radio]:checked+label:after {background-color:#1266f1}
+
+.skin-light .form-check-input[type=radio]:checked+label:after {border:2px solid #1266f1}
+
+
+
+*/
+
+
+

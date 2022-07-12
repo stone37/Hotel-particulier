@@ -1,0 +1,21 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Nouveau hébergement | Hébergements | {{ parent() }}{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/room/create/_header.html.twig' %}
+
+    {% include 'admin/room/create/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/admin/create.js'} %}
+{% endblock %}
+
+

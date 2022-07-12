@@ -1,0 +1,19 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %} Nouveau compte adminitrateur | Comptes adminitrateur | {{ parent() }}{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/admin/create/_header.html.twig' %}
+
+    {% include 'admin/admin/create/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/admin/create.js'} %}
+{% endblock %}

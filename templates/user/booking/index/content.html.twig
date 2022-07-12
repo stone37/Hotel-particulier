@@ -1,0 +1,39 @@
+{% import 'user/booking/macro/_list.html.twig' as __view %}
+
+{% dump(bookings) %}
+<section>
+    {% if bookings|length > 0 %}
+        <div class="row app-user">
+            <div class="col-12">
+                <div class="row">
+                    {% for booking in bookings %}
+                        {{ __view.booking(booking, false) }}
+                    {% endfor %}
+                    <div class="col-12 d-flex justify-content-center mt-2">
+                        {{ knp_pagination_render(bookings, 'Ui/_pagination.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="row app-user d-flex justify-content-center mb-5">
+            <div class="col-12 col-md-8 text-center mt-3 mt-md-5">
+                <h4 class="h4-responsive font-weight-stone-500">
+                    Vous n'avez aucune reservation.
+                </h4>
+                <p>
+                    C'est ici que vous verrez toutes vos nouvelles réservations c'est à dire vos reservation non
+                    confirmer.
+                </p>
+
+                <div class="my-5">
+                    <a href="{{ path('app_room_index') }}" class="btn btn-primary">
+                        <i class="fas fa-calendar mr-2"></i> Réserver une chambre maintenant
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</section>
+
+

@@ -1,0 +1,17 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Options | {{ parent() }}{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/option/index/_header.html.twig' %}
+
+    {% include 'admin/option/index/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

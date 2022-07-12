@@ -1,0 +1,5 @@
+{% import 'Ui/Macro/modals.html.twig' as macro %}
+
+{% set param = configuration.modal.soft %}
+
+{{ macro.simple(form, data, message, param.icon, param.type, param.yes_class, param.no_class) }}

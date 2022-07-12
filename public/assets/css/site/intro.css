@@ -1,0 +1,16 @@
+html, body, .view.intro {
+    min-height: 300px !important
+}
+
+@media (min-width: 992px) {
+    html, body, .view.intro {
+        height: 80% !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .bc {
+        margin-top: -7rem;
+    }
+}
+

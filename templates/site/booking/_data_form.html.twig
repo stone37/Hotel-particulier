@@ -1,0 +1,56 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'booking-data-form', 'id': 'booking-data-form'}}) }}
+    <div class="row mt-lg-4">
+        <div class="col-lg-12 px-0">
+            <div id="booking-form-sticky" class="d-flex justify-content-center align-items-end booking-form-sticky">
+                <div class="booking-form-bulk">
+                    <div class="d-flex">
+                        <div class="z-depth-4 booking-form">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div id="booking-checkin-btn" class="booking-bulk checkin d-flex align-items-center">
+                                    <div class="icon"><i class="fas fa-calendar text-primary"></i></div>
+                                    <div>
+                                        <div class="title text-secondary">Arrivée</div>
+                                        <div class="date-content grey-text">
+                                            {{ today|format_datetime('medium', 'none', locale='fr') }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="booking-checkout-btn" class="booking-bulk checkout d-flex align-items-center">
+                                    <div class="icon"><i class="fas fa-calendar text-primary"></i></div>
+                                    <div>
+                                        <div class="title text-secondary">Départ</div>
+                                        <div class="date-content grey-text">
+                                            {{ tomorrow|format_datetime('medium', 'none', locale='fr') }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="booking-booker-btn" class="booking-bulk user d-flex align-items-center">
+                                    <div class="icon"><i class="fas fa-user text-primary"></i></div>
+                                    <div>
+                                        <div class="title text-secondary">Voyageurs</div>
+                                        <div class="date-content grey-text">
+                                            <span class="room">1 chambre, </span>
+                                            <span class="customer">2 adultes, </span>
+                                            <span class="children">0 enfants</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{ form_widget(form.checkin) }}
+                                {{ form_widget(form.checkout) }}
+                                {{ form_widget(form.adult) }}
+                                {{ form_widget(form.children) }}
+                                {{ form_widget(form.room) }}
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-end">
+                            <button type="submit" class="z-depth-4 btn btn-primary booking-form-btn">
+                                Verifier la disponibilité
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ form_widget(form._token) }}
+{{ form_end(form, {'render_rest': false}) }}

@@ -1,0 +1,17 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Liste des abonnés de la newsletters | {{ parent() }}{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/emailing/newsletters/_header.html.twig' %}
+
+    {% include 'admin/emailing/newsletters/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

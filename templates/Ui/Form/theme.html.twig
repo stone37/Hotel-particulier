@@ -1,0 +1,28 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{% form_theme form _self %}
+
+{% block form_row %}
+    <div class="md-form md-outline mb-2">
+        {{- form_widget(form, {'attr': {'class': 'form-control'}}) -}}
+        {{- form_label(form) -}}
+        {{- form_errors(form) -}}
+    </div>
+{% endblock %}
+
+{%- block form_errors %}
+    {%- if errors|length > 0 -%}
+        {%- for error in errors -%}
+            <div class="red-text font-weight-stone-500 small mb-1">
+                {{ error.message }}
+            </div>
+        {%- endfor -%}
+    {%- endif -%}
+{%- endblock %}
+
+{% macro service_template(fields) %}
+    {{ form_widget(fields.file) }}
+{% endmacro %}
+
+
+

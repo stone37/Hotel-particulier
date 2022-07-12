@@ -1,0 +1,8 @@
+{% extends 'bundles/TwigBundle/Exception/layout.html.twig' %}
+
+{% set settings = config.get %}
+
+{% block title 'Accès interdit | ' ~ settings.name %}
+{% block subTitle 'Accès interdit' %}
+{% block description "Vous n'êtes pas autorisé à voir cette resource :(" %}
+

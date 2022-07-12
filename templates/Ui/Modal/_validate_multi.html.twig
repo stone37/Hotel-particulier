@@ -1,0 +1,6 @@
+{% import 'Ui/Macro/modals.html.twig' as macro %}
+
+{% set param = configuration.modal.validate %}
+
+{{ macro.bulk(form, data, message, param.icon, param.type, param.yes_class, param.no_class) }}
+

@@ -1,0 +1,21 @@
+{% extends layout %}
+
+{% import "mails/macros.twig" as e %}
+
+{% set settings = config.get %}
+
+{% block body %}
+
+    {% apply markdown_email %}
+
+        Bonjour {{ order.user.username }}
+        ===============================
+
+        Votre commande est validée.
+        Vous pouvez accéder à votre facture sur votre espace client.
+
+    {% endapply %}
+
+    {{ e.button('Mes factures', url('app_dashboard_invoice_index')) }}
+{% endblock %}
+

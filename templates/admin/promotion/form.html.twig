@@ -1,0 +1,111 @@
+<div class="form-row">
+    <div class="col-12">
+        <div class="h5-responsive border border-dark border-top-0 border-left-0 border-right-0">
+            <div class="badge badge-dark d-inline-block mr-1" style="position: relative; bottom: 6px;">1</div>
+            <div class="text-dark d-inline-block font-weight-stone-500">Information de base</div>
+        </div>
+    </div>
+</div>
+<div class="form-row">
+    <div class="col-12 col-md-4">
+        {{ form_row(form.name) }}
+        <small class="form-text text-muted" style="margin-top: -4px">
+            Ce champ est obligatoire
+        </small>
+    </div>
+    <div class="col-12 col-md-4">
+        {{ form_row(form.start) }}
+        <small class="form-text text-muted" style="margin-top: -4px">
+            Ce champ est obligatoire
+        </small>
+    </div>
+    <div class="col-12 col-md-4">
+        {{ form_row(form.end) }}
+        <small class="form-text text-muted" style="margin-top: -4px">
+            Ce champ est obligatoire
+        </small>
+    </div>
+    <div class="col-12 col-md-4">
+        {{ form_row(form.discount) }}
+        <small class="form-text text-muted" style="margin-top: -4px">
+            Ce champ est obligatoire
+        </small>
+    </div>
+    <div class="col-12 col-md-4">
+        <div class="d-flex flex-wrap">
+            <div class="select-outline position-relative w-100">
+                {{ form_widget(form.room) }}
+                <label>{{ form.room.vars.label }}</label>
+            </div>
+            <div style="margin-top: -15px;" class="red-text font-weight-stone-500">{{ form_errors(form.room) }}</div>
+        </div>
+    </div>
+</div>
+<div class="form-row">
+    <div class="col-12 col-md-8">
+        <div class="md-form md-outline">
+            <div class="mb-2">Description</div>
+            {{ form_widget(form.description) }}
+            {{ form_label(form.description) }}
+            <div class="red-text font-weight-stone-500">{{ form_errors(form.description) }}</div>
+        </div>
+    </div>
+</div>
+<div class="form-row mt-4">
+    <div class="col-12">
+        <div class="h5-responsive border border-dark border-top-0 border-left-0 border-right-0">
+            <div class="badge badge-dark d-inline-block mr-1" style="position: relative; bottom: 6px;">2</div>
+            <div class="text-dark d-inline-block font-weight-stone-500">Visibilité</div>
+        </div>
+    </div>
+</div>
+<div class="form-row">
+    <div class="col-12 col-md-4 my-3">
+        <div class="grey-text pb-1">{{ form.enabled.vars.label|trans }}</div>
+        <div class="switch stone-switch mt-1 ml-md-4">
+            <label>
+                Non
+                <input type="checkbox" name="{{ form.enabled.vars.full_name }}" id="{{ form.enabled.vars.id }}"
+                       value="{{ form.enabled.vars.value }}" {% if form.enabled.vars.checked %}checked="checked{% endif %}">
+                <span class="lever"></span>
+                Oui
+            </label>
+        </div>
+    </div>
+</div>
+<div class="form-row mt-4">
+    <div class="col-12">
+        <div class="h5-responsive border border-dark border-top-0 border-left-0 border-right-0">
+            <div class="badge badge-dark d-inline-block mr-1" style="position: relative; bottom: 6px;">3</div>
+            <div class="text-dark d-inline-block font-weight-stone-500">Image</div>
+        </div>
+    </div>
+</div>
+<div class="form-row mt-4">
+    <div class="col-6 col-md-3 col-lg-3">
+        <div class="file-field">
+            <div class="btn btn-mdb-color float-left">
+                <span>Choisir une image</span>
+                <input type="file" name="{{ form.file.children.file.vars.full_name }}" id="entity-image" />
+            </div>
+        </div>
+    </div>
+
+    {% if promotion is defined %}
+        <div class="col-4 col-md-3 col-lg-2">
+            <img src="{{ vich_uploader_asset(promotion, 'file') }}" alt="" class="img-fluid img-thumbnail" id="image-view" />
+        </div>
+    {% else %}
+        <div class="col-4 col-md-3 col-lg-2">
+            <img src="" alt="" class="img-fluid img-thumbnail" id="image-view" />
+        </div>
+    {% endif %}
+</div>
+
+
+
+
+
+
+
+

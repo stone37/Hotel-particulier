@@ -1,0 +1,51 @@
+<div class="row mb-5">
+    <div class="col-12">
+        <form class="form-group" method="get">
+            <div class="form-row d-flex align-items-center justify-content-end">
+                <div class="col-6 col-md-3 col-lg-2">
+                    <div class="d-flex flex-wrap">
+                        <div class="select-outline position-relative w-100">
+                            <select id="year" name="year" class="mdb-select md-outline md-form dropdown-stone">
+                                {% for y in current_year..2022 %}
+                                    <option value="{{ y }}" {% if y == year %}selected{% endif %}>{{ y }}</option>
+                                {% endfor %}
+                            </select>
+                            <label></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3 col-md-2 col-lg-1">
+                    <button type="submit" class="btn btn-primary btn-sm">Valider</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-12">
+        <table class="table table-responsive-sm">
+            <thead class="text-primary">
+            <tr>
+                <th scope="col" class="font-weight-stone-500 text-center">Mois</th>
+                <th scope="col" class="font-weight-stone-500 text-center">Revenus</th>
+                <th scope="col" class="font-weight-stone-500 text-center">TVA</th>
+                <th scope="col" class="font-weight-stone-500 text-center">Remise</th>
+                <th scope="col" class="font-weight-stone-500 text-center">Revenus - Remise</th>
+                <th scope="col" class="font-weight-stone-500 text-center"></th>
+            </tr>
+            </thead>
+            <tbody id="list-checkbook-container">
+            {% for report in reports %}
+                <tr>
+                    <td class="text-center">{{ ('2022-' ~ report.month ~ '-01')|format_datetime(pattern="MMMM")|capitalize }}</td>
+                    <td class="text-center">{{ report.price|format_currency('XOF') }}</td>
+                    <td class="text-center">{{ report.tax|format_currency('XOF') }}</td>
+                    <td class="text-center">{{ report.fee|format_currency('XOF') }}</td>
+                    <td class="text-center">{{ (report.price - report.fee)|format_currency('XOF') }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+

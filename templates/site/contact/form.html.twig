@@ -1,0 +1,39 @@
+<div class="form-row">
+    <div class="col-12">
+        {{ form_row(form.name) }}
+        <small class="form-text text-muted" style="margin-top: -4px">
+            Ce champ est obligatoire
+        </small>
+    </div>
+    <div class="col-12 col-md-6">
+        {{ form_row(form.email) }}
+        <small class="form-text text-muted" style="margin-top: -4px">
+            Ce champ est obligatoire
+        </small>
+    </div>
+    <div class="col-12 col-md-6">
+        {{ form_row(form.phone) }}
+        <small class="form-text text-muted" style="margin-top: -4px">
+            Ce champ est obligatoire
+        </small>
+    </div>
+</div>
+
+<div class="form-row">
+    <div class="col-12">
+        <div class="md-form md-outline">
+            {{ form_widget(form.content) }}
+            {{ form_label(form.content) }}
+            <div class="red-text font-weight-stone-500">{{ form_errors(form.content) }}</div>
+            <small class="form-text text-muted" style="margin-top: -4px">
+                Ce champ est obligatoire
+            </small>
+        </div>
+    </div>
+    <div class="col-12">
+        {{ form_row(form.recaptchaToken) }}
+    </div>
+</div>
+
+
+

@@ -1,0 +1,17 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Promotions | {{ parent() }}{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/promotion/index/_header.html.twig' %}
+
+    {% include 'admin/promotion/index/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

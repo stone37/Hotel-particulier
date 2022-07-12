@@ -1,0 +1,59 @@
+{% extends 'site/layout.html.twig' %}
+
+{% set dashboard = isActive('app_dashboard_index') %}
+
+{% set booking_index = isActive('app_dashboard_booking_index') %}
+{% set booking_confirm = isActive('app_dashboard_booking_confirmed_index') %}
+{% set booking_cancel = isActive('app_dashboard_booking_cancel_index') %}
+
+{% set invoice = isActive('app_dashboard_invoice_index') %}
+
+{% set profil_edit = isActive('app_user_profil_edit') %}
+{% set profil_pw = isActive('app_user_change_password') %}
+{% set profil_delete = isActive('app_user_delete') %}
+{% block app_intro %}
+    <nav class="navbar navbar-expand navbar-light mt-lg-70 mt-50 dashboard-navbar py-0 {#d-none d-lg-block py-0 z-depth-2#}">
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item {% if dashboard %}active{% endif %}">
+                    <a href="{{ path('app_dashboard_index') }}" class="nav-link"
+                       aria-haspopup="true" aria-expanded="false"> Tableau de bord
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item {% if booking_index or booking_confirm or booking_cancel  %}active{% endif %}">
+                    <a  href="{{ path('app_dashboard_booking_index') }}" class="nav-link"
+                        aria-haspopup="true" aria-expanded="false"> Mes reservations
+                    </a>
+                </li>
+
+                <li class="nav-item {% if invoice %}active{% endif %}" >
+                    <a href="{{ path('app_dashboard_invoice_index') }}" class="nav-link"
+                       aria-haspopup="true" aria-expanded="false"> Mes factures
+                    </a>
+                </li>
+
+                <li class="nav-item {% if profil_edit or profil_pw or profil_delete %}active{% endif %}">
+                    <a href="{{ path('app_user_profil_edit') }}" class="nav-link"
+                       aria-haspopup="true" aria-expanded="false"> Modifier mon profil
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+{% endblock %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% include 'Ui/_stylesheets.html.twig' with {'path': 'assets/css/site/user.css'} %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/site/user.js'} %}
+{% endblock %}
+
+

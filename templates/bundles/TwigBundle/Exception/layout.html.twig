@@ -1,0 +1,28 @@
+{% extends '__base.html.twig' %}
+
+{% block app_body %}
+    <main>
+      <section class="container mt-4">
+          <div class="row d-flex justify-content-center">
+              <div class="col-12">
+                  <h2 class="display-5 font-weight-stone-600 mb-4 text-center">
+                      <strong class="font-weight-bold">{% block subTitle '' %}</strong>
+                  </h2>
+                  <p class="text-center">{% block description '' %}</p>
+                  <div class="d-flex justify-content-center">
+                      <img src="{{ asset('images/hostel.svg') }}" alt="" width="380">
+                  </div>
+              </div>
+              <div class="col-12 col-md-6 d-flex mb-5">
+                  <a href="{{ path('app_home') }}" class="btn btn-primary btn-block mx-2"><i class="fas fa-long-arrow-alt-left mr-3"></i> Retour à l'accueil</a>
+                  <a href="{{ path('app_room_index') }}" class="btn btn-secondary btn-block mx-2">Nos hébergements <i class="fas fa-hotel ml-3"></i></a>
+              </div>
+          </div>
+      </section>
+  </main>
+{% endblock %}
+
+{% block app_footer %}
+    {% include '_footer.html.twig' %}
+{% endblock %}
+

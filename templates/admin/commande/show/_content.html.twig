@@ -1,0 +1,89 @@
+{% import 'Ui/Macro/buttons.html.twig' as buttons %}
+
+<div class="row app-user mt-5">
+    <div class="col-12">
+        <table class="table table-sm table-bordered table-responsive-sm table-responsive-md">
+            <tbody>
+            <tr>
+                <td class="table-dark text-center font-weight-normal">Id</td>
+                <td class="text-center font-weight-normal">{{ order.id }}</td>
+                <td class="table-dark text-center font-weight-normal">Date</td>
+                <td class="text-center font-weight-normal">{{ order.createdAt|date('d/m/Y H:i:s') }}</td>
+                <td class="table-dark text-center font-weight-normal">Reference</td>
+                <td class="text-center font-weight-normal">
+                    {% if order.reference %}
+                        {{ order.reference }}
+                    {% else %}
+                        <span class="badge badge-grey">Aucun</span>
+                    {% endif %}
+                </td>
+                <td class="table-dark text-center font-weight-normal">Etat du paiement</td>
+                <td class="text-center font-weight-normal">
+                    {% if order.validated %}
+                        <span class="badge badge-success font-weight-stone-500">
+                            <i class="fas fa-check mr-1"></i> Payée
+                        </span>
+                    {% else %}
+                        <span class="badge badge-warning font-weight-stone-500">
+                            <i class="fas fa-clock mr-1"></i> En attente de règlement
+                        </span>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                {% if order.user %}
+                    <td class="table-dark text-center font-weight-normal">Client</td>
+                    <td class="text-left font-weight-normal px-2" colspan="7">
+                        <ul class="list-unstyled list-inline mb-0">
+                            <li class="list-inline-item">Nom et prénom: {{ order.user.firstname }} {{ order.user.lastName }}</li>
+                            <li class="list-inline-item">Email: <a href="mailto::{{ order.user.email }}" class="card-link" data-toggle="tooltip" title="Envoyer un mail">{{ order.user.email }}</a></li>
+                            <li class="list-inline-item">Telephone: {{ order.user.phone }}</li>
+                        </ul>
+                    </td>
+                {% else %}
+                    <td class="table-dark text-center font-weight-normal">Client</td>
+                    <td class="text-left font-weight-normal px-2" colspan="7">
+                        <ul class="list-unstyled list-inline mb-0">
+                            <li class="list-inline-item">Nom et prénom: {{ order.booking.firstname }} {{ order.booking.lastName }}</li>
+                            <li class="list-inline-item">Email: <a href="mailto::{{ order.booking.email }}" class="card-link" data-toggle="tooltip" title="Envoyer un mail">{{ order.booking.email }}</a></li>
+                            <li class="list-inline-item">Telephone: {{ order.booking.phone }}</li>
+                        </ul>
+                    </td>
+                {% endif %}
+            </tr>
+            <tr>
+                <td class="table-dark text-center font-weight-normal">Montant</td>
+                <td class="text-center font-weight-normal">{{ order.amount|format_currency('XOF') }}</td>
+                <td class="table-dark text-center font-weight-normal">Taxe</td>
+                <td class="text-center font-weight-normal">{{ order.taxeAmount|format_currency('XOF') }}</td>
+                <td class="table-dark text-center font-weight-normal">Montant total</td>
+                <td class="text-center font-weight-normal">{{ order.amountTotal|format_currency('XOF') }}</td>
+                <td class="table-dark text-center font-weight-normal">Remise</td>
+                <td class="text-center font-weight-normal">
+                    {% if order.discountAmount %}
+                        <span class="badge badge-success font-weight-stone-500">
+                                {{ order.discountAmount }} %
+                            </span>
+                    {% else %}
+                        <span class="badge badge-warning font-weight-stone-500">Non</span>
+                    {% endif %}
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row mb-5">
+    <div class="col-12 mb-5">
+        <div class="d-flex justify-content-end mt-4">
+            {% set path = path('app_admin_commande_index') %}
+            <div class="text-center">
+                {{ buttons.default(path, 'Retour à la liste', 'app-entity-list-btn', 'fas fa-angle-left', 'btn-outline-primary') }}
+            </div>
+        </div>
+    </div>
+</div>
+
+

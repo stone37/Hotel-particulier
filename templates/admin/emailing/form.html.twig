@@ -1,0 +1,24 @@
+<div class="form-row">
+    <div class="col-12 col-md-6">
+        {{ form_row(form.subject) }}
+        <small class="form-text text-muted" style="margin-top: -4px">
+            Ce champ est obligatoire
+        </small>
+    </div>
+</div>
+
+<div class="row d-flex justify-content-center justify-content-md-start mt-4">
+    <div class="col-12 col-md-12">
+        <div class="grey-text " style="margin-bottom: -25px;">{{ form_label(form.content) }}</div>
+        <div class="md-form md-outline">
+            {{ form_widget(form.content) }}
+            <div class="red-text font-weight-stone-500">{{ form_errors(form.content) }}</div>
+        </div>
+        <small class="form-text text-muted" style="margin-top: -15px">
+            Ce champ est obligatoire
+        </small>
+    </div>
+</div>
+
+
+

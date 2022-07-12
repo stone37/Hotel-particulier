@@ -1,0 +1,30 @@
+<section class="app-newsletter pt-5">
+    <div class="row mx-md-5">
+        <div class="col-12">
+            <div class="wow fadeIn">
+                <h1 class="h1-responsive font-weight-stone-600 text-primary mb-4 text-center">
+                    <strong class="font-weight-bold">Newsletter et réductions</strong>
+                </h1>
+                <p class="text-center mx-lg-5 px-lg-5 px-2">
+                    Inscrivez-vous à notre newsletter pour recevoir immédiatement votre code de réduction exclusif
+                    et être tenu au courant de nos bonnes affaires à bas prix !
+                </p>
+            </div>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+            <form id="newsletter-form" action="{{ path('app_newsletter_subscribe') }}" class="form-inline newsletter-form" method="POST">
+                <div class="md-form md-outline form-lg input-with-pre-icon">
+                    <i class="fas fa-envelope input-prefix"></i>
+                    <input type="email" id="newsletter-email" name="email"
+                           class="form-control font-weight-normal form-control-lg" value=""
+                           placeholder="Entrer votre email" required />
+                    <label for="newsletter-email"></label>
+                </div>
+                <input type="hidden" id="newsletter-token" name="_token" value="{{ csrf_token('newsletter') }}">
+                <button type="submit" class="btn btn-primary btn-lg">Souscrire <i class="fas fa-paper-plane ml-2 d-none d-md-inline"></i></button>
+            </form>
+        </div>
+    </div>
+</section>
+
+

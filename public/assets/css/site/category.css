@@ -1,0 +1,53 @@
+.skin-light .app-choose-category h3 {
+    font-weight: 600 !important;
+}
+
+.skin-light .app-choose-category .list-group a {
+    background-color: #ffffff !important;
+    color: #1266F1;
+}
+
+.skin-light .app-choose-category .list-group a i {
+    font-size: 1rem !important;
+}
+
+.skin-light .app-choose-category .list-group.app-category-content-parent a {
+    font-weight: 600;
+    font-size: 1.2rem;
+    padding-top: .8rem;
+    padding-bottom: .8rem;
+}
+
+.skin-light .app-choose-category .list-group.app-category-content-children-1 a {
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+.skin-light .app-choose-category .list-group.app-category-content-children-2 a {
+    font-weight: 400;
+    font-size: 1rem;
+}
+
+.skin-light .app-choose-category .list-group.app-category-content-parent-children-1 a {
+    font-weight: 600 !important;
+    font-size: 1.2rem !important;
+}
+
+.skin-light .app-choose-category .list-group.app-category-content-parent-children-2 a {
+    font-weight: 500 !important;
+    font-size: 1.1rem !important;
+}
+
+
+.skin-light .app-choose-category .list-group a:hover {
+    background-color: #ececf6 !important;
+}
+
+@media (max-width: 767px) {
+    .skin-light .breadcrumb {
+        margin-top: -28px;
+    }
+}
+
+
+

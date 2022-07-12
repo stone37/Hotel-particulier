@@ -1,0 +1,27 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Tableau de bord | {{ parent() }}{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/dashboard/index/_header.html.twig' %}
+
+    {% include 'admin/dashboard/index/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        let $oDaily = '{{ days|json_encode|raw }}',
+            $oMonthly = '{{ months|json_encode|raw }}',
+            $roomInactif = '{{ roomTotal - roomEnabledTotal }}',
+            $roomEnabled = '{{ roomEnabledTotal - roomBookingTotal }}',
+            $roomBookingTotal = '{{ roomBookingTotal }}';
+    </script>
+
+    {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/admin/stats.js'} %}
+{% endblock %}

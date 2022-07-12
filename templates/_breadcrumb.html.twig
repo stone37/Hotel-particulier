@@ -1,0 +1,29 @@
+{% if wo_breadcrumbs()|length %}
+    <ol id="{{ listId }}" class="{{ listClass }} px-0">
+        {% for b in breadcrumbs %}
+            {% if b.url and not loop.last %}
+                <li {% if itemClass is defined and itemClass|length %} class="{{ itemClass }} pl-0"{% endif %}>
+                    <a href="{{ b.url }}">
+                        {% if b.translate is defined and b.translate == true %}
+                            {{- b.text | trans(b.translationParameters, translation_domain, locale) -}}
+                        {% else %}
+                            {{- b.text -}}
+                        {% endif %}
+                    </a>
+                    {% if separator is not null and not loop.last %}
+                        <i class='{{ separatorClass }}'></i>
+                    {% endif %}
+                </li>
+            {% else %}
+                <li class="breadcrumb-item pl-0 active">
+                    {% if b.translate is defined and b.translate == true %}
+                        {{- b.text | trans(b.translationParameters, translation_domain, locale) -}}
+                    {% else %}
+                        {{- b.text -}}
+                    {% endif %}
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ol>
+{% endif %}
+

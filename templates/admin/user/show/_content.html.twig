@@ -1,0 +1,265 @@
+{% import 'Ui/Macro/buttons.html.twig' as buttons %}
+
+<div class="row app-user mt-5">
+    <div class="col-12">
+        <table class="table table-sm table-bordered table-responsive-sm table-responsive-md">
+            <tbody>
+            <tr>
+                <td class="table-dark text-center font-weight-normal">Id</td>
+                <td class="text-center font-weight-normal">{{ user.id }}</td>
+                <td class="table-dark text-center font-weight-normal">Nom d'utilisateur</td>
+                <td class="text-center font-weight-normal">
+                    {% if user.username %}
+                        @{{ user.username }}
+                    {% else %}
+                        <span class="badge badge-grey">Aucun</span>
+                    {% endif %}
+                </td>
+                <td class="table-dark text-center font-weight-normal">Nom et prénom</td>
+                <td class="text-center font-weight-normal">{{ user.lastName }} {{ user.firstName }}</td>
+                <td class="table-dark text-center font-weight-normal">Email</td>
+                <td class="text-center font-weight-normal">
+                    <a href="mailto:{{ user.email }}" class="card-link" data-toggle="tooltip" title="Envoyer un mail">{{ user.email }}</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="table-dark text-center font-weight-normal">Téléphone</td>
+                <td class="text-center font-weight-normal">{{ user.phone }}</td>
+                <td class="table-dark text-center font-weight-normal">Date de naissance</td>
+                <td class="text-center font-weight-normal">
+                    {% if user.birthDay %}
+                        {{ user.birthDay|date('d/m/Y') }}
+                    {% else %}
+                        <span class="badge badge-grey">Aucun</span>
+                    {% endif %}
+                </td>
+                <td class="table-dark text-center font-weight-normal">Adresse</td>
+                <td class="text-center font-weight-normal">
+                    {% if user.address %}
+                        {{ user.address }}
+                    {% else %}
+                        <span class="badge badge-grey">Aucun</span>
+                    {% endif %}
+                </td>
+                <td class="table-dark text-center font-weight-normal">Pays</td>
+                <td class="text-center font-weight-normal">
+                    {% if user.country %}
+                        {{ user.country|country_name }}
+                    {% else %}
+                        <span class="badge badge-grey">Aucun</span>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td class="table-dark text-center font-weight-normal">Ville</td>
+                <td class="text-center font-weight-normal">
+                    {% if user.city %}
+                        {{ user.city }}
+                    {% else %}
+                        <span class="badge badge-grey">Aucun</span>
+                    {% endif %}
+                </td>
+                <td class="table-dark text-center font-weight-normal">Date de création</td>
+                <td class="text-center font-weight-normal">{{ user.createdAt|date('d/m/Y H:i:s') }}</td>
+                <td class="table-dark text-center font-weight-normal">Dernière connexion</td>
+                <td class="text-center font-weight-normal">{{ user.updatedAt|date('d/m/Y H:i:s') }}</td>
+                <td class="table-dark text-center font-weight-normal">Dernière adresse Ip</td>
+                <td class="text-center font-weight-normal">{{ user.lastLoginIp }}</td>
+            </tr>
+            <tr>
+                <td class="table-dark text-center font-weight-normal">Avatar</td>
+                <td class="text-center px-2 font-weight-normal">
+                    {% if vich_uploader_asset(user, 'file') %}
+                        <img src="{{ vich_uploader_asset(user, 'file') }}" alt="User avatar" class="img-fluid z-depth-2" style="width: 140px;" />
+                    {% else %}
+                        <span class="badge badge-grey">Aucun</span>
+                    {% endif %}
+                </td>
+                {% if user.banned %}
+                    <td class="table-dark text-center font-weight-normal">Banni</td>
+                    <td class="text-center font-weight-normal">{{ user.bannedAt|ago('Depuis') }}</td>
+                {% endif %}
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row mb-5">
+    <div class="col-12">
+        <div class="d-flex justify-content-end mb-5 mt-4">
+            {% if type == 1 %}
+                {% set path = path('app_admin_user_index') %}
+            {% elseif type == 2 %}
+                {% set path = path('app_admin_user_no_confirm_index') %}
+            {% elseif type == 3 %}
+                {% set path = path('app_admin_user_deleted_index') %}
+            {% endif %}
+
+            <div class="text-center mr-3">
+                {{ buttons.default(path, 'Retour à la liste', 'app-entity-list-btn',
+                    'fas fa-angle-left', 'btn-outline-primary') }}
+            </div>
+            <div class="text-center mr-3">
+                {{ buttons.default(path('app_admin_booking_user', {'id': user.id}), 'Reservations',
+                    'app-entity-list-advert-btn', 'fas fa-calendar', 'btn-primary') }}
+            </div>
+            <div class="text-center mr-3">
+                {{ buttons.default(path('app_admin_commande_user', {'id': user.id}), 'Commandes',
+                    'app-entity-list-order-btn', 'fas fa-shopping-cart', 'btn-grey') }}
+            </div>
+
+            {% if type == 1 %}
+                <form action="{{ path('app_admin_user_ban', {'id': user.id}) }}" method="post" onsubmit="return confirm('Voulez-vous vraiment bannir cet utilisateur ?')">
+                    <button class="btn btn-default" type="submit" {{ user.banned ? 'disabled' : '' }}>
+                        <i class="fas fa-ban mr-1"></i> {{ user.banned ? 'Banni !' : 'Bannir' }}
+                    </button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+
+
+
+{#
+{% import 'Ui/Macro/buttons.html.twig' as buttons %}
+
+<div class="row app-user mb-5">
+    <div class="col-12">
+        <table class="table table-borderless table-responsive-sm">
+            <tbody>
+            <tr>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Id</div>
+                    <div class="content text-primary font-weight-stone-600">{{ user.id }}</div>
+                </td>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Nom et prénom</div>
+                    <div class="content text-primary font-weight-stone-600">
+                        {{ user.lastName }} {{ user.firstName }}
+                    </div>
+                </td>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Nom d'utilisateur</div>
+                    <div class="content text-primary font-weight-stone-600">
+                        {% if user.username %}
+                            @{{ user.username }}
+                        {% else %}
+                            <span class="badge badge-grey">Aucun</span>
+                        {% endif %}
+                    </div>
+                </td>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Email</div>
+                    <div class="content text-primary font-weight-stone-600">
+                        <a href="mailto:{{ user.email }}" class="" data-toggle="tooltip" title="Envoyer un mail">{{ user.email }}</a>
+                    </div>
+                </td>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Téléphone</div>
+                    <div class="content text-primary font-weight-stone-600">
+                        {% if user.phone %}
+                            {{ user.phone }}
+                        {% else %}
+                            <span class="badge badge-grey">Aucune</span>
+                        {% endif %}
+                    </div>
+                </td>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Date de naissance</div>
+                    <div class="content text-primary font-weight-stone-600">
+                        {% if user.birthDay %}
+                            {{ user.birthDay|date('d/m/Y') }}
+                        {% else %}
+                            <span class="badge badge-grey">Aucune</span>
+                        {% endif %}
+                    </div>
+                </td>
+
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Localisation</div>
+                    <div class="content text-primary font-weight-stone-600">
+                        {% if user.location %}
+                            {{ user.location.name }}
+                            {% if user.location.zone %}({{ user.location.zone }}){% endif %}
+                        {% else %}
+                            <span class="badge badge-grey">Aucune</span>
+                        {% endif %}
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Date de création</div>
+                    <div class="content text-primary font-weight-stone-600">{{ user.createdAt|date('d/m/Y') }}</div>
+                </td>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Dernière connexion</div>
+                    <div class="content text-primary font-weight-stone-600">{{ user.lastLoginAt|date_french('Depuis') }}</div>
+                </td>
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Dernière adresse Ip</div>
+                    <div class="content text-primary font-weight-stone-600">{{ user.lastLoginIp }}</div>
+                </td>
+                {% if user.bannedAt %}
+                    <td>
+                        <div class="title font-weight-stone-600 grey-text">Banni</div>
+                        <div class="content text-primary font-weight-stone-600">{{ user.bannedAt|date_french('Depuis') }}</div>
+                    </td>
+                {% endif %}
+                <td>
+                    <div class="title font-weight-stone-600 grey-text">Avatar</div>
+                    <div class="content text-primary font-weight-stone-600">
+                        {% if vich_uploader_asset(user, 'file') %}
+                            <img src="{{ vich_uploader_asset(user, 'file') }}" alt="User avatar"
+                                 class="img-fluid z-depth-2" style="width: 140px;" />
+                        {% else %}
+                            <span class="badge badge-grey">Aucune</span>
+                        {% endif %}
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-end mt-4">
+            {% if type == 1 %}
+                {% set path = path('app_admin_user_index') %}
+            {% elseif type == 2 %}
+                {% set path = path('app_admin_user_no_confirm_index') %}
+            {% else %}
+                {% set path = path('app_admin_user_deleted_index') %}
+            {% endif %}
+
+            <div class="text-center mr-3">
+                {{ buttons.default(path, 'Retour à la liste', 'app-entity-list-btn',
+                    'fas fa-angle-left', 'btn-outline-primary') }}
+            </div>
+            <div class="text-center mr-3">
+                {{ buttons.default(path('app_admin_booking_user', {'id': user.id}), 'Reservations',
+                    'app-entity-list-advert-btn', 'fas fa-clipboard', 'btn-primary') }}
+            </div>
+            <div class="text-center mr-3">
+                {{ buttons.default(path('app_admin_order_user', {'id': user.id}), 'Commandes',
+                    'app-entity-list-order-btn', 'fas fa-shopping-cart', 'btn-grey') }}
+            </div>
+
+            <form action="{{ path('app_admin_user_ban', {'id': user.id}) }}" method="post"
+                  onsubmit="return confirm('Voulez-vous vraiment bannir cet utilisateur ?')">
+                <button class="btn btn-default" type="submit" {{ user.banned ? 'disabled' : '' }}>
+                    <i class="fas fa-ban mr-1"></i> {{ user.banned ? 'Banni !' : 'Bannir' }}
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+#}

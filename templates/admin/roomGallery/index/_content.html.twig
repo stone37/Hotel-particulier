@@ -1,0 +1,95 @@
+{% import 'Ui/Macro/buttons.html.twig' as buttons %}
+
+<div class="row mb-4">
+    <div class="col-12 d-flex justify-content-center justify-content-md-between">
+        <div id="entity-list-delete-bulk-btn" class="mr-3 d-none entity-room-gallery-delete-bulk-btn">
+            {% include 'Ui/Grid/Action/delete.html.twig' with {'action': {'label': 'Supprimer'}} %}
+        </div>
+        <div class="d-flex ml-auto">
+            {% set path = path('app_admin_room_gallery_add', {'room_id': room.id}) %}
+            {% set pathR = path('app_admin_room_index') %}
+            <div class="mr-3">{{ buttons.default(pathR, 'Retour aux hébergements', 'app-entity-list-btn', 'fas fa-angle-left', 'btn-outline-primary') }}</div>
+            {% include 'Ui/Grid/Action/create.html.twig' with {'path': path, 'action': {'label': 'Ajouter des images'}} %}
+        </div>
+    </div>
+</div>
+
+{% if galleries|length > 0 %}
+    <div class="row app-user mb-5">
+        <div class="col-12">
+            <table class="table table-responsive-sm">
+                <thead class="text-primary">
+                <tr>
+                    <th scope="col" class="text-center">
+                        <div class="" style="position: relative; right: 10px; top: 2px">
+                            <input type="checkbox" name="principal" class="form-check-input filled-in"
+                                   id="principal-checkbox" value="" style="margin: 0 !important;" />
+                            <label class="form-check-label" for="principal-checkbox"
+                                   style="padding-left: 0!important; "></label>
+                        </div>
+                    </th>
+
+                    <th scope="col" class="font-weight-stone-500 text-center">Image</th>
+                    <th scope="col" class="font-weight-stone-500 text-center">Date de création</th>
+                    <th scope="col" class="font-weight-stone-500 text-center">Emplacement</th>
+                    <th scope="col" class="font-weight-stone-500 text-center"></th>
+                </tr>
+                </thead>
+                <tbody id="list-checkbook-container">
+                {% for gallery in galleries %}
+                    <tr>
+                        <td class="text-center">
+                            <div class="" style="position: relative; right: 10px; top: 2px">
+                                <input type="checkbox" name="checkbox{{ loop.index }}" class="form-check-input filled-in list-checkbook"
+                                       id="checkbox{{ loop.index }}" value="{{ gallery.id }}" style="margin: 0 !important;" />
+                                <label class="form-check-label" for="checkbox{{ loop.index }}" style="padding-left: 0!important; "></label>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <a href="{{ asset(gallery.webPath) }}" class="" target="_blank">
+                                <img src="{{ asset(gallery.webPath) }}" class="img-fluid table-img" alt="" />
+                            </a>
+                        </td>
+                        <td class="text-center">{{ gallery.createdAt|date('d/m/Y') }}</td>
+                        <td class="text-center"><span class="badge badge-grey">{{ loop.index }}</span></td>
+                        <td class="text-center">
+                            <div class="dropdown">
+                                <a class="dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-ellipsis-h text-primary"></i></a>
+                                <div class="dropdown-menu dropdown-primary dropdown-menu-right mt-0">
+                                    <a href="{{ path('app_admin_room_gallery_move', {'id': gallery.id, 'pos': -1, 'room_id': room.id}) }}" class="dropdown-item">
+                                        <i class="fas fa-arrow-up mr-1"></i> Monter
+                                    </a>
+                                    <a href="{{ path('app_admin_room_gallery_move', {'id': gallery.id, 'pos': 1, 'room_id': room.id}) }}" class="dropdown-item">
+                                        <i class="fas fa-arrow-down mr-1"></i> Descendre
+                                    </a>
+                                    <a class="dropdown-item entity-room-gallery-delete" id="{{ gallery.id }}">
+                                        <i class="fas fa-trash mr-1 text-danger"></i> Supprimer
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-12 d-flex justify-content-start mt-2">
+            <div class="font-weight-stone-500 text-secondary">{{ galleries.totalItemCount }} resultats</div>
+        </div>
+        <div class="col-12 d-flex justify-content-center mt-2 mb-5">
+            {{ knp_pagination_render(galleries, 'Ui/_pagination.html.twig') }}
+        </div>
+    </div>
+{% else %}
+    <div class="row app-user d-flex justify-content-center">
+        <div class="col-12 col-md-8 text-center mt-3 mt-md-5">
+            <h3 class="h3-responsive font-weight-stone-600">
+                Vous n'avez aucune image dans la galerie.
+            </h3>
+        </div>
+    </div>
+{% endif %}
+
+
+
+

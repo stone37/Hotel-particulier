@@ -1,0 +1,312 @@
+/*html, body, header, .view.jarallax {
+    height: 100%;
+    min-height: 100%;
+}*/
+
+.carousel.home {
+    height: 37rem;
+}
+
+.carousel.home .carousel-inner,
+.carousel.home .carousel-inner .active,
+.carousel.home .carousel-inner .carousel-item {
+    height: 37rem;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .carousel.home {
+        height: 90vh
+    }
+
+    .carousel.home .carousel-inner,
+    .carousel.home .carousel-inner .active,
+    .carousel.home .carousel-inner .carousel-item {
+        height: 90vh
+    }
+}
+
+.skin-light .app-home-facilities {
+    /*position: absolute;
+    top: 70vh;
+    right: 2rem;*/
+    background-color: rgba(238, 243, 243, 1);
+}
+
+.skin-light .app-home-facilities .facilitie {
+    position: absolute;
+    top: 6rem;
+    right: 20rem;
+    word-wrap: break-word;
+    white-space: normal;
+    background-color: #FF9A16;
+    color: #FFFFFF;
+    display: inline-block;
+    -webkit-box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+    font-size: .9rem;
+    font-weight: 500;
+    padding: .7rem 1rem;
+}
+
+.skin-light .app-home-facilities .facilitie i {
+    font-size: 1rem;
+    margin-left: 10px;
+    margin-top: 4px;
+}
+
+/*.skin-light .app-home-facilities ul {
+    position: absolute;
+    top: 70vh;
+    right: 2rem;
+    background-color: #FFFFFF;
+    padding: 10px;
+    font-size: .9rem;
+    width: 200px;
+}*/
+
+.skin-light .app-home-facilities .facilitie-list {
+    position: absolute;
+    top: 6rem;
+    right: 4.35rem;
+    background-color: rgba(48, 55, 55, .9);
+    padding: 10px 15px;
+    font-size: .9rem;
+    font-weight: 500;
+    width: 250px;
+    -webkit-box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+}
+
+.skin-light .hostel-facilities h5,
+.skin-light .room-facilities h5 {
+    background-color: rgba(255, 154, 22, .2);
+}
+
+.skin-light .hostel-facilities > div.content,
+.skin-light .room-facilities > div.content {
+    border: 5px solid #FF9A16;
+}
+
+
+/*#carousel-hostel-facilities .view,
+#carousel-room-facilities .view {
+    height: 250px;
+    border: 5px solid #FF9A16;
+}*/
+
+#carousel-hostel-facilities.carousel,
+#carousel-room-facilities.carousel {
+    height: 250px;
+}
+
+#carousel-hostel-facilities.carousel .carousel-inner,
+#carousel-hostel-facilities.carousel .carousel-inner .active,
+#carousel-hostel-facilities.carousel .carousel-inner .carousel-item,
+#carousel-room-facilities.carousel .carousel-inner,
+#carousel-room-facilities.carousel .carousel-inner .active,
+#carousel-room-facilities.carousel .carousel-inner .carousel-item {
+    height: 250px;
+}
+
+#carousel-hostel-facilities.carousel .carousel-indicators li,
+#carousel-room-facilities.carousel .carousel-indicators li {
+    width: .8rem;
+    height: .8rem;
+    cursor: pointer;
+    border-radius: 50%;
+    opacity: 1;
+}
+
+#carousel-hostel-facilities.carousel .carousel-indicators li.active,
+#carousel-room-facilities.carousel .carousel-indicators li.active {
+    background-color: #FF9A16;
+}
+
+
+@media (max-width: 767px) {
+    #carousel-hostel-facilities.carousel,
+    #carousel-room-facilities.carousel {
+        height: 150px;
+    }
+
+    #carousel-hostel-facilities.carousel .carousel-inner,
+    #carousel-hostel-facilities.carousel .carousel-inner .active,
+    #carousel-hostel-facilities.carousel .carousel-inner .carousel-item,
+    #carousel-room-facilities.carousel .carousel-inner,
+    #carousel-room-facilities.carousel .carousel-inner .active,
+    #carousel-room-facilities.carousel .carousel-inner .carousel-item {
+        height: 150px;
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    #carousel-hostel-facilities.carousel,
+    #carousel-room-facilities.carousel {
+        height: 200px;
+    }
+
+    #carousel-hostel-facilities.carousel .carousel-inner,
+    #carousel-hostel-facilities.carousel .carousel-inner .active,
+    #carousel-hostel-facilities.carousel .carousel-inner .carousel-item,
+    #carousel-room-facilities.carousel .carousel-inner,
+    #carousel-room-facilities.carousel .carousel-inner .active,
+    #carousel-room-facilities.carousel .carousel-inner .carousel-item {
+        height: 200px;
+    }
+}
+
+
+
+
+
+/*
+.skin-light .home-room-promotion .card.card-cascade .view,
+.skin-light .home-room .card.card-cascade .view {
+    border-bottom: 6px solid #FF9A16;
+    box-shadow: none !important;
+    height: 190px;
+}
+
+.skin-light .home-room-promotion .card.card-cascade .view,
+.skin-light .home-room-promotion .card.card-cascade .view img,
+.skin-light .home-room .card.card-cascade .view,
+.skin-light .home-room .card.card-cascade .view img {
+    border-radius: 0 !important;
+}
+
+.skin-light .home-room-promotion .card.card-cascade .view img,
+.skin-light .home-room .card.card-cascade .view img {
+    height: 190px;
+}
+
+.skin-light .home-room-promotion .card.card-cascade {
+    background-color: rgba(255, 255, 255, .85);
+}
+
+.skin-light .home-room-promotion .card.card-cascade .card-body .remise {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    color: #FFFFFF;
+    padding: 2px 10px;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.skin-light .home-room-promotion .card.card-cascade .card-body h5 {
+    font-size: 1.1rem;
+}
+
+.skin-light .home-room-promotion .card.card-cascade .card-body ul li,
+.skin-light .home-room .card.card-cascade .card-body ul li{
+    font-size: .85rem;
+}
+
+.skin-light .home-room-promotion .card.card-cascade .card-body .detail a,
+.skin-light .home-room .card.card-cascade .card-body .detail a {
+    font-size: .85rem;
+}
+
+.skin-light .home-room-promotion .card.card-cascade .card-body .price .number,
+.skin-light .home-room .card.card-cascade .card-body .price .number {
+    font-size: 1.2rem !important;
+    font-weight: 600 !important;
+}
+
+.skin-light .home-room-promotion .card.card-cascade .card-body .price .info,
+.skin-light .home-room .card.card-cascade .card-body .price .info {
+    position: relative;
+    bottom: 6px;
+    left: 2px;
+    font-size: .7rem !important;
+}
+
+.skin-light .home-room .card.card-cascade .card-body .price-detail {
+    font-size: .85rem;
+}
+
+.skin-light .home-room .card.card-cascade .card-body .price-detail {
+   color: #FF9A16 !important;
+}
+
+.skin-light .home-room .card.card-cascade .card-body .price-detail i {
+    font-size: .7rem !important;
+    margin-left: 2px !important;
+}
+
+.skin-light .home-room a.controls {
+    display: flex !important;
+    height: 60px;
+    width: 60px;
+    background-color: #FF9A16 !important;
+    top: 15rem
+}
+
+.skin-light .home-room a.controls i {
+    font-size: 1.6rem !important;
+}
+
+.skin-light .home-room a.controls.carousel-control-prev {
+    left: -2.6rem !important;
+}
+
+.skin-light .home-room a.controls.carousel-control-next {
+    right: -2.6rem !important;
+}
+
+.skin-light .home-room .card.card-cascade .card-body .dropdown-menu {
+    min-width: 17rem;
+}
+
+.skin-light .home-room .card.card-cascade .card-body .dropdown-menu .dropdown-header {
+    padding: 0.8rem 0.8rem !important;
+    font-size: 1rem;
+}
+
+
+.skin-light .home-room .card.card-cascade .card-body .dropdown-menu .dropdown-item {
+    background-color: transparent !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.skin-light .home-room .card.card-cascade .card-body .dropdown-menu .dropdown-item:hover,
+.skin-light .home-room .card.card-cascade .card-body .dropdown-menu .dropdown-item:focus {
+    color: inherit !important;
+}
+
+.skin-light .home-room .card.card-cascade .card-body .dropdown-menu .dropdown-item .title,
+.skin-light .home-room .card.card-cascade .card-body .dropdown-menu .dropdown-item .price {
+    font-size: 0.95rem !important;
+}
+
+.skin-light .home-room .card.card-cascade .card-body .dropdown-menu .dropdown-item a.btn {
+    color: #fff !important;
+}
+
+.skin-light .home-newsletter form input {
+    width: 30rem;
+}
+
+.skin-light .home-newsletter form .btn.btn-lg {
+    position: relative;
+    padding: .96rem 2.4rem;
+    font-size: .94rem;
+    bottom: 4px;
+    right: 2px;
+    box-shadow: none;
+}
+
+.skin-light .home-newsletter form .md-form.input-with-pre-icon .input-prefix {
+    top: 45%;
+}
+
+*/
+
+
+
+
+
+
+

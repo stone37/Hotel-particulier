@@ -1,0 +1,17 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Code de réduction | {{ parent() }}{% endblock %}
+
+{% block app_body %}
+    {% include 'admin/discount/index/_header.html.twig' %}
+
+    {% include 'admin/discount/index/_content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

@@ -1,0 +1,44 @@
+{% import 'site/room/index/macro/__list.html.twig' as __view %}
+
+{% if rooms|length > 0 %}
+    <section class="home-room blue-grey darken-4 py-lg-5 py-4">
+        <div class="row mx-lg-5 mx-md-1 px-3 px-md-0">
+            <div class="col-12">
+                <div class="wow fadeIn">
+                    <h1 class="h1-responsive font-weight-stone-600 text-primary text-center mb-4">
+                        <strong class="font-weight-bold">Nos Hébergements</strong>
+                    </h1>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="text-center">
+                    <div class="row">
+                        <div id="home-room-carousel" class="carousel slide w-100" data-ride="carousel">
+                            <div class="carousel-inner w-100 vv-3" role="listbox">
+                                {% for room in rooms %}
+                                    <div class="carousel-item {% if loop.first %}active{% endif %}">
+                                        <div class="col-12 col-md-4 px-lg-4 px-md-1">
+                                            {{ __view.homeList(room) }}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <a class="carousel-control-prev controls" href="#home-room-carousel" role="button" data-slide="prev">
+                                <i class="fas fa-arrow-left"></i>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next controls" href="#home-room-carousel" role="button" data-slide="next">
+                                <i class="fas fa-arrow-right"></i>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 text-center mt-lg-4 mt-3">
+                <a href="{{ path('app_room_index') }}" class="btn btn-primary btn-lg">Tout afficher <i class="fas fa-angle-double-right ml-2"></i></a>
+            </div>
+        </div>
+    </section>
+{% endif %}
+

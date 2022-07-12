@@ -1,0 +1,8 @@
+{% extends 'bundles/TwigBundle/Exception/layout.html.twig' %}
+
+{% set settings = config.get %}
+
+{% block title 'Requête erronée | ' ~ settings.name %}
+{% block subTitle 'Requête erronée' %}
+{% block description "La requête ne semble pas correcte :(" %}
+

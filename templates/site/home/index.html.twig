@@ -1,0 +1,232 @@
+{% extends 'site/layout.html.twig' %}
+
+{% block title 'Hotel économique élégante à Yamoussoukro.' %}
+
+{% block meta %}
+    {% set content = "Accès facile à toutes les attractions de la ville avec un jardin verdoyant sur le toit,
+                        un garde-manger public, une connexion Wi-Fi gratuite dans tout l'établissement.
+                        L'établissement propose de nombreux types de chambres, toutes dotées d'une salle
+                         de bains privative. Convient aux voyageurs de groupe." %}
+
+    <meta name="description" content="{{ content }}"/>
+    <meta property="og:description" content="{{ content }}" />
+{% endblock %}
+
+{% block app_intro %}
+    <div id="carousel-home" class="carousel slide home d-none d-lg-block {#mx-3#}" data-ride="carousel">
+        <div class="carousel-inner carousel-fade" role="listbox">
+            {% for gallery in galleries %}
+                <div class="carousel-item {% if loop.first %}active{% endif %}">
+                    <div class="view" style="background-image: url({{ asset(gallery.webPath) }}); background-repeat: no-repeat; background-size: cover;">
+                        <div class="mask rgba-black-slight">
+                            <div class="row">
+                                <div class="col-lg-5 px-0">
+                                    <div class="view-content d-flex justify-content-center align-items-start">
+                                        <div class="wow fadeIn ml-5 pl-4 pr-3 text-secondary">
+                                            <h1 class="mt-4 py-2 display-4">
+                                                <strong class="font-weight-bold">
+                                                    Hotel <span class="text-primary">économique</span>
+                                                    <span class="text-danger">élégante</span> à
+                                                    <span class="text-default">Yamoussoukro.</span>
+                                                </strong>
+                                            </h1>
+                                            <p class="small-9 font-weight-stone-600">
+                                                Accès facile à toutes les attractions de la ville avec un jardin verdoyant
+                                                sur le toit, un garde-manger public, une connexion Wi-Fi gratuite dans tout l'établissement.
+                                                L'établissement propose de nombreux types de chambres, toutes dotées d'une salle de bains
+                                                privative. Convient aux voyageurs de groupe.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="app-home-facilities">
+                                        <div class="facilitie d-flex">
+                                            Nos installations <i class="fas fa-arrow-alt-circle-right"></i>
+                                        </div>
+
+                                        <div class="facilitie-list text-white">
+                                            <div class="d-flex align-items-center">
+                                                <div class="pr-3"><i class="fas fa-wifi"></i></div>
+                                                <div class="">Wifi gratuit</div>
+                                            </div>
+                                            <div class="d-flex align-items-center py-3">
+                                                <div class="pr-3"><i class="fab fa-rev" style="font-size: 1.2rem;"></i></div>
+                                                <div class="">Climatisation auto réglable</div>
+                                            </div>
+                                            <div class="d-flex align-items-center">
+                                                <div class="pr-3"><i class="fas fa-tv"></i></div>
+                                                <div class="">Télévision par cable à écran plat avec chaine de sport</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div id="carousel-mobile" class="carousel slide home d-block d-lg-none" data-ride="carousel">
+        <div class="carousel-inner carousel-fade" role="listbox">
+            {% for gallery in galleries %}
+                <div class="carousel-item {% if loop.first %}active{% endif %}">
+                    <div class="view" style="background-image: url({{ asset(gallery.webPath) }}); background-repeat: no-repeat; background-size: cover;">
+                        <div class="mask intro-gradient-rgba">
+                            <div class="container h-100 d-flex justify-content-center align-items-center">
+                                <div class="row smooth-scroll">
+                                    <div class="col-12 col-md-12 text-left">
+                                        <div class="wow fadeInDown" data-wow-delay="0.2s">
+                                            <h1 class="h1-responsive intro text-center font-weight-bold d-none d-md-block mt-5">
+                                                <strong class="font-weight-bold">
+                                                    Hotel <span class="text-primary">économique</span>
+                                                    <span class="text-danger">élégante</span> au milieu
+                                                    d'<span class="text-default">Abidjan.</span>
+                                                </strong>
+                                            </h1>
+                                            <h2 class="h2-responsive intro text-center font-weight-bold mt-5 d-block d-md-none">
+                                                <strong class="font-weight-bold">
+                                                    Hotel <span class="text-primary">économique</span>
+                                                    <span class="text-danger">élégante</span> au milieu
+                                                    d'<span class="text-default">Abidjan.</span>
+                                                </strong>
+                                            </h2>
+                                            <p class="my-3 font-weight-stone-600 text-center small-9  d-none d-md-block">
+                                                Accès facile à toutes les attractions de la ville avec un jardin verdoyant
+                                                sur le toit, un garde-manger public, une connexion Wi-Fi gratuite dans tout l'établissement.
+                                                L'établissement propose de nombreux types de chambres, toutes dotées d'une salle de bains
+                                                privative. Convient aux voyageurs de groupe.
+                                            </p>
+                                            <p class="my-3 font-weight-stone-600 small-8 text-center d-block d-md-none">
+                                                Accès facile à toutes les attractions de la ville avec un jardin verdoyant
+                                                sur le toit, un garde-manger public, une connexion Wi-Fi gratuite dans tout l'établissement.
+                                                L'établissement propose de nombreux types de chambres, toutes dotées d'une salle de bains
+                                                privative. Convient aux voyageurs de groupe.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-12">
+                                        <div class="booking-mobile-form-bulk mt-2">
+                                            <div class="d-flex justify-content-center">
+                                                <div class="z-depth-4 booking-form">
+                                                    <div class="d-none d-md-flex justify-content-between">
+                                                        <div class="booking-bulk checkin d-md-flex align-items-center">
+                                                            <div class="icon"><i class="fas fa-calendar text-primary"></i></div>
+                                                            <div>
+                                                                <div class="title text-secondary">Arrivée</div>
+                                                                <div class="date-content grey-text">{{ today|format_datetime('medium', 'none', locale='fr') }}</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="booking-bulk checkout d-flex align-items-center">
+                                                            <div class="icon"><i class="fas fa-calendar text-primary"></i></div>
+                                                            <div>
+                                                                <div class="title text-secondary">Départ</div>
+                                                                <div class="date-content grey-text">{{ tomorrow|format_datetime('medium', 'none', locale='fr') }}</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="booking-bulk user d-flex align-items-center">
+                                                            <div class="icon"><i class="fas fa-user text-primary"></i></div>
+                                                            <div>
+                                                                <div class="title text-secondary">Voyageurs</div>
+                                                                <div class="date-content grey-text">
+                                                                    <span class="room">1 chambre, </span>
+                                                                    <span class="customer">2 adultes, </span>
+                                                                    <span class="children">0 enfants</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-block d-md-none">
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="booking-bulk checkin">
+                                                                <div class="d-flex align-items-center">
+                                                                    <div class="icon"><i class="fas fa-calendar text-primary"></i></div>
+                                                                    <div class="title text-secondary">Arrivée</div>
+                                                                </div>
+                                                                <div class="date-content-number grey-text text-center">{{ today|format_datetime(pattern="d", locale='fr') }}</div>
+                                                                <div class="date-content-title grey-text text-center pl-1">{{ today|date('M Y') }}</div>
+                                                            </div>
+                                                            <div class="booking-bulk checkout">
+                                                                <div class="d-flex">
+                                                                    <div class="icon"><i class="fas fa-calendar text-primary"></i></div>
+                                                                    <div class="title text-secondary">Départ</div>
+                                                                </div>
+                                                                <div class="date-content-number grey-text text-center">{{ tomorrow|format_datetime(pattern="d", locale='fr') }}</div>
+                                                                <div class="date-content-title grey-text text-center pl-1">{{ tomorrow|date('M Y') }}</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="booking-bulk user d-flex mt-2">
+                                                            <div class="icon"><i class="fas fa-user text-primary"></i></div>
+                                                            <div>
+                                                                <div class="title text-secondary">Voyageurs</div>
+                                                                <div class="date-content grey-text">
+                                                                    <span class="room">1 chambre, </span>
+                                                                    <span class="customer">2 adultes, </span>
+                                                                    <span class="children">0 enfants</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="d-none d-md-flex align-items-md-end">
+                                                    <a class="z-depth-4 btn btn-primary booking-form-btn">
+                                                        Réserver
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-center align-items-end d-md-none">
+                                                <a class="z-depth-4 btn btn-primary booking-form-btn">
+                                                    Réserver
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="px-3">
+        {#{{ include('site/booking/_data_form.html.twig') }}#}
+        {{ render(controller('App\\Controller\\BookingController::search')) }}
+    </div>
+{% endblock %}
+
+{% block app_body %}
+    {#<div>
+        <div>
+            <input type="text" id="checkInDate" class="datepicker d-none" />
+            <input type="text" id="checkOutDate" class="datepicker d-none" />
+        </div>
+    </div>#}
+
+    {% include 'site/home/content.html.twig' %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% include 'Ui/_stylesheets.html.twig' with {'path': 'assets/css/site/index.css'} %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        /*jQuery(document).ready(function() {
+            $('.checkin-datepicker').pickadate();
+            $('.checkout-datepicker').pickadate();
+        });*/
+
+
+        // Sticky
+        $('.booking-form-sticky').sticky({topSpacing: 70, zIndex: 999, stopper: ".sticky-stopper", stickyClass: 'active'});
+    </script>
+
+    {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/site/booking.js'} %}
+{% endblock %}
+

@@ -1,0 +1,34 @@
+<div class="form-row">
+    <div class="col-12 col-md-4">
+        <div class="font-weight-stone-600 grey-text pb-1">{{ form.enabled.vars.label|trans }} (Ce champ est obligatoire)</div>
+        <div class="switch stone-switch mt-2 ml-md-2">
+            <label>
+                Non
+                <input type="checkbox" name="{{ form.enabled.vars.full_name }}" id="{{ form.enabled.vars.id }}"
+                       value="{{ form.enabled.vars.value }}" {% if form.enabled.vars.checked %}checked="checked{% endif %}">
+                <span class="lever"></span>
+                Oui
+            </label>
+        </div>
+    </div>
+    <div class="col-12">
+        {{ form_row(form.ipAddresses) }}
+    </div>
+    <div class="col-12">
+        <div class="md-form md-outline">
+            {{ form_widget(form.customMessage) }}
+            {{ form_label(form.customMessage) }}
+            <div class="red-text font-weight-stone-500">{{ form_errors(form.customMessage) }}</div>
+        </div>
+    </div>
+    <div class="col-12 col-md-4">
+        <div class="font-weight-stone-500 dark-grey-text"
+             style="margin-bottom: -1.5rem !important;">Commence le</div>
+        {{ form_row(form.startDate) }}
+    </div>
+    <div class="col-12 col-md-4">
+        <div class="font-weight-stone-500 dark-grey-text"
+             style="margin-bottom: -1.4rem !important;">Se termine le</div>
+        {{ form_row(form.endDate) }}
+    </div>
+</div>

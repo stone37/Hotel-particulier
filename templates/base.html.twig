@@ -1,19 +1,93 @@
 <!DOCTYPE html>
-<html>
-    <head>
+<html lang="fr">
+    <head id="top-section">
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+        <title>{% block title "O'blackmarket" %} | Hotel particulier</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        {% block meta '' %}
+        <meta property="og:title" content="{{ block('title') }}"/>
+        <meta property="og:site_name" content="hotelparticulier.com"/>
+        <meta property="og:language" content="fr"/>
+        <meta name="twitter:author" content="@hotel_particulier_com"/>
+        <meta property="og:country-name" content="Côte d'Ivoire"/>
+        <link rel="shortcut icon" href="{{ app.request.relativeUriForPath(asset('images/favicon/favicon.ico')) }}">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
+        {% block stylesheets %}
+            {% include 'Ui/_stylesheets.html.twig' with {'path': 'assets/css/bootstrap.css'} %}
+            {% include 'Ui/_stylesheets.html.twig' with {'path': 'assets/css/mdb.css'} %}
+            {% include 'Ui/_stylesheets.html.twig' with {'path': 'assets/css/style.css'} %}
         {% endblock %}
     </head>
-    <body>
-        {% block body %}{% endblock %}
+    <body class="fixed-sn skin-light">
+        {% block app_flashes %}{% include 'Ui/_flashes.html.twig' %}{% endblock %}
+        {% include 'Ui/_loading.html.twig' %}
+
+        <header>
+            {% block app_navbar %}{% endblock %}
+            {% block app_intro %}{% endblock %}
+        </header>
+
+        <main>
+            {#{% block app_breadcrumbs %}{% endblock %}#}
+            {% block app_body %}{% endblock %}
+        </main>
+
+       {# <div class="px-md-3">
+            {% block app_breadcrumbs %}{% endblock %}
+            {% block app_body %}{% endblock %}
+        </div>#}
+
+
+        {% include 'Ui/_top_scroll.html.twig' %}
+        {% include 'Ui/_confirmation.html.twig' %}
+        {% block app_booking %}
+            {% include 'Ui/_booking.html.twig' %}
+        {% endblock %}
+        {#{% include 'Ui/_cookieconsent.html.twig' %}#}
+        {% block app_footer %}
+            {% include '_footer.html.twig' %}
+        {% endblock %}
+
+
+        <script>
+            {% set data = booker.bookingData %}
+
+            window.hostel = {
+                ...(window.hostel || {}),
+                ADMIN: {{ is_granted('ROLE_SUPER_ADMIN') ? 'true' : 'false' }},
+                USER: {{ app.user ? app.user.id : 'null' }},
+                BOOKING_CHECKIN: new Date("{{ data.checkin|date('Y/m/d') }}"),
+                BOOKING_CHECKOUT: new Date("{{ data.checkout|date('Y/m/d') }}"),
+                MAX_ADULT: parseInt({{ roomService.maxAdult }}),
+                MAX_CHILDREN: parseInt("{{ roomService ? roomService.maxChildren : null }}"),
+                DEFAULT_ADULT: parseInt("{{ data.adult }}"),
+                DEFAULT_CHILDREN: parseInt("{{ data.children }}"),
+                DEFAULT_ROOM: parseInt("{{ data.roomNumber }}"),
+            }
+        </script>
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+        {% block javascripts %}
+            {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/jquery.js'} %}
+            {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/popper.js'} %}
+            {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/bootstrap.js'} %}
+            {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/mdb.js'} %}
+            {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/init.js'} %}
+            {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/script.js'} %}
+        {% endblock %}
+
+        {#<script src="https://cdn.jsdelivr.net/npm/jquery.cookie-consent/dist/jquery.cookie-consent.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#cookieConsent').cookieConsent({
+                    testing: true,
+                    consentStyle: 'font-weight:bold;'
+                });
+            });
+        </script>#}
     </body>
 </html>
+

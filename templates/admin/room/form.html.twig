@@ -1,0 +1,152 @@
+<div class="form-row">
+    <div class="col-12">
+        <div class="h5-responsive border border-dark border-top-0 border-left-0 border-right-0">
+            <div class="badge badge-dark d-inline-block mr-1" style="position: relative; bottom: 6px;">1</div>
+            <div class="text-dark d-inline-block font-weight-stone-500">Information de base</div>
+        </div>
+    </div>
+</div>
+<div class="form-row">
+    <div class="col-12 col-md-4">
+        {{ form_row(form.name) }}
+        <small class="form-text text-muted" style="margin-top: -4px">
+            Ce champ est obligatoire
+        </small>
+    </div>
+    <div class="col-12 col-md-4">
+        {{ form_row(form.roomNumber) }}
+        <small class="form-text text-muted" style="margin-top: -4px">
+            Ce champ est obligatoire
+        </small>
+    </div>
+    <div class="col-12 col-md-4">
+        {{ form_row(form.price) }}
+        <small class="form-text text-muted" style="margin-top: -4px">
+            Ce champ est obligatoire
+        </small>
+    </div>
+    <div class="col-12 col-md-4">
+        {{ form_row(form.maximumAdults) }}
+        <small class="form-text text-muted" style="margin-top: -4px">
+            Ce champ est obligatoire
+        </small>
+    </div>
+    <div class="col-12 col-md-4">
+        {{ form_row(form.maximumOfChildren) }}
+        <small class="form-text text-muted" style="margin-top: -4px">
+            Ce champ est obligatoire
+        </small>
+    </div>
+    <div class="col-12 col-md-4">
+        {{ form_row(form.area) }}
+    </div>
+    <div class="col-12 col-md-4">
+        {{ form_row(form.couchage) }}
+    </div>
+</div>
+<div class="form-row">
+    <div class="col-12 col-md-8">
+        <div class="md-form md-outline">
+            <div class="mb-2">Description</div>
+            {{ form_widget(form.description) }}
+            {{ form_label(form.description) }}
+            <div class="red-text font-weight-stone-500">{{ form_errors(form.description) }}</div>
+        </div>
+    </div>
+</div>
+<div class="form-row mt-3">
+    <div class="col-12">
+        <div class="h5-responsive border border-dark border-top-0 border-left-0 border-right-0">
+            <div class="badge badge-dark d-inline-block mr-1" style="position: relative; bottom: 6px;">2</div>
+            <div class="text-dark d-inline-block font-weight-stone-500">Information complémentaire</div>
+        </div>
+    </div>
+</div>
+<div class="form-row">
+    <div class="col-12 col-md-6 mt-3">
+       <div class="app-checkbox-field-bulk">
+            <div class="font-weight-stone-500 mb-2">{{ form.equipments.vars.label }}</div>
+            {{ form_widget(form.equipments) }}
+        </div>
+    </div>
+
+    {% if room.type == 'simple' %}
+        <div class="col-12 col-md-6 mt-3">
+            <div class="app-checkbox-field-bulk">
+                <div class="font-weight-stone-500 mb-2">{{ form.supplements.vars.label }}</div>
+                {{ form_widget(form.supplements) }}
+            </div>
+        </div>
+    {% endif %}
+
+    {% if room.type == 'configured' %}
+        <div class="col-12 col-md-6 mt-3">
+            <div class="app-checkbox-field-bulk">
+                <div class="font-weight-stone-500 mb-2">{{ form.options.vars.label }}</div>
+                {{ form_widget(form.options) }}
+            </div>
+        </div>
+    {% endif %}
+</div>
+<div class="form-row">
+    <div class="col-12 col-md-4">
+        <div class="d-flex flex-wrap">
+            <div class="select-outline position-relative w-100">
+                {{ form_widget(form.smoker) }}
+                <label>{{ form.smoker.vars.label }}</label>
+            </div>
+            <div style="margin-top: -15px;" class="red-text font-weight-stone-500">{{ form_errors(form.smoker) }}</div>
+        </div>
+    </div>
+</div>
+
+<div class="form-row mt-4">
+    <div class="col-12">
+        <div class="h5-responsive border border-dark border-top-0 border-left-0 border-right-0">
+            <div class="badge badge-dark d-inline-block mr-1" style="position: relative; bottom: 6px;">3</div>
+            <div class="text-dark d-inline-block font-weight-stone-500">Taxe et visibilité</div>
+        </div>
+    </div>
+</div>
+<div class="form-row">
+    <div class="col-12 col-md-4 mt-2">
+        <div class="d-flex flex-wrap">
+            <div class="select-outline position-relative w-100">
+                {{ form_widget(form.taxe) }}
+                <label>{{ form.taxe.vars.label }}</label>
+            </div>
+            <div style="margin-top: -15px;" class="red-text font-weight-stone-500">{{ form_errors(form.taxe) }}</div>
+        </div>
+    </div>
+    <div class="col-12 col-md-4 my-3 pl-md-3">
+        <div class="grey-text pb-1">{{ form.taxeStatus.vars.label|trans }}</div>
+        <div class="switch stone-switch mt-1 pl-md-2">
+            <label>
+                Non
+                <input type="checkbox" name="{{ form.taxeStatus.vars.full_name }}" id="{{ form.taxeStatus.vars.id }}"
+                       value="{{ form.taxeStatus.vars.value }}" {% if form.taxeStatus.vars.checked %}checked="checked{% endif %}">
+                <span class="lever"></span>
+                Oui
+            </label>
+        </div>
+    </div>
+    <div class="col-12 col-md-4 my-3 pl-md-3">
+        <div class="grey-text pb-1">{{ form.enabled.vars.label|trans }}</div>
+        <div class="switch stone-switch mt-1 pl-md-2">
+            <label>
+                Non
+                <input type="checkbox" name="{{ form.enabled.vars.full_name }}" id="{{ form.enabled.vars.id }}"
+                       value="{{ form.enabled.vars.value }}" {% if form.enabled.vars.checked %}checked="checked{% endif %}">
+                <span class="lever"></span>
+                Oui
+            </label>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+

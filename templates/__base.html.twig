@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head id="top-section">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="index" title="Balise Meta" href="{{ app.request.schemeAndHttpHost }}/" />
+        <link rel="canonical" href="{{ app.request.schemeAndHttpHost }}/" />
+        <link rel="shortcut icon" href="{{ app.request.relativeUriForPath(asset('images/favicon/favicon.ico')) }}">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+
+        {% block stylesheets %}
+            {% include 'Ui/_stylesheets.html.twig' with {'path': 'assets/css/bootstrap.css'} %}
+            {% include 'Ui/_stylesheets.html.twig' with {'path': 'assets/css/mdb.css'} %}
+            {% include 'Ui/_stylesheets.html.twig' with {'path': 'assets/css/style.css'} %}
+        {% endblock %}
+    </head>
+    <body class="fixed-sn skin-light">
+        {% include 'Ui/_flashes.html.twig' %}
+
+        {% block app_body %}{% endblock %}
+
+        {% block app_footer %}{% endblock %}
+
+        {#<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>#}
+        {% block javascripts %}
+            {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/jquery.js'} %}
+            {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/popper.js'} %}
+            {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/bootstrap.js'} %}
+            {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/mdb.js'} %}
+        {% endblock %}
+    </body>
+</html>
+

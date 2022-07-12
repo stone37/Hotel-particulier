@@ -1,0 +1,24 @@
+<div class="form-row">
+    <div class="col-12 col-md-4">
+        {{ form_row(form.name) }}
+        <small class="form-text text-muted" style="margin-top: -4px">
+            Ce champ est obligatoire
+        </small>
+    </div>
+    <div class="col-12 col-md-8 d-flex justify-content-md-center" style="margin-top: 20px">
+        <div class="app-checkbox-field-bulk">
+            <div class="font-weight-stone-500 mb-2">{{ form.supplements.vars.label }}</div>
+            {{ form_widget(form.supplements) }}
+        </div>
+    </div>
+    <div class="col-12 col-md-8">
+        <div class="md-form md-outline">
+            <div class="mb-2">Description</div>
+            {{ form_widget(form.description) }}
+            {{ form_label(form.description) }}
+            <div class="red-text font-weight-stone-500">{{ form_errors(form.description) }}</div>
+        </div>
+    </div>
+</div>
+
+

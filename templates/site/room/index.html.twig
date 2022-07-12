@@ -1,0 +1,186 @@
+{% extends 'site/layout.html.twig' %}
+
+{% block title 'Nos hébergements' %}
+
+{% set settings = config.get %}
+
+{% block meta %}
+    {% set content = "O'blackmarket: petites annonces en Côte d'Ivoire. Achetez un véhicule, trouvez un emploi, une maison ou un appartement, des meubles, appareils électroménagers et plus !" %}
+    <meta name="description" content="{{ content }}"/>
+    <meta property="og:description" content="{{ content }}" />
+{% endblock %}
+
+{% block app_intro %}
+    <div class="view intro" style="background-image: url({{ asset('images/intro2.jpg') }}); background-repeat: no-repeat; background-size: cover;">
+        <div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
+            <div class="container">
+                <div class="row d-flex justify-content-center wow fadeIn">
+                    <div class="col-12 col-md-10 col-lg-9 mb-4 text-primary text-center">
+                        <h1 class="display-3 font-weight-bold d-none d-md-block mt-md-5 pt-md-5 text-center">Nos hébergements</h1>
+                        <h1 class="h1-responsive font-weight-bold d-block d-md-none text-center mt-5 pt-5"
+                        style="font-size: 2.8rem !important">Nos hébergements</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bc">
+        <div class="mx-md-5 mx-3">
+            {{ wo_render_breadcrumbs({viewTemplate: '_breadcrumb.html.twig', listClass: 'breadcrumb',
+                itemClass: 'breadcrumb-item', separator: '>', separatorClass: 'fas fa-angle-right'}) }}
+        </div>
+    </div>
+    {#<div class="px-3">
+        {{ render(controller('App\\Controller\\BookingController::search')) }}
+    </div>#}
+{% endblock %}
+
+{% block app_body %}
+    <div class="mb-5">
+        {#<div>
+            <input type="text" id="checkInDate" class="datepicker d-none" />
+            <input type="text" id="checkOutDate" class="datepicker d-none" />
+        </div>#}
+
+        <section class="">
+
+        </section>
+
+        <section>
+            <div class="row mx-lg-5 mx-md-1 px-1">
+                <div class="col-12">
+                    <div class="wow fadeIn">
+                        <h2 class="h2-responsive font-weight-stone-600 text-primary mb-4 text-center px-md-0 px-1">
+                            <strong class="font-weight-bold">35 chambres de qualité dans le quartier le plus paisible de Yamoussoukro</strong>
+                        </h2>
+                        <p class="text-center px-md-0 px-1 mb-4">
+                            <strong>{{ settings.name }}</strong> dispose de 35 chambres éléquantes et sophistiquées qui nous
+                            permettent d'accorder à chacun de nos clients une attention personnelles. Nos 35 chambres sont doubles
+                            ou Twin, certaines disposent d'une terrasse privée et d'un espace pour des lits d'appoint pour enfants.
+                            La <strong>Suite junior</strong> et la <strong>Penthouse</strong>, toutes deux avec des terrasse
+                            privative vous assureront une vue inoubliable sur le quartier.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    {{ render(controller('App\\Controller\\BookingController::search')) }}
+                </div>
+
+                {% include 'site/room/index/content.html.twig'%}
+            </div>
+        </section>
+        <section>
+            <div class="row app-hostel-service-view">
+                <div class="col-12">
+                    <div class="view content-data-one"
+                         style="background-image: url({{ asset('images/img4.jpg') }});
+                                 background-repeat: no-repeat;
+                                 background-size: cover;">
+                        <div class="mask rgba-black-strong">
+                            <div class="row my-md-5 mx-md-5 mx-1 my-4">
+                                <div class="col-12">
+                                    <div class="row d-flex justify-content-start align-items-start">
+                                        <div class="col-12">
+                                            <div class="wow fadeIn">
+                                                <h1 class="h2-responsive font-weight-stone-600 text-primary text-center mb-4 pl-2">
+                                                    <strong class="font-weight-bold">Lounge Bar</strong>
+                                                </h1>
+                                            </div>
+                                            <p class="text-white text-center">
+                                                Une journée passe à visiter les sites touristiques de la ville de yamoussoukro
+                                                est une facon incroyable de passer la journée, mais en meme temps, cela peut
+                                                etre une experience fatigante. C'est pourquoi l'<strong>{{ settings.name }}</strong>
+                                                a mis à la disposition de ses clients un <strong>Lounge Bar</strong>, l'endroit
+                                                idéal pour se détendre et se remettre d'une longue journée. Concu comme un espace
+                                                lounge privé, le bar l'<strong>{{ settings.name }}</strong> est un l'endroit idéal
+                                                pour prendre un verre préparé par notre barman ou prendre un apéritif en toute detente.
+                                                Heure d'ouverture : 16H00 à 24H00.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="view content-data-two"
+                         style="background-image: url({{ asset('images/intro4.jpg') }});
+                                 background-repeat: no-repeat;
+                                 background-size: cover;">
+                        <div class="mask rgba-black-strong">
+                            <div class="row my-md-5 mx-md-5 mx-1 my-4">
+                                <div class="col-12">
+                                    <div class="row d-flex justify-content-start align-items-start">
+                                        <div class="col-12 mx-md-4">
+                                            <div class="wow fadeIn">
+                                                <h1 class="h2-responsive font-weight-stone-600 text-primary text-center mb-4 pl-2">
+                                                    <strong class="font-weight-bold">Le salon</strong>
+                                                </h1>
+                                            </div>
+                                            <p class="text-white text-center">
+                                                Notre salon est idéal pour lire un journal ou un livre, se détendre après une
+                                                journée bien remplie. Décoré dans un style classique contemporain, il dispose
+                                                d'une bibliothèque et du Wi-Fi gratuit.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="view content-data-three"
+                         style="background-image: url({{ asset('images/intro1.jpg') }});
+                                 background-repeat: no-repeat;
+                                 background-size: cover;">
+                        <div class="mask rgba-black-strong">
+                            <div class="row my-md-5 mx-md-5 mx-1 my-4">
+                                <div class="col-12">
+                                    <div class="row d-flex justify-content-start align-items-start">
+                                        <div class="col-12 mx-md-4">
+                                            <div class="wow fadeIn">
+                                                <h1 class="h2-responsive font-weight-stone-600 text-primary text-center mb-4 pl-2">
+                                                    <strong class="font-weight-bold">Terrasse panoramique</strong>
+                                                </h1>
+                                            </div>
+                                            <p class="text-white text-center">
+                                                L'<strong>{{ settings.name }}</strong> est agrémenté d'une belle terrasse panoramique
+                                                offrant une vue unique sur la ville.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {{ include('site/newsletter/_subscribe.html.twig') }}
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% include 'Ui/_stylesheets.html.twig' with {'path': 'assets/css/site/room.css'} %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        $('.booking-form-sticky').sticky({topSpacing: 70, zIndex: 999, stopper: ".sticky-stopper", stickyClass: 'active'});
+    </script>
+    {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/site/booking.js'} %}
+    {% include 'Ui/_javascripts.html.twig' with {'path': 'assets/js/site/room.js'} %}
+    <script>
+        $("#mdb-lightbox-ui").load("/assets/mdb-addons/mdb-lightbox-ui.html");
+    </script>
+{% endblock %}
+
+

@@ -1,0 +1,21 @@
+{% extends layout %}
+
+{% import "mails/macros.twig" as e %}
+
+{% set settings = config.get %}
+
+{% block body %}
+
+    {% apply markdown_email %}
+
+        {{ data.subject }}
+        ===============================
+
+        {% if format == 'html' %}
+            {{ e.section(data.content | markdown_untrusted) }}
+        {% endif %}
+
+    {% endapply %}
+
+    {{ e.button('Mon tableau de bord', url('app_dashboard_index')) }}
+{% endblock %}

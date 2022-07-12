@@ -1,0 +1,20 @@
+{% extends layout %}
+
+{% import "mails/macros.twig" as e %}
+
+{% set settings = config.get %}
+
+{% block body %}
+
+  {% apply markdown_email %}
+
+    Suppression de votre compte {{ settings.name }}
+    ===============================
+
+    Vous venez de demander la suppression de votre compte sur {{ settings.name }}.com. Cette suppression sera effective dans **{{ days }} jours**. Si vous êtes à l'origine de cette demande vous pouvez ignorer cet email.
+
+  {% endapply %}
+
+  {{ e.button('Annuler la suppression', url('app_user_delete')) }}
+
+{% endblock %}

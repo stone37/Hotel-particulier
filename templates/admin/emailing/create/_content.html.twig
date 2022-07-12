@@ -1,0 +1,21 @@
+{% import 'Ui/Macro/buttons.html.twig' as buttons %}
+
+{% form_theme form 'Ui/Form/theme.html.twig' %}
+
+<section class="section card mb-5">
+    <div class="card-body">
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'admin-form'}}) }}
+        <P class="text-danger my-0">{{ form_errors(form) }}</P>
+
+        {% include 'admin/emailing/send_form.html.twig' %}
+
+        {{ form_widget(form._token) }}
+
+        <div class="d-flex justify-content-end mt-4">
+            {% set path = path('app_admin_emailing_index', {'type': 1}) %}
+            <div class="text-center mr-3">{{ buttons.default(path, 'Retour à la liste', 'app-entity-list-btn', 'fas fa-angle-left', 'btn-outline-primary') }}</div>
+            <div class="text-center">{{ buttons.validate('Envoyer', 'fas fa-paper-plane', '') }}</div>
+        </div>
+        {{ form_end(form, {'render_rest': false}) }}
+    </div>
+</section>

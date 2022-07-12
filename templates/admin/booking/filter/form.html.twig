@@ -1,0 +1,18 @@
+<div class="row d-flex justify-content-center">
+    <div class="col-12 col-md-10">
+        <div class="form-row">
+            <div class="col-12">
+                {{ form_row(form.code) }}
+            </div>
+            <div class="col-12">
+                <div class="d-flex flex-wrap">
+                    <div class="select-outline position-relative w-100">
+                        {{ form_widget(form.room) }}
+                        <label>{{ form.room.vars.label }}</label>
+                    </div>
+                    <div style="margin-top: -15px;" class="red-text font-weight-stone-500">{{ form_errors(form.room) }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,284 @@
+#imgUpload-dropdiv {
+    border: 2px #1266F1 dashed !important
+}
+
+#imgUpload-dropdiv .no-image {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#imgUpload-dropdiv .no-image i {
+    font-size: 1.1rem;
+}
+
+#imgUpload-list .dm-uploader {
+    border: 2px #e0e0e0 dashed;
+    width: 160px !important;
+    max-height: 150px;
+    margin-left: 1rem !important;
+    margin-right: 1rem !important;
+    cursor: pointer;
+}
+
+#imgUpload-list .dm-uploader:hover {
+    border: 2px #1266F1 dashed;
+}
+
+#imgUpload-list .dm-uploader i {
+ color: #bdbdbd;
+}
+
+#imgUpload-list .dm-uploader div.nbPhotos {
+    color: #34a864;
+    font-weight: 600;
+}
+
+.scale-up-ver-top {
+    -webkit-animation:scale-up-ver-top .4s cubic-bezier(0.680,-0.550,0.265,1.550) both;
+    animation:scale-up-ver-top .4s cubic-bezier(0.680,-0.550,0.265,1.550) both
+}
+
+#imgUpload-list {
+    transition: height .5s ease
+}
+
+#imgUpload-list .imgUpload-add > div {
+    padding: 10px !important;
+    width: auto !important;
+    overflow: hidden;
+}
+
+#imgUpload-list .imgUpload-add > div > div {
+    position: relative;
+}
+
+#imgUpload-list .imgUpload-add .info,
+#imgUpload-list .imgUpload-add .action {
+    position: absolute;
+    top: 0;
+    color: white;
+    z-index: 2;
+    padding: 10px 0 0 10px;
+    box-sizing: border-box;
+    transition: top .3s;
+}
+
+#imgUpload-list .imgUpload-add > div > div.img-bloc:first-child:before {
+    content:'';
+    display: block;
+    background: linear-gradient(to bottom,rgba(18,102,241,0.95) 0,rgba(18,102,241,0) 100%);
+    height: 70px;
+    position: absolute;
+    width: 100%;
+    border-radius: .6em;
+    transition:top .3s;
+    top: 0;
+}
+
+#imgUpload-list .imgUpload-add > div:hover .info,
+#imgUpload-list .imgUpload-add > div:hover .action .progresslabel,
+#imgUpload-list .imgUpload-add > div:hover>div.img-bloc:before {
+    top: -80px
+}
+
+#imgUpload-list .imgUpload-add > div > div .actionhover {
+    width: 190%;
+    left: -45%;
+    transition: all .3s;
+    position: absolute;
+    top: 46%
+}
+
+#imgUpload-list .imgUpload-add > div:hover .actionhover {
+    left: 0;
+    width:100%
+}
+
+#imgUpload-list .imgUpload-add > div.error > div.img-bloc:first-child:before {
+    background: linear-gradient(to bottom, rgba(175,32,40,0.9), rgba(0,0,0,0) 100%)
+}
+
+#imgUpload-list .imgUpload-add > div img,
+#imgUpload-list .imgUpload-add > div canvas {
+    width: 100% !important;
+    max-height: 190px;
+    border-radius: .6em .6em 0 0;
+    display: block
+}
+
+#imgUpload-list .imgUpload-add > div .info {
+    pointer-events:none;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    width:calc(100% - 76px)
+}
+
+#imgUpload-list .info .progresslabel {
+    display:inline-block;
+    position:absolute;
+    width:45px;
+    right:-38px;
+    top:7px;
+    white-space:normal;
+    text-align:right
+}
+
+#imgUpload-list .info span:nth-child(2) {
+    opacity:.5;
+    font-size:10px
+}
+
+#imgUpload-list .info span {
+    display:block;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis
+}
+
+#imgUpload-list .action {
+    right:0;
+    text-align:right
+}
+
+#imgUpload-list .action button, #imgUpload-list .actionhover button {
+    margin:0;
+    padding:0;
+    width:26px;
+    height:26px;
+    border:0;
+    outline:0;
+    border-radius: 50%;
+    background: #1266f1 none;
+    box-shadow: 0 0 0 0 rgba(255,255,255,0);
+    color:white;
+    position:absolute;
+    right:10px;
+    transition:box-shadow .25s ease-out,opacity .25s ease-in;
+    cursor:pointer
+}
+
+#imgUpload-list .action button.remove {
+    display:none;
+    opacity:0
+}
+
+#imgUpload-list .imgUpload-add.show .action button.remove {
+    display: block;
+    opacity: 1
+}
+
+#imgUpload-list .action button.hide {
+    opacity:0
+}
+
+#imgUpload-list .action button.show {
+    opacity:1;
+    display:block
+}
+
+#imgUpload-list .action button:hover,
+#imgUpload-list .actionhover button:hover
+{
+    box-shadow:0 0 0 .125em rgba(255, 255, 255, 0.9)
+}
+
+#imgUpload-list .actionhover button.rotate-left {
+    left: 10px;
+    right:auto
+}
+
+#imgUpload-list .progress svg {
+    width:26px;
+    height:26px;
+    transform:rotate(-90deg);
+    border-radius:50%
+}
+
+#imgUpload-list .progress circle {
+    fill:#34495e;
+    stroke:#69e66a;
+    stroke-width:32;
+    stroke-dasharray:0,100
+}
+
+#imgUpload-list .imgUpload-add > div > div:nth-child(2) {
+    text-align: center;
+    color: #ffffff;
+    font-weight: 500;
+    background: #1266f1;
+    padding: 3px;
+    border-radius: 0 0 .6em .6em;
+    cursor: pointer
+}
+
+#imgUpload-list .imgUpload-add > div.principale > div:nth-child(2) {
+    background: #2cbfa9;
+    color: white
+}
+
+#imgUpload-list .imgUpload-add > div.disabled
+{
+    opacity:.5
+}
+
+#imgUpload-list .imgUpload-add > div:first-child:nth-last-child(1) {
+    display: none
+}
+
+#imgUpload-list .imgUpload-add.show > div:first-child:nth-last-child(1) {
+    display: block;
+}
+
+
+
+
+
+/*#photoUpload ul li, #PhotoSupp ul li {
+    position: relative;
+    display: block;
+    float: left;
+    width: 90px;
+    margin: 7px 12px 7px 0;
+    padding: 0
+}
+
+#photoUpload ul li:last-child, #PhotoSupp ul li:last-child {
+    margin-right:0;
+    overflow:initial;
+    display:table
+}
+
+#photoUpload ul li .imgZone:hover, #PhotoSupp ul li.imgZone:hover, .imgZone:hover {
+    background-color:#f1f1f1
+}
+
+#photoUpload ul.pro li {
+    min-height:90px;
+    margin-bottom:5px
+}
+
+#photoUpload ul li .imgZone, #PhotoSupp ul li.imgZone, .imgZone {
+    height:82px;
+    width:90px;
+    overflow:hidden;
+    position:relative;
+    background-color:#fff;
+    border:1px solid #c2c2c2;
+    text-align:center;
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    border-radius:4px;
+    font-weight:normal
+}
+
+#photoSupp ul li {
+    margin-bottom:5px
+}
+
+#photoUpload ul li .imgPrincipale {
+    border:1px solid #9a9a9a;
+    width:100%;border-top:0
+}*/
+

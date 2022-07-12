@@ -1,0 +1,22 @@
+{% import 'site/room/index/macro/__list.html.twig' as __room  %}
+
+{% if rooms|length > 0 %}
+    <div class="col-12">
+        <section>
+            <div class="row mt-md-4 home-room">
+                {% for room in rooms %}
+                    <div class="col-12 col-md-6 col-lg-4">
+                        {{ __room.list(room, equipments) }}
+                    </div>
+                {% endfor %}
+
+                <div class="col-12 d-flex justify-content-center my-2">
+                    {{ knp_pagination_render(rooms, 'Ui/_pagination.html.twig') }}
+                </div>
+            </div>
+        </section>
+    </div>
+{% endif %}
+
+
+
