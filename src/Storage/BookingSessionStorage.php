@@ -17,7 +17,7 @@ class BookingSessionStorage
 
     public function __construct(SettingsManager $manager, RequestStack $request)
     {
-        $this->settings = $manager->get();
+        //$this->settings = $manager->get();
         $this->request = $request;
     }
 
