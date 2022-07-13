@@ -22,7 +22,7 @@ class AuthSubscriber implements EventSubscriberInterface
     public function __construct(Mailer $mailer, SettingsManager $manager)
     {
         $this->mailer = $mailer;
-        $this->settings = $manager->get();
+        //$this->settings = $manager->get();
     }
 
     /**

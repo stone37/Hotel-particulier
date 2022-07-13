@@ -42,7 +42,7 @@ class AccountController extends AbstractController
         $this->repository = $repository;
         $this->profileService = $profileService;
         $this->em = $em;
-        $this->settings = $manager->get();
+        //$this->settings = $manager->get();
     }
 
     #[Route(path: '/u/profil/edit', name: 'app_user_profil_edit')]

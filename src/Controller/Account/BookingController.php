@@ -36,7 +36,7 @@ class BookingController extends AbstractController
         SettingsManager $manager
     )
     {
-        $this->settings = $manager->get();
+        /*$this->settings = $manager->get();*/
         $this->bookingRepository = $bookingRepository;
         $this->paginator = $paginator;
         $this->em = $em;

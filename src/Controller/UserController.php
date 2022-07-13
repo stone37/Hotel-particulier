@@ -15,7 +15,7 @@ class UserController extends AbstractController
 
     public function __construct(SettingsManager $manager)
     {
-        $this->settings = $manager->get();
+        //$this->settings = $manager->get();
     }
 
 

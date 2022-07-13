@@ -40,7 +40,7 @@ class PaymentSubscriber implements EventSubscriberInterface
         $this->generator = $generator;
         $this->mailer = $mailer;
         $this->dispatcher = $dispatcher;
-        $this->settings = $manager->get();
+        //$this->settings = $manager->get();
     }
 
     public static function getSubscribedEvents(): array

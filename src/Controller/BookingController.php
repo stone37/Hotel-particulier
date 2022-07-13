@@ -53,7 +53,7 @@ class BookingController extends AbstractController
         $this->em = $em;
         $this->manager = $orderManager;
         $this->breadcrumbs = $breadcrumbs;
-        $this->settings = $manager->get();
+        //$this->settings = $manager->get();
     }
 
     #[Route(path: '/reservation', name: 'app_user_profil_edit')]

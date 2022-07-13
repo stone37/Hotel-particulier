@@ -22,7 +22,7 @@ class ContactController extends AbstractController
 
     public function __construct(SettingsManager $manager)
     {
-        $this->settings = $manager->get();
+        //$this->settings = $manager->get();
     }
 
     #[Route(path: '/contact', name: 'app_contact')]

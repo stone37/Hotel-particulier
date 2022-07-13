@@ -15,7 +15,7 @@ class NewsletterService
     public function __construct(Mailer $mailer, SettingsManager $manager)
     {
         $this->mailer = $mailer;
-        $this->settings = $manager->get();
+        //$this->settings = $manager->get();
     }
 
     public function sendEmailing(Emailing $emailing)

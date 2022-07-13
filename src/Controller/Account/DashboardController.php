@@ -22,7 +22,7 @@ class DashboardController extends AbstractController
         SettingsManager $manager)
     {
         $this->bookingRepository = $bookingRepository;
-        $this->settings = $manager->get();
+        /*$this->settings = $manager->get();*/
     }
 
     #[Route(path: '/u/', name: 'app_dashboard_index', methods: ['GET'])]

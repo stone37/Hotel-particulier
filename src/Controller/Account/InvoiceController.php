@@ -28,7 +28,7 @@ class InvoiceController extends AbstractController
     {
         $this->paymentRepository = $paymentRepository;
         $this->paginator = $paginator;
-        $this->settings = $manager->get();
+        /*$this->settings = $manager->get();*/
     }
 
     #[Route(path: '/u/invoices', name: 'app_dashboard_invoice_index')]

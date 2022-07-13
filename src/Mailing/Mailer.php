@@ -25,7 +25,7 @@ class Mailer
     ) {
         $this->twig = $twig;
         $this->mailer = $mailer;
-        $this->settings = $manager->get();
+        //$this->settings = $manager->get();
         $this->dkimKey = $dkimKey;
     }
 
