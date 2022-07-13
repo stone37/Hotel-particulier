@@ -34,7 +34,7 @@ class AccountDeletionController extends AbstractController
         UserPasswordHasherInterface $passwordHasher
     )
     {
-        $this->settings = $manager->get();
+        //$this->settings = $manager->get();
         $this->service = $service;
         $this->passwordHasher = $passwordHasher;
     }

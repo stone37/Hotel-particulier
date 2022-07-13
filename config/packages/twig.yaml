@@ -3,7 +3,7 @@ twig:
     form_themes:
         - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
     globals:
-        config: '@App\Manager\SettingsManager'
+        #config: '@App\Manager\SettingsManager'
         booker: '@App\Storage\BookingSessionStorage'
         roomService: '@App\Service\RoomService'
 
