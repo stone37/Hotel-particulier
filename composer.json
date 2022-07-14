@@ -114,11 +114,6 @@
         "symfony": {
             "allow-contrib": false,
             "require": "6.1.*"
-        },
-        "paas": {
-            "compile": [
-                "php bin/console assetic:dump --env=prod --no-debug"
-            ]
         }
     },
     "require-dev": {
