@@ -141,7 +141,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[Assert\File(maxSize: '8M')]
     #[Vich\UploadableField(mapping: 'user', fileNameProperty: 'fileName', size: 'fileSize', mimeType: 'fileMimeType', originalName: 'originalName')]
-    private ?File $file;
+    private ?File $file = null;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Booking::class)]
     private ArrayCollection $bookings;

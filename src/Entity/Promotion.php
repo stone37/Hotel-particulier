@@ -48,7 +48,7 @@ class Promotion
 
     #[Assert\File(maxSize: '8M')]
     #[Vich\UploadableField(mapping: 'promotion', fileNameProperty: 'fileName', size: 'fileSize', mimeType: 'fileMimeType', originalName: 'originalName')]
-    private ?File $file;
+    private ?File $file = null;
 
     #[ORM\ManyToOne(targetEntity: Room::class, inversedBy: 'promotions')]
     #[ORM\JoinColumn(nullable: false)]
