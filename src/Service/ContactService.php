@@ -54,7 +54,7 @@ class ContactService
 
         $message = (new Email())
             ->text($data->content)
-            ->subject("O'blackmarket::Contact : {$data->name} ({$data->phone})")
+            ->subject("Hotel particulier::Contact : {$data->name} ({$data->phone})")
             ->from('noreply@oblackmarket.com')
             ->replyTo(new Address($data->email, $data->name))
             ->to('contact@oblackmarket.com');

@@ -3,9 +3,7 @@
 namespace App\Controller\Account;
 
 use App\Controller\Traits\ControllerTrait;
-use App\Entity\Settings;
 use App\Entity\User;
-use App\Manager\SettingsManager;
 use App\Service\DeleteAccountService;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -24,17 +22,11 @@ class AccountDeletionController extends AbstractController
 {
     use ControllerTrait;
 
-    private ?Settings $settings;
     private DeleteAccountService $service;
     private UserPasswordHasherInterface $passwordHasher;
 
-    public function __construct(
-        SettingsManager $manager,
-        DeleteAccountService $service,
-        UserPasswordHasherInterface $passwordHasher
-    )
+    public function __construct(DeleteAccountService $service, UserPasswordHasherInterface $passwordHasher)
     {
-        //$this->settings = $manager->get();
         $this->service = $service;
         $this->passwordHasher = $passwordHasher;
     }
@@ -70,8 +62,7 @@ class AccountDeletionController extends AbstractController
 
         return $this->render('user/account/delete.html.twig', [
             'user' => $user,
-            'form' => $form->createView(),
-            'settings' => $this->settings
+            'form' => $form->createView()
         ]);
     }
 

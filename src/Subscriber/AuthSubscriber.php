@@ -2,7 +2,6 @@
 
 namespace App\Subscriber;
 
-use App\Entity\Settings;
 use App\Entity\User;
 use App\Event\UserCreatedEvent;
 use App\Event\PasswordResetTokenCreatedEvent;
@@ -17,12 +16,12 @@ use Symfony\Component\HttpKernel\Event\ViewEvent;
 class AuthSubscriber implements EventSubscriberInterface
 {
     private Mailer $mailer;
-    private ?Settings $settings;
+    private SettingsManager $manager;
 
     public function __construct(Mailer $mailer, SettingsManager $manager)
     {
         $this->mailer = $mailer;
-        //$this->settings = $manager->get();
+        $this->manager = $manager;
     }
 
     /**
@@ -47,7 +46,7 @@ class AuthSubscriber implements EventSubscriberInterface
                 'user' => $user,
             ])
                 ->to($user->getEmail())
-                ->subject($this->settings->getName().' | Confirmation du compte');
+                ->subject($this->manager->get()->getName().' | Confirmation du compte');
 
             $this->mailer->sendNow($email);
         }
@@ -58,7 +57,7 @@ class AuthSubscriber implements EventSubscriberInterface
                 'days' => DeleteAccountService::DAYS,
             ])
                 ->to($user->getEmail())
-                ->subject($this->settings->getName().' | Suppression de votre compte');
+                ->subject($this->manager->get()->getName().' | Suppression de votre compte');
 
             $this->mailer->sendNow($email);
         }
@@ -78,7 +77,7 @@ class AuthSubscriber implements EventSubscriberInterface
             'username' => $event->getUser(),
         ])
             ->to($event->getUser()->getEmail())
-            ->subject($this->settings->getName().' | Réinitialisation de votre mot de passe');
+            ->subject($this->manager->get()->getName().' | Réinitialisation de votre mot de passe');
 
         $this->mailer->sendNow($email);
     }
@@ -99,7 +98,7 @@ class AuthSubscriber implements EventSubscriberInterface
             'user' => $event->getUser(),
             ])
             ->to($event->getUser()->getEmail())
-            ->subject($this->settings->getName().' | Confirmation du compte');
+            ->subject($this->manager->get()->getName().' | Confirmation du compte');
 
         $this->mailer->sendNow($email);
     }
@@ -117,7 +116,7 @@ class AuthSubscriber implements EventSubscriberInterface
             'days' => DeleteAccountService::DAYS,
         ])
             ->to($event->getUser()->getEmail())
-            ->subject($this->settings->getName().' | Suppression de votre compte');
+            ->subject($this->manager->get()->getName().' | Suppression de votre compte');
 
         $this->mailer->sendNow($email);
     }

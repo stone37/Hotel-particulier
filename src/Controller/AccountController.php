@@ -4,10 +4,8 @@ namespace App\Controller;
 
 use App\Controller\Traits\ControllerTrait;
 use App\Dto\ProfileUpdateDto;
-use App\Entity\Settings;
 use App\Exception\TooManyEmailChangeException;
 use App\Form\UpdateAvatarForm;
-use App\Manager\SettingsManager;
 use App\Repository\UserRepository;
 use App\Service\ProfileService;
 use App\Form\UpdatePasswordForm;
@@ -20,7 +18,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 class AccountController extends AbstractController
 {
     use ControllerTrait;
@@ -29,20 +26,17 @@ class AccountController extends AbstractController
     private UserRepository $repository;
     private ProfileService $profileService;
     private EntityManagerInterface $em;
-    private ?Settings $settings;
 
     public function __construct(
         UserPasswordHasherInterface $passwordHasher,
         UserRepository $repository,
         ProfileService $profileService,
-        EntityManagerInterface $em,
-        SettingsManager $manager
+        EntityManagerInterface $em
     ) {
         $this->passwordEncoder = $passwordHasher;
         $this->repository = $repository;
         $this->profileService = $profileService;
         $this->em = $em;
-        //$this->settings = $manager->get();
     }
 
     #[Route(path: '/u/profil/edit', name: 'app_user_profil_edit')]
@@ -82,8 +76,7 @@ class AccountController extends AbstractController
         return $this->render('user/account/edit.html.twig', [
             'form_update' => $formUpdate->createView(),
             'form_avatar' => $formAvatarUpdate->createView(),
-            'user' => $user,
-            'settings' => $this->settings
+            'user' => $user
         ]);
     }
 
@@ -132,8 +125,7 @@ class AccountController extends AbstractController
 
         return $this->render('user/account/change_password.html.twig', [
             'form_password' => $form->createView(),
-            'user' => $user,
-            'settings' => $this->settings
+            'user' => $user
         ]);
     }
 }

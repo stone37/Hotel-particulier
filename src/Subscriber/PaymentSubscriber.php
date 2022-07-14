@@ -6,11 +6,8 @@ use App\Data\BookingData;
 use App\Entity\Booking;
 use App\Entity\Payment;
 use App\Entity\Room;
-use App\Entity\Settings;
 use App\Event\BookingPaymentEvent;
 use App\Event\PaymentEvent;
-use App\Mailing\Mailer;
-use App\Manager\SettingsManager;
 use App\Service\Summary;
 use App\Service\UniqueNumberGenerator;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,8 +17,6 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class PaymentSubscriber implements EventSubscriberInterface
 {
-    private Mailer $mailer;
-    private ?Settings $settings;
     private EntityManagerInterface $em;
     private UniqueNumberGenerator $generator;
     private RequestStack $request;
@@ -31,16 +26,12 @@ class PaymentSubscriber implements EventSubscriberInterface
         RequestStack $request,
         EntityManagerInterface $em,
         UniqueNumberGenerator $generator,
-        Mailer $mailer,
-        EventDispatcherInterface $dispatcher,
-        SettingsManager $manager)
+        EventDispatcherInterface $dispatcher)
     {
         $this->request = $request;
         $this->em = $em;
         $this->generator = $generator;
-        $this->mailer = $mailer;
         $this->dispatcher = $dispatcher;
-        //$this->settings = $manager->get();
     }
 
     public static function getSubscribedEvents(): array
@@ -100,25 +91,10 @@ class PaymentSubscriber implements EventSubscriberInterface
         $this->em->persist($booking);
         $this->em->persist($payment);
 
-        //dump($booking);
-
-        dump($booking, $payment);
-
         $this->em->flush();
 
         $this->dispatcher->dispatch(new BookingPaymentEvent($booking));
     }
-
-
-
-    /*public function onPayment(PaymentEvent $event)
-    {
-        $email = $this->mailer->createEmail('mails/commande/validate.twig', ['commande' => $event->getCommande()])
-            ->to($event->getCommande()->getUser()->getEmail())
-            ->subject($this->settings->getName().' | Validation de votre commande');
-
-        $this->mailer->sendNow($email);
-    }*/
 
     private function addOccupants(Booking $booking, BookingData $data): Booking
     {

@@ -2,8 +2,6 @@
 
 namespace App\Mailing;
 
-use App\Entity\Settings;
-use App\Manager\SettingsManager;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Crypto\DkimSigner;
 use Symfony\Component\Mime\Email;
@@ -15,17 +13,14 @@ class Mailer
     private Environment $twig;
     private MailerInterface $mailer;
     private $dkimKey;
-    private ?Settings $settings;
 
     public function __construct(
         Environment $twig,
         MailerInterface $mailer,
-        SettingsManager $manager,
         ?string $dkimKey = null
     ) {
         $this->twig = $twig;
         $this->mailer = $mailer;
-        //$this->settings = $manager->get();
         $this->dkimKey = $dkimKey;
     }
 

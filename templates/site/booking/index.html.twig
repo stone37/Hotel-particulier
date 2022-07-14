@@ -2,16 +2,14 @@
 
 {% block title 'Réservation' %}
 
-{% set settings = config.get %}
-
 {% block meta %}
-    {% set content = "" %}
+    {% set content = "Réservation" %}
     <meta name="description" content="{{ content }}"/>
     <meta property="og:description" content="{{ content }}" />
 {% endblock %}
 
 {% block app_intro %}
-    <div class="view intro" style="background-image: url({{ asset(room.gallery.first.webPath) }}); background-repeat: no-repeat; background-size: cover;">
+    <div class="view intro" style="background-image: url({{ asset(room.galleries.first.webPath) }}); background-repeat: no-repeat; background-size: cover;">
         <div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
             <div class="container">
                 <div class="row d-flex justify-content-center wow fadeIn">

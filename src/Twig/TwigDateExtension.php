@@ -15,12 +15,6 @@ class TwigDateExtension extends AbstractExtension
         ];
     }
 
-    /**
-     * @param DateTimeInterface $date
-     * @param bool $prefix
-     * @param bool $days
-     * @return string
-     */
     public function ago(DateTimeInterface $date, bool $prefix = false, bool $days = false): string
     {
         $date = explode('|', $date->format("w|d|n|Y"));
@@ -34,10 +28,6 @@ class TwigDateExtension extends AbstractExtension
             $day[$date[0]] . ' ' . $date[1] . ' ' . $month[$date[2]-1] . ' ' . $date[3];
     }
 
-    /**
-     * @param false $prefix
-     * @return string[]
-     */
     private function month($prefix = false)
     {
         if ($prefix) {
@@ -47,10 +37,6 @@ class TwigDateExtension extends AbstractExtension
         }
     }
 
-    /**
-     * @param false $prefix
-     * @return string[]
-     */
     private function days($prefix = false): array
     {
         if ($prefix) {

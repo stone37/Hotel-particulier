@@ -42,7 +42,7 @@ class EmailingController extends AbstractController
         $this->service = $service;
     }
 
-    #[Route(path: '/admin/emailing/{type}', name: 'app_admin_emailing_index')]
+    #[Route(path: '/admin/emailing/{type}/list', name: 'app_admin_emailing_index')]
     public function index(Request $request, string $type)
     {
         $qb = $this->repository->getAdmin($type);

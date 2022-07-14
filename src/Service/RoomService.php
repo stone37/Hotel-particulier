@@ -8,8 +8,6 @@ use App\Manager\PromotionManager;
 use App\Repository\OptionRepository;
 use App\Repository\RoomRepository;
 use App\Util\PriceCalculator;
-use App\Util\RoomPriceCalculator;
-use App\Util\SimpleRoomPriceCalculator;
 
 class RoomService
 {
@@ -23,16 +21,12 @@ class RoomService
         RoomRepository $repository,
         CartService $service,
         PriceCalculator $calculator,
-        SimpleRoomPriceCalculator $simplePriceCalculator,
-        RoomPriceCalculator $priceCalculator,
         OptionRepository $optionRepository,
         PromotionManager $manager
     )
     {
         $this->repository = $repository;
         $this->service = $service;
-        $this->priceCalculator = $priceCalculator;
-        $this->simplePriceCalculator = $simplePriceCalculator;
         $this->optionRepository = $optionRepository;
         $this->calculator = $calculator;
         $this->manager = $manager;

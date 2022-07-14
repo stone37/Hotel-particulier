@@ -3,7 +3,6 @@
 namespace App\Storage;
 
 use App\Data\BookingData;
-use App\Entity\Settings;
 use App\Manager\SettingsManager;
 use DateTime;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -13,11 +12,11 @@ class BookingSessionStorage
     private const BOOKING_KEY_NAME = 'booking_data';
 
     private RequestStack $request;
-    private ?Settings $settings;
+    private SettingsManager $manager;
 
     public function __construct(SettingsManager $manager, RequestStack $request)
     {
-        //$this->settings = $manager->get();
+        $this->manager = $manager;
         $this->request = $request;
     }
 
@@ -95,11 +94,11 @@ class BookingSessionStorage
 
     public function getCheckinMin()
     {
-        return (((int) $this->settings->getCheckinTime()->format('H') * 60) + (int) $this->settings->getCheckinTime()->format('i'));
+        return (((int) $this->manager->get()->getCheckinTime()->format('H') * 60) + (int) $this->manager->get()->getCheckinTime()->format('i'));
     }
 
     public function getCheckoutMin()
     {
-        return (((int) $this->settings->getCheckoutTime()->format('H') * 60) + (int) $this->settings->getCheckoutTime()->format('i'));
+        return (((int) $this->manager->get()->getCheckoutTime()->format('H') * 60) + (int) $this->manager->get()->getCheckoutTime()->format('i'));
     }
 }

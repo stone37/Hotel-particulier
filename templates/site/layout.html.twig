@@ -2,6 +2,12 @@
 
 {% set settings = config.get %}
 
+{% set room_index = isActive('app_room_index') %}
+{% set room_show = isActive('app_room_show') %}
+{% set service_index = isActive('app_service_index') %}
+{% set gallery_index = isActive('app_gallery_index') %}
+{% set promotion_index = isActive('app_promotion_index') %}
+
 {% block app_navbar %}
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top {#mx-3 mt-3#} {#navbar navbar-expand-lg navbar-dark fixed-top#} d-none d-lg-block pt-3 {#scrolling-navbar#}">
         <div class="container-fluid">
@@ -10,20 +16,18 @@
             </a>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
+                    <li class="nav-item {% if room_index or room_show %}active{% endif %}">
                         <a class="nav-link" href="{{ path('app_room_index') }}" data-offset="100">Hébergements</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item {% if service_index %}active{% endif %}">
                         <a class="nav-link" href="{{ path('app_service_index') }}">Services</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Restaurants</a>
-                    </li>
-                    <li class="nav-item">
+                    {#<li class="nav-item"><a class="nav-link" href="">Restaurants</a></li>#}
+                    <li class="nav-item {% if gallery_index %}active{% endif %}">
                         <a class="nav-link" href="{{ path('app_gallery_index') }}">Galerie</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Nos offres</a>
+                    <li class="nav-item {% if promotion_index %}active{% endif %}">
+                        <a class="nav-link" href="{{ path('app_promotion_index') }}">Nos offres</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav nav-flex-icons ml-md-4">

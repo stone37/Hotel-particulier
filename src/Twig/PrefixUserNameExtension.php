@@ -15,10 +15,6 @@ class PrefixUserNameExtension extends AbstractExtension
         );
     }
 
-    /**
-     * @param User $user
-     * @return string
-     */
     public function prefix(User $user)
     {
         $name = explode(" ", $user->getFirstName());

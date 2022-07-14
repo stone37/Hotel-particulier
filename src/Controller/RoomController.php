@@ -45,10 +45,6 @@ class RoomController extends AbstractController
     {
         $this->breadcrumb($this->breadcrumbs)->addItem('Nos hébergements');
 
-        /*$this->session->remove('orderId');
-        $this->session->remove('app_cart');
-        $this->session->remove('booking');*/
-
         $filter = new RoomFilter();
         $filter = $this->hydrate($request, $filter);
 

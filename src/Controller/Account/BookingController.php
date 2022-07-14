@@ -4,10 +4,8 @@ namespace App\Controller\Account;
 
 use App\Controller\Traits\ControllerTrait;
 use App\Entity\Booking;
-use App\Entity\Settings;
 use App\Form\Filter\BookingFilterType;
 use App\Manager\BookingManager;
-use App\Manager\SettingsManager;
 use App\Model\BookingSearch;
 use App\Repository\BookingRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,7 +20,6 @@ class BookingController extends AbstractController
 {
     use ControllerTrait;
 
-    private ?Settings $settings;
     private BookingRepository $bookingRepository;
     private PaginatorInterface $paginator;
     private EntityManagerInterface $em;
@@ -32,11 +29,9 @@ class BookingController extends AbstractController
         BookingRepository $bookingRepository,
         PaginatorInterface $paginator,
         EntityManagerInterface $em,
-        BookingManager $bookingManager,
-        SettingsManager $manager
+        BookingManager $bookingManager
     )
     {
-        /*$this->settings = $manager->get();*/
         $this->bookingRepository = $bookingRepository;
         $this->paginator = $paginator;
         $this->em = $em;
@@ -57,7 +52,6 @@ class BookingController extends AbstractController
         $bookings = $this->paginator->paginate($bookings, $request->query->getInt('page', 1), 20);
 
         return $this->render('user/booking/index.html.twig', [
-            'settings' => $this->settings,
             'form' => $form->createView(),
             'bookings' => $bookings
         ]);
@@ -77,7 +71,6 @@ class BookingController extends AbstractController
         $bookings = $this->paginator->paginate($bookings, $request->query->getInt('page', 1), 20);
 
         return $this->render('user/booking/confirm.html.twig', [
-            'settings' => $this->settings,
             'form' => $form->createView(),
             'bookings' => $bookings
         ]);
@@ -100,7 +93,6 @@ class BookingController extends AbstractController
         $bookings = $this->paginator->paginate($bookings, $request->query->getInt('page', 1), 20);
 
         return $this->render('user/booking/cancel.html.twig', [
-            'settings' => $this->settings,
             'form' => $form->createView(),
             'bookings' => $bookings
         ]);

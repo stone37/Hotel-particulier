@@ -669,9 +669,9 @@
                                             <div class="col-lg-6">
                                                 <div class="price text-right">
                                                     <div class="text-danger number">
-                                                        {{ app_room_total_price(room, option)|format_currency('XOF') }}
+                                                        {{ room_price_total_by_booking(room, option)|format_currency('XOF') }}
                                                     </div>
-                                                    <div class="grey-text info font-weight-stone-500">taxe et frais compris</div>
+                                                    <div class="grey-text info font-weight-stone-500">Taxe et frais compris</div>
                                                 </div>
                                                 <div class="d-flex justify-content-end align-items-center">
                                                     <div class="dropdown mr-2">
@@ -686,21 +686,21 @@
                                                                  style="background-color: transparent !important; -webkit-box-shadow: none !important; box-shadow: none !important;">
                                                                 <div class="title dark-grey-text">1 chambre x 1 nuit</div>
                                                                 <div class="price dark-grey-text">
-                                                                    {{ app_room_price(room, option)|format_currency('XOF') }}
+                                                                    {{ room_price_by_booking(room, option)|format_currency('XOF') }}
                                                                 </div>
                                                             </div>
                                                             <div class="dropdown-item d-flex justify-content-between"
                                                                  style="background-color: transparent !important; -webkit-box-shadow: none !important; box-shadow: none !important;">
                                                                 <div class="title dark-grey-text" style="font-size: 0.95rem !important;">Taxe et frais</div>
                                                                 <div class="price dark-grey-text" style="font-size: 0.95rem !important;">
-                                                                    {% set taxe = app_room_total_price(room, option) - app_room_price(room, option) %}
+                                                                    {% set taxe = room_price_total_by_booking(room, option) - room_price_by_booking(room, option) %}
                                                                     {{ taxe|format_currency('XOF') }}
                                                                 </div>
                                                             </div>
                                                             <div class="dropdown-item d-flex justify-content-between"
                                                                  style="background-color: transparent !important; -webkit-box-shadow: none !important; box-shadow: none !important;">
                                                                 <div class="title text-dark font-weight-stone-600">Total</div>
-                                                                <div class="price text-dark font-weight-stone-600">{{ app_room_total_price(room, option)|format_currency('XOF') }}</div>
+                                                                <div class="price text-dark font-weight-stone-600">{{ room_price_total_by_booking(room, option)|format_currency('XOF') }}</div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -732,7 +732,7 @@
                                     <div class="col-md-6 room-supplement">
                                         <div class="price text-right">
                                             <div class="text-danger number">
-                                                {{ app_room_simple_total_price(room)|format_currency('XOF') }}
+                                                {{ room_price_total_by_booking(room)|format_currency('XOF') }}
                                             </div>
                                             <div class="grey-text info font-weight-stone-500">taxe et frais compris</div>
                                         </div>
@@ -749,21 +749,21 @@
                                                          style="background-color: transparent !important; -webkit-box-shadow: none !important; box-shadow: none !important;">
                                                         <div class="title dark-grey-text">1 chambre x 1 nuit</div>
                                                         <div class="price dark-grey-text">
-                                                            {{ app_room_simple_price(room)|format_currency('XOF') }}
+                                                            {{ room_price_by_booking(room)|format_currency('XOF') }}
                                                         </div>
                                                     </div>
                                                     <div class="dropdown-item d-flex justify-content-between"
                                                          style="background-color: transparent !important; -webkit-box-shadow: none !important; box-shadow: none !important;">
                                                         <div class="title dark-grey-text" style="font-size: 0.95rem !important;">Taxe et frais</div>
                                                         <div class="price dark-grey-text" style="font-size: 0.95rem !important;">
-                                                            {% set taxe = app_room_simple_total_price(room) - app_room_simple_price(room) %}
+                                                            {% set taxe = room_price_total_by_booking(room) - room_price_by_booking(room) %}
                                                             {{ taxe|format_currency('XOF') }}
                                                         </div>
                                                     </div>
                                                     <div class="dropdown-item d-flex justify-content-between"
                                                          style="background-color: transparent !important; -webkit-box-shadow: none !important; box-shadow: none !important;">
                                                         <div class="title text-dark font-weight-stone-600">Total</div>
-                                                        <div class="price text-dark font-weight-stone-600">{{ app_room_simple_total_price(room)|format_currency('XOF') }}</div>
+                                                        <div class="price text-dark font-weight-stone-600">{{ room_price_total_by_booking(room)|format_currency('XOF') }}</div>
                                                     </div>
                                                 </div>
                                             </div>

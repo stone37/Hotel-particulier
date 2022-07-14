@@ -9,9 +9,6 @@ use Twig\TwigFilter;
 
 class TwigTimeExtension extends AbstractExtension
 {
-    /**
-     * @return array<TwigFilter>
-     */
     public function getFilters(): array
     {
         return [

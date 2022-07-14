@@ -4,7 +4,6 @@ namespace App\Twig;
 
 use App\Entity\Room;
 use App\Manager\PromotionManager;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 

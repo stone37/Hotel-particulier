@@ -2,22 +2,17 @@
 
 namespace App\Controller;
 
-use App\Data\BookingData;
 use App\Entity\Equipment;
-use App\Entity\EquipmentGroup;
 use App\Entity\Gallery;
 use App\Entity\Promotion;
 use App\Entity\Room;
 use App\Entity\RoomEquipment;
 use App\Entity\RoomGallery;
-use App\Form\BookingDataType;
-use App\Service\BookerService;
 use App\Service\CartService;
 use App\Storage\BookingSessionStorage;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -52,22 +47,6 @@ class HomeController extends AbstractController
         $promotions = $this->em->getRepository(Promotion::class)->findLimit(3);
         $rooms = $this->em->getRepository(Room::class)->getEnabled();
 
-        /*$maximumAdult = $this->em->getRepository(Room::class)->getMaximumAdult();
-        $maximumChildren = $this->em->getRepository(Room::class)->getMaximumChildren();*/
-
-        /*$data = new BookingData();
-        $form = $this->createForm(BookingDataType::class, $data);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->booker->add($data);
-
-            return $this->redirectToRoute('app_room_index', [
-                'adult' => $data->getAdult(),
-                'children' => $data->getChildren()
-            ]);
-        }*/
-
         return $this->render('site/home/index.html.twig', [
             'galleries' => $galleries,
             'equipments' => $equipments,
@@ -76,11 +55,8 @@ class HomeController extends AbstractController
             'roomEquipmentImages' => $roomEquipmentImages,
             'promotions' => $promotions,
             'rooms' => $rooms,
-            /*'maximumAdults' => $maximumAdult['maximumAdults'],
-            'maximumChildren' => $maximumChildren['maximumOfChildren'],*/
             'today' => new DateTime(),
             'tomorrow' => (new DateTime())->modify('+1 day'),
-            /*'form' => $form->createView(),*/
         ]);
     }
 }

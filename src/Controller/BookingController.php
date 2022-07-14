@@ -6,12 +6,10 @@ use App\Controller\Traits\ControllerTrait;
 use App\Data\BookingData;
 use App\Entity\Commande;
 use App\Entity\Room;
-use App\Entity\Settings;
 use App\Form\BookingDataType;
 use App\Form\BookingType;
 use App\Form\DiscountType;
 use App\Manager\OrderManager;
-use App\Manager\SettingsManager;
 use App\Repository\OptionRepository;
 use App\Service\BookerService;
 use App\Service\CartService;
@@ -34,7 +32,6 @@ class BookingController extends AbstractController
     private EntityManagerInterface $em;
     private OrderManager $manager;
     private Breadcrumbs $breadcrumbs;
-    private ?Settings $settings;
 
     public function __construct(
         BookerService $booker,
@@ -43,8 +40,7 @@ class BookingController extends AbstractController
         RoomService $roomService,
         EntityManagerInterface $em,
         OrderManager $orderManager,
-        Breadcrumbs $breadcrumbs,
-        SettingsManager $manager
+        Breadcrumbs $breadcrumbs
     ) {
         $this->booker = $booker;
         $this->cartService = $cartService;
@@ -53,10 +49,9 @@ class BookingController extends AbstractController
         $this->em = $em;
         $this->manager = $orderManager;
         $this->breadcrumbs = $breadcrumbs;
-        //$this->settings = $manager->get();
     }
 
-    #[Route(path: '/reservation', name: 'app_user_profil_edit')]
+    #[Route(path: '/reservation', name: 'app_booking_index')]
     public function index(Request $request)
     {
         $this->breadcrumb($this->breadcrumbs)
@@ -100,7 +95,6 @@ class BookingController extends AbstractController
             'commande' => $summary,
             'booking' => $booking,
             'room' => $room,
-            'settings' => $this->settings
         ]);
     }
 

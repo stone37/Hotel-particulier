@@ -3,8 +3,6 @@
 namespace App\Controller\Account;
 
 use App\Controller\Traits\ControllerTrait;
-use App\Entity\Settings;
-use App\Manager\SettingsManager;
 use App\Repository\PaymentRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -17,18 +15,13 @@ class InvoiceController extends AbstractController
 {
     use ControllerTrait;
 
-    private ?Settings $settings;
     private PaymentRepository $paymentRepository;
     private PaginatorInterface $paginator;
 
-    public function __construct(
-        PaymentRepository $paymentRepository,
-        PaginatorInterface $paginator,
-        SettingsManager $manager)
+    public function __construct(PaymentRepository $paymentRepository, PaginatorInterface $paginator)
     {
         $this->paymentRepository = $paymentRepository;
         $this->paginator = $paginator;
-        /*$this->settings = $manager->get();*/
     }
 
     #[Route(path: '/u/invoices', name: 'app_dashboard_invoice_index')]
@@ -41,7 +34,6 @@ class InvoiceController extends AbstractController
         $payments = $this->paginator->paginate($payments, $request->query->getInt('page', 1), 20);
 
         return $this->render('user/invoice/index.html.twig', [
-            'settings' => $this->settings,
             'user'     => $user,
             'payments'  => $payments,
         ]);
@@ -59,7 +51,6 @@ class InvoiceController extends AbstractController
 
         return $this->render('user/invoice/show.html.twig', [
             'payment' => $payment,
-            'settings' => $this->settings,
         ]);
     }
 }

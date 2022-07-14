@@ -1,0 +1,64 @@
+{% extends 'site/layout.html.twig' %}
+
+{% block title ' Condition de reservation' %}
+
+{% block meta %}
+    {% set content = " Condition de reservation" %}
+    <meta name="description" content="{{ content }}"/>
+    <meta property="og:description" content="{{ content }}" />
+{% endblock %}
+
+{% block app_intro %}
+    <div class="view intro" style="background-image: url({{ asset('images/intro2.jpg') }}); background-repeat: no-repeat; background-size: cover;">
+        <div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
+            <div class="container">
+                <div class="row d-flex justify-content-center wow fadeIn">
+                    <div class="col-12 col-md-10 col-lg-9 mb-4 text-primary text-center">
+                        <h1 class="display-5 font-weight-bold d-none d-md-block mt-md-5 pt-md-5 text-center">
+                            Condition de reservation
+                        </h1>
+                        <h1 class="h1-responsive font-weight-bold d-block d-md-none text-center mt-5 pt-5"
+                            style="font-size: 2.8rem !important"> Condition de reservation</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bc">
+        <div class="mx-md-5 mx-3">
+            {{ breadcrumb('Condition de reservation') }}
+            {{ wo_render_breadcrumbs({ viewTemplate: '_breadcrumb.html.twig', listClass: 'breadcrumb',
+                itemClass: 'breadcrumb-item', separator: '>', separatorClass: 'fas fa-angle-right'}) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block app_body %}
+    <div class="row d-flex justify-content-center mb-4">
+        <div class="col-12">
+            {% include 'site/pages/bookingCondition/_content.html.twig' %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <style>
+        html, body, .view.intro {
+            min-height: 250px !important
+        }
+
+        @media (min-width: 992px) {
+            html, body, .view.intro {
+                height: 70% !important;
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+
