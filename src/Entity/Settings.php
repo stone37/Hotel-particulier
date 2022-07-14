@@ -73,7 +73,7 @@ class Settings
     private ?DateTimeInterface $checkoutTime;
 
     #[Vich\UploadableField(mapping: 'settings', fileNameProperty: 'fileName', size: 'fileSize', mimeType: 'fileMimeType', originalName: 'fileOriginalName')]
-    private ?File $file;
+    private ?File $file = null;
 
     public function getId(): ?int
     {
