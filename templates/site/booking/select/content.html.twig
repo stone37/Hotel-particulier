@@ -7,21 +7,15 @@
 
 {% include 'Ui/_booking.html.twig' %}
 
-<section class="container">
-    <div class="row my-4">
+<section class="container px-0 px-md-4">
+    <div class="row my-md-4 mt-4 mb-3">
         <div class="col-12">
-            <div class="d-flex justify-content-between">
-                <div>
-                    <a href="{{ path('app_home') }}" class="btn btn-sm btn-outline-primary">
-                        <i class="fas fa-home mr-2"></i> Accueil
-                    </a>
-                </div>
-
-                <div>
-                    <a id="btn-back" href="" class="btn-floating btn-primary btn-sm"><i class="fas fa-times"></i></a>
-                </div>
+            <div>
+                <a href="{{ path('app_home') }}" class="btn btn-sm btn-primary">
+                    <i class="fas fa-home mr-2"></i> Retour à l'accueil
+                </a>
             </div>
-            <div class="text-center my-3">
+            <div class="text-center my-md-3 mt-4">
                 <h2 class="h2-responsive font-weight-stone-600 text-secondary">Sélectionnez votre date de séjour</h2>
             </div>
         </div>
@@ -47,7 +41,7 @@
                 <div class="booking-form-bulk">
                     <div class="booking-form">
                         <div class="d-flex">
-                            <div id="booking-checkin-btn" class="booking-bulk z-depth-1 checkin d-flex align-items-center">
+                            <div id="booking-checkin-btn" class="booking-bulk checkin d-flex align-items-center">
                                 <div class="icon"><i class="fas fa-calendar text-primary"></i></div>
                                 <div>
                                     <div class="title text-secondary">Arrivée</div>
@@ -56,7 +50,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="booking-checkout-btn" class="booking-bulk z-depth-1 checkout d-flex align-items-center">
+                            <div id="booking-checkout-btn" class="booking-bulk checkout d-flex align-items-center">
                                 <div class="icon"><i class="fas fa-calendar text-primary"></i></div>
                                 <div>
                                     <div class="title text-secondary">Départ</div>
@@ -66,8 +60,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-3">
-                            <div id="booking-booker-btn" class="booking-bulk user z-depth-1 d-flex align-items-center">
+                        <div class="mt-2 mt-md-3">
+                            <div id="booking-booker-btn" class="booking-bulk user d-flex align-items-center">
                                 <div class="icon"><i class="fas fa-user text-primary"></i></div>
                                 <div>
                                     <div class="title text-secondary">Voyageurs</div>
@@ -85,7 +79,7 @@
                         {{ form_widget(form.children) }}
                         {{ form_widget(form.roomNumber) }}
                     </div>
-                    <div class="mt-4">
+                    <div class="mt-3">
                         <button type="submit" class="z-depth-4 btn btn-primary btn-block booking-form-btn">
                             Réserver maintenant
                         </button>
@@ -97,8 +91,11 @@
             {{ form_end(form, {'render_rest': false}) }}
         </div>
         <div class="col-12 col-md-8">
-            <div class="my-5 pt-5 text-center">
-                <img src="{{ vich_uploader_asset(settings, 'file') }}" alt="Logo du site" class="img-fluid logo py-0"/>
+            <div class="mt-5 mb-4 d-flex align-items-end justify-content-center">
+                <a href="{{ path('app_home') }}" class="">
+                    <img src="{{ vich_uploader_asset(settings, 'file') }}" alt="Logo du site"
+                         class="img-fluid logo mt-5" style="width: 180px !important;"/>
+                </a>
             </div>
         </div>
     </div>

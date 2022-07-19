@@ -39,6 +39,11 @@ class RoomGalleryRepository extends ServiceEntityRepository
         }
     }
 
+    public function flush(): void
+    {
+        $this->getEntityManager()->flush();
+    }
+
     public function getGalleries(int $limit = 3)
     {
         $qb = $this->createQueryBuilder('rg')->select('COUNT(rg)');

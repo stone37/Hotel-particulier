@@ -22,10 +22,10 @@ class RoomGallery
     private $id;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private ?string $name;
+    private ?string $name = '';
 
     #[ORM\Column(type: 'string', length: 255)]
-    private ?string $extension;
+    private ?string $extension = '';
 
     #[Assert\File(
         maxSize: '8000k',

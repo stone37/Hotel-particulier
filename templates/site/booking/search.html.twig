@@ -1,10 +1,19 @@
 {% set data = booker.bookingData %}
 
 {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'booking-data-form', 'id': 'booking-data-form'}}) }}
-<div class="row mt-lg-4">
+
+{% include 'site/booking/_form_modal.html.twig' %}
+
+{{ form_widget(form.checkin) }}
+{{ form_widget(form.checkout) }}
+{{ form_widget(form.adult) }}
+{{ form_widget(form.children) }}
+{{ form_widget(form.roomNumber) }}
+
+<div class="row {#mt-lg-4#}">
     <div class="col-lg-12 px-0">
         <div id="booking-form-sticky" class="d-flex justify-content-center align-items-end booking-form-sticky">
-            <div class="booking-form-bulk">
+            <div class="booking-form-bulk d-none d-md-block">
                 <div class="d-flex">
                     <div class="z-depth-4 booking-form">
                         <div class="d-flex justify-content-between align-items-center">
@@ -37,11 +46,6 @@
                                     </div>
                                 </div>
                             </div>
-                            {{ form_widget(form.checkin) }}
-                            {{ form_widget(form.checkout) }}
-                            {{ form_widget(form.adult) }}
-                            {{ form_widget(form.children) }}
-                            {{ form_widget(form.roomNumber) }}
                         </div>
                     </div>
                     <div class="d-flex align-items-end">

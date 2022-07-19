@@ -1,0 +1,61 @@
+<div class="d-md-flex justify-content-md-between align-items-center mt-2 mb-4">
+    <h2 class="font-weight-stone-600 h2-responsive text-primary">{{ promotion.name }}</h2>
+    <div class="">
+        <div class="promotion-remise pink darken-1 z-depth-3">Remise de {{ promotion.discount }}%</div>
+        <div class="h5-responsive blue promotion-date z-depth-3">
+            Du {{ promotion.start|format_datetime('medium', 'none', locale='fr') }} au
+            {{ promotion.end|format_datetime('medium', 'none', locale='fr') }}
+        </div>
+    </div>
+</div>
+<div class="border border-primary grey p-3 lighten-5" style="border-width: 1.6px !important">
+    {{ promotion.description|raw }}
+</div>
+
+{% if not promotion.room.options|length > 0 %}
+    <div class="d-flex justify-content-end align-items-center">
+        <div class="price">
+            <div class="text-danger number">
+                <div class="grey-text">
+                    <small>
+                        <s>{{ room_price_total_by_booking(promotion.room)|format_currency('XOF') }}</s>
+                    </small>
+                </div>
+                <div class="">
+                    <strong>{{ room_promotion_price_total_by_booking(promotion.room, promotion.discount)|format_currency('XOF') }}</strong>
+                </div>
+            </div>
+            <div class="grey-text info font-weight-stone-500">Taxe et frais compris</div>
+        </div>
+
+        <div class="booking-btn ml-2 mt-3">
+            <a href="" class="btn btn-primary btn-md">Réserver</a>
+        </div>
+    </div>
+{% else %}
+    <div class="d-flex justify-content-end align-items-center">
+        <div class="price">
+            <div class="dark-grey-text intro font-weight-stone-600 small-8 mt-2">A partir de</div>
+            <div class="text-danger number">
+                <div class="grey-text">
+                    <small>
+                        <s>{{ room_first_total_price(promotion.room)|format_currency('XOF') }}</s>
+                    </small>
+                </div>
+                <div class="">
+                    <strong>{{ room_promotion_first_total_price(promotion.room, promotion.discount)|format_currency('XOF') }}</strong>
+                </div>
+            </div>
+            <div class="grey-text info font-weight-stone-500">Taxe et frais compris</div>
+        </div>
+        <div class="booking-btn ml-2">
+            <a href="{#{{ path('app_room_show', {'slug': promotion.room.slug}) }}#room_{{ promotion.room.id }}_price_detail#}" class="btn btn-primary btn-md">Réserver</a>
+        </div>
+    </div>
+{% endif %}
+
+
+{#<div class="text-right mt-4">
+    <a href="" class="btn btn-primary">Réserver</a>
+</div>#}
+

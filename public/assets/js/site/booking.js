@@ -2,17 +2,22 @@ $(document).ready(function() {
     //$('.checkin-datepicker').pickadate();
     //$('.checkout-datepicker').pickadate();
 
-    //console.log(window.hostel.BOOKING_CHECKIN);
-    //console.log(window.hostel.BOOKING_CHECKOUT);
+    /*console.log(window.hostel.BOOKING_CHECKIN);
+    console.log(window.hostel.BOOKING_CHECKOUT);*/
 
     let $checkin_date = $('.checkin-datepicker'),
         $checkout_date = $('.checkout-datepicker'),
         $booking_checkin_btn = $('#booking-checkin-btn'),
         $booking_checkout_btn = $('#booking-checkout-btn'),
         $booking_booker_btn = $('#booking-booker-btn'),
+        $booking_sm_booker_btn = $('#booking-sm-booker-btn'),
         $booking_booker_modal = $('#booking-booker-modal'),
+        $booking_sm_checkin_btn = $('#booking-sm-checkin-btn'),
+        $booking_sm_checkout_btn = $('#booking-sm-checkout-btn'),
         $booking_checkin_date = $booking_checkin_btn.find('.date-content'),
         $booking_checkout_date = $booking_checkout_btn.find('.date-content'),
+        $booking_sm_checkin_date = $booking_sm_checkin_btn.find('.date-content'),
+        $booking_sm_checkout_date = $booking_sm_checkout_btn.find('.date-content'),
         $booking_adult_field = $('input.booking_data_adult'),
         $booking_children_field = $('input.booking_data_children'),
         $booking_room_field = $('input.booking_data_room'),
@@ -34,6 +39,7 @@ $(document).ready(function() {
         $tomorrow = new Date();
         $tomorrow.setDate($today.getDate() + 1);*/
 
+
     let $checkin_datepicker = $checkin_date.pickadate({
             min: window.hostel.BOOKING_CHECKIN,
             selectMonths: false,
@@ -49,6 +55,7 @@ $(document).ready(function() {
             close: 'Fermer',
             onClose: function() {
                 $booking_checkin_btn.removeClass('active');
+                $booking_sm_checkin_btn.removeClass('active');
             },
             onSet: function(context) {
                 if ($checkin_picker.get('select')) {
@@ -56,6 +63,7 @@ $(document).ready(function() {
 
                     $checkout_picker.set('min', new Date(selected.obj.getFullYear(), selected.obj.getMonth(),selected.obj.getDate()+1));
                     $booking_checkin_date.text($checkin_picker.get('value'));
+                    $booking_sm_checkin_date.text($checkin_picker.get('value'));
                 }
             }
         }),
@@ -76,6 +84,7 @@ $(document).ready(function() {
             close: 'Fermer',
             onClose: function() {
                 $booking_checkout_btn.removeClass('active');
+                $booking_sm_checkout_btn.removeClass('active');
             },
             onSet: function(context) {
                 if (!$checkout_picker.get('select') && $checkin_picker.get('select')) {
@@ -83,6 +92,7 @@ $(document).ready(function() {
                         $d = new Date(selected.obj.getFullYear(), selected.obj.getMonth(),selected.obj.getDate()+1);
 
                     $booking_checkout_date.text($d.getDate()+' '+getMonthsShort($d.getMonth())+' '+$d.getFullYear());
+                    $booking_sm_checkout_date.text($d.getDate()+' '+getMonthsShort($d.getMonth())+' '+$d.getFullYear());
                 }
 
                 if ($checkout_picker.get('select')) {
@@ -90,6 +100,7 @@ $(document).ready(function() {
                         $d = new Date(selected.obj.getFullYear(), selected.obj.getMonth(),selected.obj.getDate());
 
                     $booking_checkout_date.text($d.getDate()+' '+getMonthsShort($d.getMonth())+' '+$d.getFullYear());
+                    $booking_sm_checkout_date.text($d.getDate()+' '+getMonthsShort($d.getMonth())+' '+$d.getFullYear());
                 }
             }
         }),
@@ -120,8 +131,15 @@ $(document).ready(function() {
         $booking_booker_modal.modal()
     });
 
+    $booking_booker_modal.on('show.bs.modal', function () {
+        $('body').css('overflow', 'hidden');
+    });
+
     $booking_booker_modal.on('hide.bs.modal', function () {
         $booking_booker_btn.removeClass('active');
+        $booking_sm_booker_btn.removeClass('active');
+
+        $('body').css('overflow', 'auto');
     });
 
     if ($adults === $maximum_adults) {
@@ -172,9 +190,15 @@ $(document).ready(function() {
         }
     });
 
-    if ($adults === $maximum_children) {
+    if ($children === $maximum_children) {
         $('#booking-booker-modal .modal-body .children a.addition').addClass('disabled')
     }
+
+    ///console.log(parseInt($booking_children_field));
+
+    /*if ($children === 0) {
+        $('#booking-booker-modal .modal-body .children a.addition').addClass('disabled')
+    }*/
 
     $booking_booker_children_field.click(function (e) {
         e.preventDefault();
@@ -253,7 +277,10 @@ $(document).ready(function() {
 
         let $room = $($booking_booker_btn.find('.room')),
             $customer = $($booking_booker_btn.find('.customer')),
-            $child = $($booking_booker_btn.find('.children'));
+            $child = $($booking_booker_btn.find('.children')),
+            $roomSm = $($booking_sm_booker_btn.find('.room')),
+            $customerSm = $($booking_sm_booker_btn.find('.customer')),
+            $childSm = $($booking_sm_booker_btn.find('.children'));
 
         $booking_adult_field.val($adults);
         $booking_children_field.val($children);
@@ -262,9 +289,60 @@ $(document).ready(function() {
         $room.text($rooms + ' chambre, ');
         $customer.text($adults + ' adultes, ');
         $child.text($children + ' enfants');
+        $roomSm.text($rooms + ' chambre, ');
+        $customerSm.text($adults + ' adultes, ');
+        $childSm.text($children + ' enfants');
 
         $('#booking-booker-modal').modal('hide')
     });
+
+    // Booking mobile
+    let $app_room_booking_sm_modal = $('#app-room-booking-sm-modal'),
+        $booking_room_modal_sm_btn = $('#booking_room_modal_sm_btn');
+
+    $app_room_booking_sm_modal.on('show.bs.modal', function () {
+        $('body').css('overflow', 'hidden');
+    });
+
+    $app_room_booking_sm_modal.on('hide.bs.modal', function () {
+        $booking_room_modal_sm_btn.show();
+
+        $('body').css('overflow', 'auto');
+    });
+
+    $booking_room_modal_sm_btn.click(function(e){
+        e.preventDefault();
+
+        $(this).hide();
+
+        $app_room_booking_sm_modal.modal()
+    });
+
+    $booking_sm_checkin_btn.click(function (e) {
+        e.preventDefault();
+
+        $(this).addClass('active');
+
+        $checkin_date.trigger('click');
+    });
+
+    $booking_sm_checkout_btn.click(function (e) {
+        e.preventDefault();
+
+        $(this).addClass('active');
+
+        $checkout_date.trigger('click');
+    });
+
+    $booking_sm_booker_btn.click(function(e){
+        e.preventDefault();
+
+        $(this).addClass('active');
+
+        $booking_booker_modal.modal()
+    });
+
+
 
 
     // Booking occupant data
@@ -275,6 +353,10 @@ $(document).ready(function() {
         prototype = $wrapper.data('prototype');
 
     for (let index = 0; index < window.hostel.DEFAULT_ROOM; index++) {
+
+        if (!$wrapper.length) {
+            return;
+        }
 
         let newForm = prototype.replace(/__name__/g, index);
 
@@ -886,3 +968,35 @@ $(document).ready(function() {
 
 
 });
+
+function getScrollbarWidth() {
+
+    var $window = $(window);
+    var $html = $(document.documentElement);
+
+    if ($html.height() <= $window.height()) {
+        return 0;
+    }
+
+    var $outer = $('<div style="visibility:hidden;width:100px" />').
+    appendTo('body');
+
+    // Get the width without scrollbars.
+    var widthWithoutScroll = $outer[0].offsetWidth;
+
+    // Force adding scrollbars.
+    $outer.css( 'overflow', 'scroll' );
+
+    // Add the inner div.
+    var $inner = $('<div style="width:100%" />' ).appendTo($outer);
+
+    // Get the width with scrollbars.
+    var widthWithScroll = $inner[0].offsetWidth;
+
+    // Remove the divs.
+    $outer.remove();
+
+    // Return the difference between the widths.
+    return widthWithoutScroll - widthWithScroll;
+}
+

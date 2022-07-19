@@ -7,6 +7,7 @@
 {% set service_index = isActive('app_service_index') %}
 {% set gallery_index = isActive('app_gallery_index') %}
 {% set promotion_index = isActive('app_promotion_index') %}
+{% set promotion_show = isActive('app_promotion_show') %}
 
 {% block app_navbar %}
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top {#mx-3 mt-3#} {#navbar navbar-expand-lg navbar-dark fixed-top#} d-none d-lg-block pt-3 {#scrolling-navbar#}">
@@ -26,7 +27,7 @@
                     <li class="nav-item {% if gallery_index %}active{% endif %}">
                         <a class="nav-link" href="{{ path('app_gallery_index') }}">Galerie</a>
                     </li>
-                    <li class="nav-item {% if promotion_index %}active{% endif %}">
+                    <li class="nav-item {% if promotion_index or promotion_show %}active{% endif %}">
                         <a class="nav-link" href="{{ path('app_promotion_index') }}">Nos offres</a>
                     </li>
                 </ul>
@@ -47,17 +48,30 @@
     </nav>
 
     {# Mobile navbar #}
-    <nav class="navbar fixed-top navbar-expand-lg double-nav d-block d-lg-none">
-        <div class="float-left d-flex">
-            <a href="#" data-activates="slide-out" class="button-collapse">
+    <nav class="navbar fixed-top navbar-expand-lg double-nav d-block d-lg-none {#pt-md-2 pt-2#}">
+        <div class="float-left">
+            <a href="#" data-activates="slide-out" class="button-collapse d-inline-block">
                 <i class="fas fa-stream"></i>
+            </a>
+            <a href="{{ path('app_home') }}" class="">
+                <img src="{{ asset('images/logo/logo_icon_mobile.png') }}" alt="Logo" class="logo_icon d-inline-block" />
             </a>
         </div>
         <div class="float-right mobile-btn">
+            <a href="tel:{{ settings.phone }}" class="btn btn-default btn-sm waves-effect waves-light phone mr-4 d-none d-md-inline-block">
+                <i class="fas fa-phone-alt mr-2"></i> {{ settings.phone }}
+            </a>
+            <a href="tel:{{ settings.phone }}" class="btn btn-default btn-sm waves-effect waves-light phone d-inline-block d-md-none">
+                <i class="fas fa-phone-alt"></i>
+            </a>
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                 {{ render(controller('App\\Controller\\MenuController::dropdownMenu')) }}
             {% else %}
-                <a href="{{ path('app_login') }}" {#style="height: 38px !important;"#} type="button" class="btn btn-primary btn-sm waves-effect waves-light">Se connecter</a>
+                <a href="{{ path('app_login') }}" class="btn btn-primary btn-sm waves-effect waves-light user d-inline-block d-md-none">
+                    <i class="fas fa-user"></i>
+                </a>
+                <a href="{{ path('app_register') }}" type="button" class="btn btn-secondary btn-sm waves-effect waves-light d-none d-md-inline-block">S'inscrire</a>
+                <a href="{{ path('app_login') }}" type="button" class="btn btn-primary btn-sm waves-effect waves-light d-none d-md-inline-block">Se connecter</a>
             {% endif %}
 
             {#<a class="navbar-brand" href="{{ path('app_home') }}">
@@ -68,58 +82,39 @@
 
     <div id="slide-out" class="side-nav mobile sn-bg-4 fixed d-block d-lg-none">
         <ul class="custom-scrollbar">
-            <li class="logo-sn waves-effect py-3">
+            <li class="logo-sn waves-effect pt-3 pb-4">
                 <div class="text-center">
                     <a href="{{ path('app_home') }}" class="pl-0">
-                        <img src="{{ asset('images/logo_w2.png') }}" style="width: 180px !important;" alt="Logo du site" />
+                        <img src="{{ asset('images/logo/logo_write.png') }}" style="width: 180px !important;" alt="Logo du site" />
                     </a>
                 </div>
             </li>
-
-            {#{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                {{ render(controller('App\\Controller\\MenuController::dropdownMenu')) }}
-            {% else %}
-                <li class="py-3">
-                    <div class="text-center d-flex justify-content-between mx-3">
-                        <a href="{{ path('app_register') }}" style="height: 38px !important;" type="button" class="btn btn-secondary btn-sm  waves-effect waves-light">S'inscrire</a>
-                        <a href="{{ path('app_login') }}" style="height: 38px !important;" type="button" class="btn btn-primary btn-sm waves-effect waves-light">Se connecter</a>
-                    </div>
-                </li>
-            {% endif %}#}
             <li>
                 <ul class="collapsible collapsible-accordion">
-                    {#<li>
-                        <a href="{{ path('app_admin_dashboard') }}" class="waves-effect {% if dashboard %}active{% endif %}">
-                            <i class="sv-slim-icon fas fa-th-large"></i>
-                            Tableau de bord
-                        </a>
-                    </li>#}
                     <li>
-                        <a href="{{ path('app_room_index') }}" class="waves-effect">
+                        <a href="{{ path('app_room_index') }}"
+                           class="waves-effect {% if room_index or room_show %}active{% endif %}">
                             <i class="sv-slim-icon fas fa-bed"></i>
                             Hébergements
                         </a>
                     </li>
                     <li>
-                        <a href="{{ path('app_service_index') }}" class="waves-effect">
+                        <a href="{{ path('app_service_index') }}"
+                           class="waves-effect {% if service_index %}active{% endif %}">
                             <i class="sv-slim-icon fas fa-clipboard-list"></i>
                             Services
                         </a>
                     </li>
                     <li>
-                        <a href="" class="waves-effect">
-                            <i class="sv-slim-icon fas fa-utensils"></i>
-                            Restaurants
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ path('app_gallery_index') }}" class="waves-effect">
+                        <a href="{{ path('app_gallery_index') }}"
+                           class="waves-effect  {% if gallery_index %}active{% endif %}">
                             <i class="sv-slim-icon far fa-images"></i>
                             Galerie
                         </a>
                     </li>
                     <li>
-                        <a href="" class="waves-effect">
+                        <a href="{{ path('app_promotion_index') }}"
+                           class="waves-effect {% if promotion_index or promotion_show %}active{% endif %}">
                             <i class="sv-slim-icon fas fa-star"></i>
                             Nos offres
                         </a>
@@ -130,6 +125,7 @@
         <div class="sidenav-bg mask-strong"></div>
     </div>
 {% endblock %}
+
 
 
 

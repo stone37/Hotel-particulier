@@ -70,7 +70,7 @@ class EmailingController extends AbstractController
 
             $this->dispatcher->dispatch($event, AdminCRUDEvent::PRE_CREATE);
 
-            $this->repository->add($emailing);
+            $this->repository->add($emailing, true);
 
             $this->service->sendEmailing($emailing);
 
@@ -166,7 +166,7 @@ class EmailingController extends AbstractController
                 return $this->redirectToRoute('app_admin_emailing_index', ['type' => '2']);
             }
 
-            $this->repository->add($emailing);
+            $this->repository->add($emailing, true);
 
             $this->service->sendUserEmailing($emailing, $users);
 
@@ -199,7 +199,7 @@ class EmailingController extends AbstractController
                 return $this->redirectToRoute('app_admin_emailing_index', ['type' => '3']);
             }
 
-            $this->repository->add($emailing);
+            $this->repository->add($emailing, true);
 
             $this->service->sendNewsletterEmailing($emailing, $newsletters);
 
@@ -272,10 +272,10 @@ class EmailingController extends AbstractController
     #[Route(path: '/admin/emailing/bulk/delete', name: 'app_admin_emailing_bulk_delete', options: ['expose' => true])]
     public function deleteBulk(Request $request)
     {
-        $ids = (array) $request->query->get('data');
+        $ids = (array) json_decode($request->query->get('data'));
 
         if ($request->query->has('data'))
-            $request->getSession()->set('data', $request->query->get('data'));
+            $request->getSession()->set('data', $ids);
 
         $form = $this->deleteMultiForm();
 

@@ -40,6 +40,11 @@ class EmailingRepository extends ServiceEntityRepository
         }
     }
 
+    public function flush(): void
+    {
+        $this->getEntityManager()->flush();
+    }
+
     public function getAdmin(string $type): QueryBuilder
     {
         return $this->createQueryBuilder('e')

@@ -14,13 +14,13 @@ class RoomUser
     private $id;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $name;
+    private ?string $name = null;
 
     #[ORM\Column(type: 'string', length: 180, nullable: true)]
-    private $email;
+    private ?string $email = null;
 
     #[ORM\ManyToOne(targetEntity: Booking::class, inversedBy: 'occupants')]
-    private ?Booking $booking;
+    private ?Booking $booking = null;
 
     public function getId(): ?int
     {

@@ -20,7 +20,7 @@ class ContactRequest
     private ?string $ip = '';
 
     #[ORM\Column(type: 'datetime')]
-    private ?DateTimeInterface $createdAt;
+    private ?DateTimeInterface $createdAt = null;
 
     public function __construct()
     {
@@ -49,7 +49,7 @@ class ContactRequest
         return $this->createdAt;
     }
 
-    public function setCreatedAt(DateTimeInterface $createdAt): self
+    public function setCreatedAt(?DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 

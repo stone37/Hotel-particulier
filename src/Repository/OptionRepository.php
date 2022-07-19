@@ -40,6 +40,11 @@ class OptionRepository extends ServiceEntityRepository
         }
     }
 
+    public function flush(): void
+    {
+        $this->getEntityManager()->flush();
+    }
+
     public function getData(): ?QueryBuilder
     {
         $qb = $this->createQueryBuilder('o')

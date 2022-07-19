@@ -41,6 +41,11 @@ class LoginAttemptRepository extends ServiceEntityRepository
         }
     }
 
+    public function flush(): void
+    {
+        $this->getEntityManager()->flush();
+    }
+
     /**
      * Compte le nombre de tentative de connexion pour un utilisateur.
      *

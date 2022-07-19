@@ -6,14 +6,14 @@
 
     <div id="room_{{ room.id }}" class="card card-cascade narrower z-depth-4 mb-5">
         <div class="view view-cascade overlay">
-            {% if room.gallery|length %}
-                <img class="card-img-top" src="{{ asset(room.gallery.first.webPath) }}" alt="{{ room.gallery.first.name }}">
+            {% if room.galleries|length %}
+                <img class="card-img-top" src="{{ asset(room.galleries.first.webPath) }}" alt="{{ room.galleries.first.name }}">
             {% else %}
                 <img class="card-img-top" src="{{ asset('images/no_photo.png') }}" alt="Hostel room image">
             {% endif %}
             <a><div class="mask rgba-white-slight"></div></a>
         </div>
-        <div class="card-body card-body-cascade text-left pt-3 pb-2 px-3">
+        <div class="card-body card-body-cascade text-left pt-3 pb-2 px-2 px-lg-3 p-md-2">
             {% if promotion %}
                 <div class="remise pink darken-1 z-depth-3">Remise de {{ promotion }}%</div>
             {% endif %}
@@ -149,13 +149,11 @@
                                 <div class="dropdown-item d-flex justify-content-between">
                                     <div class="title dark-grey-text">{{ room_number }} chambre x {{ booking_days }} nuit</div>
                                     <div class="price dark-grey-text">
-                                        {#{{ app_room_simple_price(room)|format_currency('XOF') }}#}
                                         {{ room_price_by_booking(room)|format_currency('XOF') }}
                                     </div>
                                 </div>
                                 <div class="dropdown-item" style="position: absolute; top: 4rem">
                                     <div class="small-6 font-weight-stone-500 text-primary">
-                                        {#{{ app_room_simple_unit_price(room)|format_currency('XOF') }} par chambre, par nuit#}
                                         {{ room_real_price(room)|format_currency('XOF') }} par chambre, par nuit
                                     </div>
                                 </div>
@@ -163,7 +161,6 @@
                                 <div class="dropdown-item d-flex justify-content-between">
                                     <div class="title dark-grey-text">1 chambre x 1 nuit</div>
                                     <div class="price dark-grey-text">
-                                        {#{{ app_room_simple_price(room)|format_currency('XOF') }}#}
                                         {{ room_price_by_booking(room)|format_currency('XOF') }}
                                     </div>
                                 </div>
@@ -182,7 +179,6 @@
                             <div class="dropdown-item d-flex justify-content-between">
                                 <div class="title dark-grey-text">Taxe et frais</div>
                                 <div class="price dark-grey-text">
-                                    {#{% set taxe = app_room_simple_total_price(room) - app_room_simple_price(room) %}#}
                                     {% set taxe = room_price_total_by_booking(room) - room_price_by_booking(room) %}
                                     {{ taxe|format_currency('XOF') }}
                                 </div>
@@ -190,8 +186,6 @@
                             <div class="dropdown-item d-flex justify-content-between">
                                 <div class="title text-dark font-weight-stone-600">Total</div>
                                 <div class="price text-dark font-weight-stone-600">
-                                    {#{{ app_room_simple_total_price(room)|format_currency('XOF') }}#}
-
                                     {% if promotion %}
                                         {{ room_promotion_price_total_by_booking(room, promotion)|format_currency('XOF') }}
                                     {% else %}
@@ -338,8 +332,8 @@
 
     <div id="home_room_{{ room.id }}" class="card card-cascade narrower z-depth-4 home_room_bulk">
         <div class="view view-cascade overlay">
-            {% if room.gallery|length %}
-                <img class="card-img-top" src="{{ asset(room.gallery.first.webPath) }}" alt="{{ room.gallery.first.name }}">
+            {% if room.galleries|length %}
+                <img class="card-img-top" src="{{ asset(room.galleries.first.webPath) }}" alt="{{ room.galleries.first.name }}">
             {% else %}
                 <img class="card-img-top" src="{{ asset('images/no_photo.png') }}" alt="Hostel room image">
             {% endif %}
@@ -347,7 +341,7 @@
                 <div class="mask rgba-white-slight"></div>
             </a>
         </div>
-        <div class="card-body card-body-cascade text-left pt-3 pb-2 px-3">
+        <div class="card-body card-body-cascade text-left pt-3 pb-2 px-2 px-lg-3 p-md-2">
             {% if promotion %}
                 <div class="remise pink darken-1 z-depth-3">Remise de {{ promotion }}%</div>
             {% endif %}

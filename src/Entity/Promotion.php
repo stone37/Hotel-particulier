@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: PromotionRepository::class)]
 #[Vich\Uploadable]
@@ -32,6 +33,10 @@ class Promotion
     #[Assert\NotBlank]
     private ?string $name = '';
 
+    #[ORM\Column(type: 'string', length: 100)]
+    #[Gedmo\Slug(fields: ['name'], unique: true)]
+    private ?string $slug;
+
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $description = '';
 
@@ -47,12 +52,12 @@ class Promotion
     private $discount = null;
 
     #[Assert\File(maxSize: '8M')]
-    #[Vich\UploadableField(mapping: 'promotion', fileNameProperty: 'fileName', size: 'fileSize', mimeType: 'fileMimeType', originalName: 'originalName')]
+    #[Vich\UploadableField(mapping: 'promotion', fileNameProperty: 'fileName', size: 'fileSize', mimeType: 'fileMimeType', originalName: 'fileOriginalName')]
     private ?File $file = null;
 
     #[ORM\ManyToOne(targetEntity: Room::class, inversedBy: 'promotions')]
     #[ORM\JoinColumn(nullable: false)]
-    private $room;
+    private ?Room $room = null;
 
     public function getId(): ?int
     {
@@ -67,6 +72,18 @@ class Promotion
     public function setName(?string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

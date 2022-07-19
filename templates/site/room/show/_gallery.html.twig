@@ -1,21 +1,21 @@
-{% if room.gallery|length %}
+{% if room.galleries|length %}
     <div id="mdb-lightbox-ui"></div>
 
     <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-4 col-md-6">
             <div class="mdb-lightbox">
                 <div class="row">
                     <figure class="col-md-12 principale">
-                        <a href="{{ asset(room.gallery.first.webPath) }}" data-size="1400x1067">
-                            <img id="principale" src="{{  asset(room.gallery.first.webPath) }}"
-                                 class="img-fluid z-depth-2" alt="{{ room.gallery.first.name }}" />
+                        <a href="{{ asset(room.galleries.first.webPath) }}" data-size="1400x1067">
+                            <img id="principale" src="{{  asset(room.galleries.first.webPath) }}"
+                                 class="img-fluid z-depth-2" alt="{{ room.galleries.first.name }}" />
                         </a>
                     </figure>
-                    {% for gallery in room.gallery %}
-                        {% if gallery != room.gallery.first %}
+                    {% for gallery in room.galleries %}
+                        {% if gallery != room.galleries.first %}
                             <figure class="col-md-3 d-none">
                                 <a href="{{ asset(gallery.webPath) }}" data-size="1400x1067">
-                                    <img {% if loop.index == 8 %} id="img-plus"{% endif %}
+                                    <img {% if loop.index == 7 %}id="img-plus"{% endif %}
                                          src="{{ asset(gallery.webPath) }}" class="img-fluid" alt="{{ gallery.name }}" />
                                 </a>
                             </figure>
@@ -24,34 +24,34 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-8">
-            <div class="row mdb-lightbox {#mt-lg-4 pl-2 pl-lg-0 pr-2#}">
-                <figure class="col-lg-3 children">
-                    <a href="{{ asset(room.gallery.first.webPath) }}" data-size="1400x1067">
-                        <img src="{{ asset(room.gallery.first.webPath) }}" class="img-fluid z-depth-2" alt="{{ room.gallery.first.name }}" />
+        <div class="col-lg-8 col-md-6">
+            <div class="row mdb-lightbox">
+                <figure class="col-md-4 col-6 children">
+                    <a href="{{ asset(room.galleries.first.webPath) }}" data-size="1400x1067">
+                        <img src="{{ asset(room.galleries.first.webPath) }}" class="img-fluid z-depth-2" alt="{{ room.galleries.first.name }}" />
                     </a>
                 </figure>
-                {% for key, gallery in room.gallery %}
-                    {% if gallery != room.gallery.first %}
-                        {% if key <= 7 %}
-                            <figure class="col-lg-3 children">
+                {% for key, gallery in room.galleries %}
+                    {% if gallery != room.galleries.first %}
+                        {% if key < 6 %}
+                            <figure class="col-md-4 col-6 children">
                                 <a href="{{ asset(gallery.webPath) }}" data-size="1400x1067">
                                     <img src="{{ asset(gallery.webPath) }}" class="img-fluid z-depth-2" alt="{{ gallery.name }}" />
                                 </a>
                             </figure>
-                            {% if key == 7 %}
-                                {% if room.gallery|length > 7 %}
+                            {% if key == 5 %}
+                                {% if room.galleries|length > 6 %}
                                     <div class="lightbox-plus">
                                         <div>
                                             <i class="fas fa-images"></i>
-                                            <span class="nbr-image">{{ room.gallery|length - 7 }}</span>
+                                            <span class="nbr-image">{{ room.galleries|length - 6 }}</span>
                                             <i class="fas fa-plus"></i>
                                         </div>
                                     </div>
                                 {% endif %}
                             {% endif %}
                         {% else %}
-                            <figure class="col-lg-3 d-none">
+                            <figure class="col-md-4 col-6 d-none">
                                 <a href="{{ asset(gallery.webPath) }}" data-size="1400x1067">
                                     <img src="{{ asset(gallery.webPath) }}" class="img-fluid" alt="{{ gallery.name }}" />
                                 </a>

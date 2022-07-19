@@ -41,6 +41,11 @@ class PaymentRepository extends ServiceEntityRepository
         }
     }
 
+    public function flush(): void
+    {
+        $this->getEntityManager()->flush();
+    }
+
     public function getLasts()
     {
         $qb = $this->createQueryBuilder('p')

@@ -13,16 +13,33 @@
     height: 37rem;
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (max-width: 767px) {
     .carousel.home {
-        height: 90vh
+        height: 27.8rem;
     }
 
     .carousel.home .carousel-inner,
     .carousel.home .carousel-inner .active,
     .carousel.home .carousel-inner .carousel-item {
-        height: 90vh
+        height: 27.8rem;
     }
+
+    .carousel.home .view .smooth-scroll h1 {
+        font-size: 2rem !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .carousel.home {
+        height: 70vh
+    }
+
+    .carousel.home .carousel-inner,
+    .carousel.home .carousel-inner .active,
+    .carousel.home .carousel-inner .carousel-item {
+        height: 70vh
+    }
+
 }
 
 .skin-light .app-home-facilities {

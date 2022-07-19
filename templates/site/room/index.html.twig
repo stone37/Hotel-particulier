@@ -5,19 +5,19 @@
 {% set settings = config.get %}
 
 {% block meta %}
-    {% set content = "O'blackmarket: petites annonces en Côte d'Ivoire. Achetez un véhicule, trouvez un emploi, une maison ou un appartement, des meubles, appareils électroménagers et plus !" %}
+    {% set content = "Nos hébergements" %}
     <meta name="description" content="{{ content }}"/>
     <meta property="og:description" content="{{ content }}" />
 {% endblock %}
 
 {% block app_intro %}
-    <div class="view intro" style="background-image: url({{ asset('images/intro2.jpg') }}); background-repeat: no-repeat; background-size: cover;">
+    <div class="view intro" style="background-image: url({{ asset('images/nos_hebergement.jpg') }}); background-repeat: no-repeat; background-size: cover;">
         <div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
             <div class="container">
                 <div class="row d-flex justify-content-center wow fadeIn">
                     <div class="col-12 col-md-10 col-lg-9 mb-4 text-primary text-center">
                         <h1 class="display-3 font-weight-bold d-none d-md-block mt-md-5 pt-md-5 text-center">Nos hébergements</h1>
-                        <h1 class="h1-responsive font-weight-bold d-block d-md-none text-center mt-5 pt-5"
+                        <h1 class="display-6 font-weight-bold d-block d-md-none text-center mt-5 pt-5 pr-1"
                         style="font-size: 2.8rem !important">Nos hébergements</h1>
                     </div>
                 </div>
@@ -30,27 +30,21 @@
                 itemClass: 'breadcrumb-item', separator: '>', separatorClass: 'fas fa-angle-right'}) }}
         </div>
     </div>
-    {#<div class="px-3">
-        {{ render(controller('App\\Controller\\BookingController::search')) }}
-    </div>#}
+    <div>
+        {{ include('site/booking/_mobile_btn.html.twig') }}
+    </div>
 {% endblock %}
 
 {% block app_body %}
     <div class="mb-5">
-        {#<div>
-            <input type="text" id="checkInDate" class="datepicker d-none" />
-            <input type="text" id="checkOutDate" class="datepicker d-none" />
-        </div>#}
-
-        <section class="">
-
-        </section>
-
         <section>
             <div class="row mx-lg-5 mx-md-1 px-1">
                 <div class="col-12">
+                    {{ render(controller('App\\Controller\\BookingController::search')) }}
+                </div>
+                <div class="col-12">
                     <div class="wow fadeIn">
-                        <h2 class="h2-responsive font-weight-stone-600 text-primary mb-4 text-center px-md-0 px-1">
+                        <h2 class="h2-responsive font-weight-stone-600 text-primary mb-4 text-center px-md-0 px-1 mt-0 mt-md-2">
                             <strong class="font-weight-bold">35 chambres de qualité dans le quartier le plus paisible de Yamoussoukro</strong>
                         </h2>
                         <p class="text-center px-md-0 px-1 mb-4">
@@ -63,10 +57,6 @@
                     </div>
                 </div>
 
-                <div class="col-12">
-                    {{ render(controller('App\\Controller\\BookingController::search')) }}
-                </div>
-
                 {% include 'site/room/index/content.html.twig'%}
             </div>
         </section>
@@ -74,7 +64,7 @@
             <div class="row app-hostel-service-view">
                 <div class="col-12">
                     <div class="view content-data-one"
-                         style="background-image: url({{ asset('images/img4.jpg') }});
+                         style="background-image: url({{ asset('images/bar.jpg') }});
                                  background-repeat: no-repeat;
                                  background-size: cover;">
                         <div class="mask rgba-black-strong">
@@ -106,7 +96,7 @@
                 </div>
                 <div class="col-12">
                     <div class="view content-data-two"
-                         style="background-image: url({{ asset('images/intro4.jpg') }});
+                         style="background-image: url({{ asset('images/salon.jpg') }});
                                  background-repeat: no-repeat;
                                  background-size: cover;">
                         <div class="mask rgba-black-strong">
@@ -133,7 +123,7 @@
                 </div>
                 <div class="col-12">
                     <div class="view content-data-three"
-                         style="background-image: url({{ asset('images/intro1.jpg') }});
+                         style="background-image: url({{ asset('images/terrasse.jpg') }});
                                  background-repeat: no-repeat;
                                  background-size: cover;">
                         <div class="mask rgba-black-strong">

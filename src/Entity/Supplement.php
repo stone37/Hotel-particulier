@@ -30,7 +30,7 @@ class Supplement
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     #[Assert\NotBlank]
     #[Assert\Length(min: 2, max: 100)]
-    private ?string $name;
+    private ?string $name = '';
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Gedmo\Slug(fields: ['name'], unique: true)]
@@ -43,10 +43,10 @@ class Supplement
     private ?int $type = self::PER_PERSON;
 
     #[ORM\ManyToMany(targetEntity: Option::class, mappedBy: 'supplements')]
-    private ArrayCollection $options;
+    private $options = null;
 
-    #[ORM\ManyToMany(targetEntity: Room::class, inversedBy: 'supplements')]
-    private ArrayCollection $rooms;
+    #[ORM\ManyToMany(targetEntity: Room::class, mappedBy: 'supplements')]
+    private $rooms = null;
 
     public function __construct()
     {
@@ -146,6 +146,7 @@ class Supplement
     {
         if (!$this->rooms->contains($room)) {
             $this->rooms[] = $room;
+            $room->addSupplement($this);
         }
 
         return $this;

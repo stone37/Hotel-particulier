@@ -10,17 +10,17 @@
         <div class="mt-4 d-block d-md-flex justify-content-between">
             <nav>
                 <ul class="list-inline list-unstyled">
-                    <li class="list-inline-item">
+                    <li class="list-inline-item mb-2">
                         <a href="{{ path('app_room_index') }}" class="mr-xl-4 font-weight-stone-500">Hébergements</a>
                     </li>
-                    <li class="list-inline-item">
+                    <li class="list-inline-item mb-2">
                         <a href="{{ path('app_service_index') }}" class="mr-xl-4 font-weight-stone-500">Services</a>
                     </li>
                     {#<li class="list-inline-item"><a href="" class="mr-xl-4 font-weight-stone-500">Restaurants</a></li>#}
-                    <li class="list-inline-item">
+                    <li class="list-inline-item mb-2">
                         <a href="{{ path('app_gallery_index') }}" class="mr-xl-4 font-weight-stone-500">Galerie</a>
                     </li>
-                    <li class="list-inline-item">
+                    <li class="list-inline-item mb-2">
                         <a href="{{ path('app_promotion_index') }}" class="mr-xl-4 font-weight-stone-500">Nos offres</a>
                     </li>
                 </ul>
@@ -74,22 +74,22 @@
 
         <nav class="second">
             <ul class="list-inline list-unstyled">
-                <li class="list-inline-item">
+                <li class="list-inline-item mb-2">
                     <a href="{{ path('app_confidentialite') }}" class="mr-xl-4 font-weight-stone-500">Politique de Confidentialité</a>
                 </li>
-                <li class="list-inline-item">
+                <li class="list-inline-item mb-2">
                     <a href="{{ path('app_cgu') }}" class="mr-xl-4 font-weight-stone-500">Condition d'utilisation</a>
                 </li>
-                <li class="list-inline-item">
+                <li class="list-inline-item mb-2">
                     <a href="{{ path('app_cgr') }}" class="mr-xl-4 font-weight-stone-500">Condition de reservation</a>
                 </li>
-                <li class="list-inline-item">
+                <li class="list-inline-item mb-2">
                     <a href="{{ path('app_contact') }}" class="mr-xl-4 font-weight-stone-500">Contactez-nous</a>
                 </li>
             </ul>
         </nav>
 
-        <div class="mt-4">
+        <div class="mt-3">
             {% if settings.address %}
                 <p class="mb-2 grey-text">
                     <i class="fas fa-home mr-2"></i> {{ settings.address }}

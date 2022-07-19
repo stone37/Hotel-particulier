@@ -20,14 +20,14 @@ html, body, .view.intro {
     height: 190px !important;
 }*/
 
-.skin-light .mdb-lightbox figure.children img.img-fluid {
+/*.skin-light .mdb-lightbox figure.children img.img-fluid {
     height: 106px !important;
     cursor: default !important;
-}
+}*/
 
 .skin-light .app-room-gallery-bulk .lightbox-plus {
     color: #FFFFFF;
-    background-color: rgba(0, 0, 0, .8);
+    background-color: rgba(0, 0, 0, .7);
     cursor: pointer;
     position: absolute;
     right: 20px;
@@ -288,5 +288,53 @@ html, body, .view.intro {
 
 */
 
+
+
+.skin-light .app-room-gallery-bulk .mdb-lightbox .principale img {
+    width: 100% !important;
+    height: 275px !important;
+}
+
+.skin-light .app-room-gallery-bulk .mdb-lightbox .children img {
+    width: 100% ;
+    height: 130px;
+    /*max-height: 200px;*/
+}
+
+@media (max-width: 767px) {
+    .skin-light .app-room-gallery-bulk .mdb-lightbox .principale img {
+        width: 100% !important;
+        height: 150px !important;
+    }
+
+    .skin-light .app-room-gallery-bulk .mdb-lightbox .children img {
+        width: 100% ;
+        height: 100px;
+    }
+
+    #booking-data-form {
+        margin-bottom: -2rem !important;
+    }
+}
+
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .skin-light .app-room-gallery-bulk .mdb-lightbox .principale img {
+        width: 100% !important;
+        height: 196px !important;
+    }
+
+    .skin-light .app-room-gallery-bulk .mdb-lightbox .children img {
+        width: 100% ;
+        height: 90px !important;
+    }
+
+    #booking-data-form .booking-form-sticky.active .booking-form-bulk .booking-form-btn {
+        font-size: .95rem !important;
+        font-weight: 500 !important;
+        padding: 1.19rem 2rem !important;
+    }
+
+}
 
 

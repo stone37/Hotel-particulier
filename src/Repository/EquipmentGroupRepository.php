@@ -41,6 +41,11 @@ class EquipmentGroupRepository extends ServiceEntityRepository
         }
     }
 
+    public function flush(): void
+    {
+        $this->getEntityManager()->flush();
+    }
+
     public function getAdmins(EquipmentGroupSearch $search): ?QueryBuilder
     {
         $qb = $this->createQueryBuilder('eg')

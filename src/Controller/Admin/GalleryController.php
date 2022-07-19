@@ -138,10 +138,10 @@ class GalleryController extends AbstractController
     #[Route(path: '/admin/gallery/bulk/delete', name: 'app_admin_gallery_bulk_delete', options: ['expose' => true])]
     public function deleteBulk(Request $request)
     {
-        $ids = (array) $request->query->get('data');
+        $ids = (array) json_decode($request->query->get('data'));
 
         if ($request->query->has('data'))
-            $request->getSession()->set('data', $request->query->get('data'));
+            $request->getSession()->set('data', $ids);
 
         $form = $this->deleteMultiForm();
 

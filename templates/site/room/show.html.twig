@@ -9,13 +9,13 @@
 {% endblock %}
 
 {% block app_intro %}
-    <div class="view intro" style="background-image: url({{ asset(room.gallery.first.webPath) }}); background-repeat: no-repeat; background-size: cover;">
+    <div class="view intro" style="background-image: url({{ asset(room.galleries|length > 0 ? room.galleries.first.webPath : 'images/nos_hebergement.jpg') }}); background-repeat: no-repeat; background-size: cover;">
         <div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
-            <div class="container">
+            <div class="container mt-5">
                 <div class="row d-flex justify-content-center wow fadeIn">
                     <div class="col-12 col-md-12 mb-4 text-primary text-center">
-                        <h1 class="display-4 font-weight-bold d-none d-md-block mt-lg-5 pt-md-2 pt-lg-5 mt-md-0 text-center">{{ room.name }}</h1>
-                        <h1 class="display-5 font-weight-bold d-block d-md-none text-center">{{ room.name }}</h1>
+                        <h1 class="display-4 font-weight-bold d-none d-md-block mt-md-4 pt-lg-4 text-center">{{ room.name }}</h1>
+                        <h1 class="display-6 font-weight-bold d-block d-md-none text-center mt-5 pt-4">{{ room.name }}</h1>
                     </div>
                 </div>
             </div>
@@ -26,6 +26,9 @@
             {{ wo_render_breadcrumbs({viewTemplate: '_breadcrumb.html.twig', listClass: 'breadcrumb',
                 itemClass: 'breadcrumb-item', separator: '>', separatorClass: 'fas fa-angle-right'}) }}
         </div>
+    </div>
+    <div>
+        {{ include('site/booking/_mobile_btn.html.twig') }}
     </div>
 {% endblock %}
 

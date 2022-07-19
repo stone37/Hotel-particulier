@@ -24,13 +24,13 @@ class RoomEquipment
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     #[Assert\NotBlank]
     #[Assert\Length(min: 2, max: 100)]
-    private ?string $name;
+    private ?string $name = '';
 
     #[ORM\Column(type: 'text', nullable: true)]
-    private ?string $description;
+    private ?string $description = '';
 
-    #[ORM\ManyToMany(targetEntity: Room::class, inversedBy: 'equipments', cascade: ['persist'])]
-    private ArrayCollection $rooms;
+    #[ORM\ManyToMany(targetEntity: Room::class, mappedBy: 'equipments')]
+    private $rooms = null;
 
     public function __construct()
     {
@@ -78,6 +78,7 @@ class RoomEquipment
     {
         if (!$this->rooms->contains($room)) {
             $this->rooms[] = $room;
+            $room->addEquipment($this);
         }
 
         return $this;
@@ -85,7 +86,9 @@ class RoomEquipment
 
     public function removeRoom(Room $room): self
     {
-        $this->rooms->removeElement($room);
+        if ($this->rooms->removeElement($room)) {
+            $room->removeEquipment($this);
+        }
 
         return $this;
     }

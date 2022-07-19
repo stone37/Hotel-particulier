@@ -31,21 +31,12 @@
         </header>
 
         <main>
-            {#{% block app_breadcrumbs %}{% endblock %}#}
             {% block app_body %}{% endblock %}
         </main>
 
-       {# <div class="px-md-3">
-            {% block app_breadcrumbs %}{% endblock %}
-            {% block app_body %}{% endblock %}
-        </div>#}
-
-
         {% include 'Ui/_top_scroll.html.twig' %}
         {% include 'Ui/_confirmation.html.twig' %}
-        {% block app_booking %}
-            {% include 'Ui/_booking.html.twig' %}
-        {% endblock %}
+        {% block app_booking %}{% include 'Ui/_booking.html.twig' %}{% endblock %}
         {#{% include 'Ui/_cookieconsent.html.twig' %}#}
         {% block app_footer %}
             {% include '_footer.html.twig' %}

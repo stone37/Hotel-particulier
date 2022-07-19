@@ -8,12 +8,11 @@
                     {% if promotions|length == 1 %}one
                     {% elseif promotions|length == 2 %}two
                     {% else %}three{% endif %}"
-                     style="background-image: url({{ asset('images/intro4.jpg') }});
+                     style="background-image: url({{ asset('images/promotion.jpg') }});
                              background-repeat: no-repeat;
-                             background-size: cover;
-                             /*height: 45rem; @media (max-width: 767px) {height: 105rem !important}*/">
+                             background-size: cover;">
                     <div class="mask rgba-white-strong">
-                        <div class="row my-md-5 mx-lg-3 px-3 px-lg-0 mt-4">
+                        <div class="row {#my-md-5#} mx-lg-3 px-3 px-lg-0 mt-4">
                             <div class="col-12">
                                 <div class="row d-flex justify-content-start align-items-start">
                                     <div class="col-12 mx-lg-4">
@@ -23,84 +22,13 @@
                                             </h1>
                                         </div>
                                     </div>
+
                                     {% for promotion in promotions %}
                                         {{ __view.homeList(promotion)}}
                                     {% endfor %}
 
-                                    {#<div class="col-12 col-md-6 col-lg-4 px-5">
-                                        <div class="card card-cascade z-depth-4 mb-4 wow fadeInRight">
-                                            <div class="view view-cascade overlay">
-                                                <img class="card-img-top" src="{{ asset('images/5.jpg') }}" alt="Room promotion image">
-                                                <a>
-                                                    <div class="mask rgba-white-slight"></div>
-                                                </a>
-                                            </div>
-
-                                            <div class="card-body card-body-cascade pt-3 pb-2 px-3">
-                                                <div class="remise bg-primary z-depth-3">-80%</div>
-                                                <h5 class="card-title h5-responsive font-weight-stone-600">
-                                                    <strong class="text-primary">Lorem ipsum dolor sit amet</strong>
-                                                </h5>
-                                                <ul class="list-unstyled dark-grey-text">
-                                                    <li><i class="fas fa-border-style mr-2 my-2"></i> 20 m²</li>
-                                                    <li><i class="fas fa-user-friends mr-2 my-2"></i> 2 personnes</li>
-                                                    <li><i class="fas fa-bed mr-2 my-2"></i> 1 grand lit</li>
-                                                    <li><i class="fas fa-wifi mr-2 mt-2 mb-1"></i> Accès Wi-Fi gratuit</li>
-                                                </ul>
-                                                <div class="detail mb-4">
-                                                    <a href="" class="card-link">Plus de detail <i class="fas fa-angle-right ml-2"></i></a>
-                                                </div>
-                                                <div class="d-flex justify-content-between">
-                                                    <div class="price">
-                                                        <div class="text-danger number">{{ '100000'|format_currency('XOF') }}</div>
-                                                        <div class="grey-text info font-weight-stone-500">taxe et frais compris</div>
-                                                    </div>
-
-                                                    <div class="pt-1">
-                                                        <a href="" class="btn btn-primary btn-sm btn-rounded">Réserver</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6 col-lg-4 px-5">
-                                        <div class="card card-cascade z-depth-4 mb-4 wow fadeInRight">
-                                            <div class="view view-cascade overlay">
-                                                <img class="card-img-top" src="{{ asset('images/7.jpg') }}" alt="Room promotion image">
-                                                <a>
-                                                    <div class="mask rgba-white-slight"></div>
-                                                </a>
-                                            </div>
-
-                                            <div class="card-body card-body-cascade pt-3 pb-2 px-3">
-                                                <div class="remise bg-primary z-depth-3">-15%</div>
-                                                <h5 class="card-title h5-responsive font-weight-stone-600">
-                                                    <strong class="text-primary">Lorem ipsum dolor sit amet</strong>
-                                                </h5>
-                                                <ul class="list-unstyled dark-grey-text">
-                                                    <li><i class="fas fa-border-style mr-2 my-2"></i> 20 m²</li>
-                                                    <li><i class="fas fa-user-friends mr-2 my-2"></i> 2 personnes</li>
-                                                    <li><i class="fas fa-bed mr-2 my-2"></i> 1 grand lit</li>
-                                                    <li><i class="fas fa-wifi mr-2 mt-2 mb-1"></i> Accès Wi-Fi gratuit</li>
-                                                </ul>
-                                                <div class="detail mb-4">
-                                                    <a href="" class="card-link">Plus de detail <i class="fas fa-angle-right ml-2"></i></a>
-                                                </div>
-                                                <div class="d-flex justify-content-between">
-                                                    <div class="price">
-                                                        <div class="text-danger number">{{ '100000'|format_currency('XOF') }}</div>
-                                                        <div class="grey-text info font-weight-stone-500">taxe et frais compris</div>
-                                                    </div>
-
-                                                    <div class="pt-1">
-                                                        <a href="" class="btn btn-primary btn-sm btn-rounded">Réserver</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>#}
-                                    <div class="col-12 text-center mt-lg-4">
-                                        <a href="" class="btn btn-primary btn-lg">Tous nos offres <i class="fas fa-angle-double-right ml-2"></i></a>
+                                    <div class="col-12 text-center mt-lg-2">
+                                        <a href="{{ path('app_promotion_index') }}" class="btn btn-primary btn-lg">Tous nos offres <i class="fas fa-angle-double-right ml-2"></i></a>
                                     </div>
                                 </div>
                             </div>

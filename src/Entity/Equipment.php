@@ -19,14 +19,14 @@ class Equipment
     private $id;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private ?string $name;
+    private ?string $name = null;
 
     #[ORM\Column(type: 'text', nullable: true)]
-    private ?string $description;
+    private ?string $description = null;
 
     #[ORM\ManyToOne(targetEntity: EquipmentGroup::class, inversedBy: 'equipments')]
     #[ORM\JoinColumn(nullable: false)]
-    private $groupe;
+    private ?EquipmentGroup $groupe = null;
 
     public function getId(): ?int
     {

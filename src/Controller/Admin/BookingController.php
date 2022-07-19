@@ -149,6 +149,7 @@ class BookingController extends AbstractController
         return $this->render('admin/booking/index.html.twig', [
             'bookings' => $bookings,
             'searchForm' => $form->createView(),
+            'user' => $user
         ]);
     }
 
@@ -160,13 +161,14 @@ class BookingController extends AbstractController
         $form = $this->createForm(AdminBookingType::class, $search);
         $form->handleRequest($request);
 
-        $qb = $this->repository->getRepository(Booking::class)->admins($search);
+        $qb = $this->repository->admins($search);
 
         $bookings = $this->paginator->paginate($qb, $request->query->getInt('page', 1), 25);
 
         return $this->render('admin/booking/index.html.twig', [
             'bookings' => $bookings,
             'searchForm' => $form->createView(),
+            'room' => $room
         ]);
     }
 
@@ -213,11 +215,10 @@ class BookingController extends AbstractController
     #[Route(path: '/admin/bookings/bulk/confirmed', name: 'app_admin_booking_bulk_confirmed', options: ['expose' => true])]
     public function confirmedBulk(Request $request)
     {
-        $ids = (array)$request->query->get('data');
+        $ids = (array) json_decode($request->query->get('data'));
 
-        if ($request->query->has('data')) {
-            $request->getSession()->set('data', $request->query->get('data'));
-        }
+        if ($request->query->has('data'))
+            $request->getSession()->set('data', $ids);
 
         $form = $this->confirmedMultiForm();
 
@@ -309,11 +310,10 @@ class BookingController extends AbstractController
     #[Route(path: '/admin/bookings/bulk/cancelled', name: 'app_admin_booking_bulk_cancelled', options: ['expose' => true])]
     public function cancelledBulk(Request $request)
     {
-        $ids = (array)$request->query->get('data');
+        $ids = (array) json_decode($request->query->get('data'));
 
-        if ($request->query->has('data')) {
-            $request->getSession()->set('data', $request->query->get('data'));
-        }
+        if ($request->query->has('data'))
+            $request->getSession()->set('data', $ids);
 
         $form = $this->cancelledMultiForm();
 
@@ -409,10 +409,10 @@ class BookingController extends AbstractController
     #[Route(path: '/admin/bookings/bulk/delete', name: 'app_admin_booking_bulk_delete', options: ['expose' => true])]
     public function deleteBulk(Request $request)
     {
-        $ids = (array) $request->query->get('data');
+        $ids = (array) json_decode($request->query->get('data'));
 
         if ($request->query->has('data'))
-            $request->getSession()->set('data', $request->query->get('data'));
+            $request->getSession()->set('data', $ids);
 
         $form = $this->deleteMultiForm();
 

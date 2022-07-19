@@ -41,6 +41,11 @@ class EmailVerificationRepository extends ServiceEntityRepository
         }
     }
 
+    public function flush(): void
+    {
+        $this->getEntityManager()->flush();
+    }
+
     /**
      * @param User $user
      * @return EmailVerification|null

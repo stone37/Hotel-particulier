@@ -39,6 +39,11 @@ class SettingsRepository extends ServiceEntityRepository
         }
     }
 
+    public function flush(): void
+    {
+        $this->getEntityManager()->flush();
+    }
+
     /**
      * @throws \Doctrine\ORM\NonUniqueResultException
      */

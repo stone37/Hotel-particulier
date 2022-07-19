@@ -42,6 +42,11 @@ class RoomRepository extends ServiceEntityRepository
         }
     }
 
+    public function flush(): void
+    {
+        $this->getEntityManager()->flush();
+    }
+
     /**
      * Retourne tous les chambres dans l'adminnistration
      *
@@ -200,6 +205,7 @@ class RoomRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('r')
             ->select('r.maximumAdults')
             ->orderBy('r.maximumAdults', 'desc')
+            ->andWhere('r.enabled = 1')
             ->setMaxResults(1);
 
         return $qb->getQuery()->getOneOrNullResult();
@@ -210,6 +216,7 @@ class RoomRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('r')
             ->select('r.maximumOfChildren')
             ->orderBy('r.maximumOfChildren', 'desc')
+            ->andWhere('r.enabled = 1')
             ->setMaxResults(1);
 
         return $qb->getQuery()->getOneOrNullResult();

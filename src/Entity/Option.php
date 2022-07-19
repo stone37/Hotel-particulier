@@ -27,24 +27,23 @@ class Option
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     #[Assert\NotBlank]
     #[Assert\Length(min: 2, max: 100)]
-    private ?string $name;
+    private ?string $name = '';
 
     #[ORM\Column(type: 'text', nullable: true)]
-    private ?string $description;
+    private ?string $description = '';
 
     #[ORM\ManyToMany(targetEntity: Supplement::class, inversedBy: 'options')]
     #[ORM\OrderBy(['position' => 'asc'])]
-    private $supplements;
+    private $supplements = null;
 
-    #[ORM\ManyToMany(targetEntity: Room::class, inversedBy: 'options')]
-    private ArrayCollection $rooms;
+    #[ORM\ManyToMany(targetEntity: Room::class, mappedBy: 'options')]
+    private $rooms = null;
 
     public function __construct()
     {
         $this->supplements = new ArrayCollection();
         $this->rooms = new ArrayCollection();
     }
-
 
     public function getId(): ?int
     {
@@ -111,6 +110,7 @@ class Option
     {
         if (!$this->rooms->contains($room)) {
             $this->rooms[] = $room;
+            $room->addOption($this);
         }
 
         return $this;

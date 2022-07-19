@@ -128,26 +128,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?DateTimeInterface $createdAt;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
-    private ?DateTimeInterface $updatedAt;
+    private ?DateTimeInterface $updatedAt = null;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
-    private ?DateTimeInterface $bannedAt;
+    private ?DateTimeInterface $bannedAt = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true, options: ['default' => null])]
-    private ?string $lastLoginIp;
+    private ?string $lastLoginIp = null;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
-    private ?DateTimeInterface $lastLoginAt;
+    private ?DateTimeInterface $lastLoginAt = null;
 
     #[Assert\File(maxSize: '8M')]
     #[Vich\UploadableField(mapping: 'user', fileNameProperty: 'fileName', size: 'fileSize', mimeType: 'fileMimeType', originalName: 'originalName')]
     private ?File $file = null;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Booking::class)]
-    private ArrayCollection $bookings;
+    private $bookings = null;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Commande::class, cascade: ['ALL'])]
-    private ArrayCollection $commandes;
+    private $commandes = null;
 
     public function __construct()
     {

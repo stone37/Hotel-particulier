@@ -34,7 +34,7 @@ body.skin-light.fixed-sn .navbar {
 }
 
 @media (max-width: 767px) {
-    body.skin-light.fixed-sn .button-collapse {
+    .skin-light.fixed-sn .button-collapse {
         background-color: #303737 !important;
         color: #ffffff !important;
         padding-top: 0.52rem !important;
@@ -42,17 +42,34 @@ body.skin-light.fixed-sn .navbar {
         padding-left: 0.7rem !important;
         padding-right: 0.7rem !important;
         font-size: 1rem !important;
+        margin-left: 4px !important;
     }
 
-    body.skin-light.fixed-sn .jumbotron.mobile {
-        position: relative;
+    .skin-light.fixed-sn .jumbotron.mobile {
+        position: fixed;
+        top: 2px;
         left: 0;
         right: 0;
-        margin-top: 50px;
-        z-index: 10;
+        margin-top: 52px;
+        z-index: 1030;
+        margin-bottom: 0 !important;
+        box-shadow: none !important;
+
     }
 
-    body.skin-light.fixed-sn .navbar {
+    .skin-light.fixed-sn .jumbotron.mobile a.btn-sm {
+        font-size: 1.15rem !important;
+        padding-top: 13px !important;
+        padding-bottom: 11px !important;
+    }
+
+   /* .skin-light.fixed-sn .jumbotron.mobile a i {
+        font-size: 1rem !important;
+        position: relative;
+        bottom: 1px;
+    }*/
+
+    .skin-light.fixed-sn .navbar {
         box-shadow: none !important;
     }
 
@@ -74,6 +91,7 @@ body.skin-light.fixed-sn .navbar {
         padding-left: 0.76rem !important;
         padding-right: 0.76rem !important;
         font-size: 1rem !important;
+        margin-left: 4px !important;
     }
 
     body.skin-light.fixed-sn .jumbotron.mobile {
@@ -1564,13 +1582,9 @@ button.bg-primary:focus {
 
 
 
-
-
-
-
 .skin-light .side-nav .sidenav-bg:after,
 .skin-light .side-nav .sidenav-bg.mask-strong:after {
-    background: rgba(48, 55, 55, .85)
+    background: rgba(48, 55, 55, .88)
 }
 
 .skin-light .side-nav {
@@ -1674,6 +1688,14 @@ button.bg-primary:focus {
     color: #ffffff;
     height:36px;
     font-size:.875rem;
+    margin-right:.5rem;
+    margin-left:.5rem
+}
+
+.skin-light .side-nav.mobile .collapsible li a:not(.collapsible-header) {
+    color: #ffffff;
+    height: 46px;
+    font-size: 1.1rem;
     margin-right:.5rem;
     margin-left:.5rem
 }
@@ -1784,16 +1806,55 @@ button.bg-primary:focus {
 
 @media (max-width: 767px) {
     .skin-light .navbar {
-        padding-top:.408rem;
-        padding-bottom:.408rem;
         background-color: rgba(238, 243, 243, 1) !important;
+        padding-top: 8px !important;
+        padding-bottom: 6px !important;
+    }
+
+    .skin-light .navbar .mobile-btn .btn.phone,
+    .skin-light .navbar .mobile-btn .btn.user {
+        width: 38.5px !important;
+        /*padding-top: 14px !important;
+        padding-bottom: 14px !important;*/
+        padding-top: 0.7rem !important;
+        padding-bottom: 0.65rem !important;
+        /*padding-left: 0.7rem !important;
+        padding-right: 0.7rem !important;*/
+        font-size: 1rem !important;
+        box-shadow: none !important;
+    }
+
+    .skin-light .navbar .logo_icon {
+        width: 26px !important;
+        margin-left: 15px !important;
+        position: relative;
+        bottom: 2px;
     }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
     .skin-light .navbar {
         background-color: rgba(238, 243, 243, 1) !important;
-        padding-top: .9rem;
+        min-height: 50px;
+        padding-top: 9px !important;
+        padding-bottom: 6px !important;
+    }
+
+    .skin-light .navbar .mobile-btn .btn.phone {
+        /*
+        !*border-width: 1.8px !important;*!
+        padding-left: 13px !important;
+        padding-right: 13px !important;
+        border: none !important*/
+        border-radius: 20px !important;
+        box-shadow: none !important;
+    }
+
+    .skin-light .navbar .logo_icon {
+        width: 28px !important;
+        margin-left: 25px !important;
+        position: relative;
+        bottom: 1px;
     }
 }
 
@@ -3001,11 +3062,13 @@ label.btn input[type="radio"].with-gap:checked+label:after {
 
 .fixed-action-btn {
     position: fixed;
+    height: 50px;
     z-index: 998;
     right: 20px;
     bottom: 75px;
-    margin-bottom:0;
-    padding-top:15px
+    margin:0;
+    padding: 0;
+    background-color: transparent;
 }
 
 .fixed-action-btn a {
@@ -3013,8 +3076,8 @@ label.btn input[type="radio"].with-gap:checked+label:after {
     padding-right: 16px !important;
     padding-top: 14px !important;
     padding-bottom: 14px !important;
-    border: 2px solid #FF9A16 !important;
-    background-color: #FF9A16 !important;
+    /*border: 2px solid #FF9A16 !important;*/
+    background-color: /*#FF9A16*/ rgba(255, 154, 22, .7) !important;
     font-size: 1.08rem !important;
     border-radius: 50% !important;
     line-height: normal;
@@ -3024,9 +3087,10 @@ label.btn input[type="radio"].with-gap:checked+label:after {
     transition:all .3s linear
 }
 
-.fixed-action-btn a:hover {
-    border: 2px solid #FF9A16 !important;
-    background-color: #ffffff !important;
+.fixed-action-btn a:hover,
+.fixed-action-btn a:focus {
+    /*border: 2px solid #FF9A16 !important;*/
+    background-color: rgba(255, 154, 22, 1) !important;
     box-shadow: none;
 }
 
@@ -3035,11 +3099,11 @@ label.btn input[type="radio"].with-gap:checked+label:after {
     font-size: 1.05rem !important
 }
 
-.fixed-action-btn a:hover i {
-    color: #FF9A16 !important;
-}
+/*.fixed-action-btn a:hover i {
+    color: #ffffff !important;
+}*/
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     .fixed-action-btn {
         position: fixed;
         z-index: 998;
@@ -3050,12 +3114,12 @@ label.btn input[type="radio"].with-gap:checked+label:after {
     }
 
     .fixed-action-btn a {
-        padding-left: 11px !important;
-        padding-right: 11px !important;
-        padding-top: 8px !important;
-        padding-bottom: 8px !important;
-        border: 2px solid #FF9A16 !important;
-        background-color: #FF9A16 !important;
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+        padding-top: 12px !important;
+        padding-bottom: 12px !important;
+        /*border: 2px solid #FF9A16 !important;*/
+        background-color: rgba(255, 154, 22, .7) !important;
         border-radius: 50% !important;
         line-height: normal;
         font-size: 1.08rem !important;
@@ -3065,14 +3129,17 @@ label.btn input[type="radio"].with-gap:checked+label:after {
         transition:all .3s linear
     }
 
-    .fixed-action-btn a:hover {
-        border: 2px solid #FF9A16 !important;
-        background-color: #ffffff !important;
+    .fixed-action-btn a:hover,
+    .fixed-action-btn a:focus {
+        /*border: 2px solid #FF9A16 !important;*/
+        /*background-color: #ffffff !important;*/
+
+        background-color: rgba(255, 154, 22, 1) !important;
     }
 
-    .fixed-action-btn a:hover i {
+    /*.fixed-action-btn a:hover i {
         color: #FF9A16 !important;
-    }
+    }*/
 
     .fixed-action-btn i {
         color: #ffffff !important;
@@ -3292,7 +3359,7 @@ label.btn input[type="radio"].with-gap:checked+label:after {
 }
 
 .intro-gradient-rgba {
-    background: linear-gradient(40deg, rgba(238, 243, 243, .7), rgba(238, 243, 243, 1)) !important
+    background: linear-gradient(40deg, rgba(0, 0, 0, .5), rgba(238, 243, 243, .8)) !important
 }
 
 @media (max-width: 767px) {
@@ -3456,8 +3523,9 @@ label.btn input[type="radio"].with-gap:checked+label:after {
 
 
 @media (min-width: 576px) {
-    #booking-booker-modal .modal-sm {
-        max-width: 350px;
+    #booking-booker-modal .modal-dialog.modal-sm {
+        margin-top: 3.6rem !important;
+        max-width: 325px !important;
     }
 }
 
@@ -3666,6 +3734,12 @@ label.btn input[type="radio"].with-gap:checked+label:after {
     line-height: 1.2;
 }
 
+.skin-light .display-6 {
+    font-size: 2.7rem;
+    font-weight: 300;
+    line-height: 1.2;
+}
+
 .carousel-inner.vv-3 .carousel-item.active,
 .carousel-inner.vv-3 .carousel-item-next,
 .carousel-inner.vv-3 .carousel-item-prev {
@@ -3724,7 +3798,7 @@ label.btn input[type="radio"].with-gap:checked+label:after {
 }
 
 .skin-light .home-room-promotion .content-data {
-    height: 45rem !important;
+    height: 46rem !important;
 }
 
 .skin-light .home-room-promotion .card.card-cascade .view,
@@ -3760,6 +3834,16 @@ label.btn input[type="radio"].with-gap:checked+label:after {
     font-size: 1rem;
 }
 
+.skin-light .home-room-promotion .card.card-cascade .card-body .promotion-date {
+    position: absolute;
+    top: 38px;
+    right: 8px;
+    color: #FFFFFF;
+    padding: 2px 10px;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
 .skin-light .home-room-promotion .card.card-cascade .card-body h5 {
     font-size: 1.1rem;
     line-height: normal;
@@ -3776,17 +3860,24 @@ label.btn input[type="radio"].with-gap:checked+label:after {
 }
 
 .skin-light .home-room-promotion .card.card-cascade .card-body .price .number,
-.skin-light .home-room .card.card-cascade .card-body .price .number {
+.skin-light .home-room .card.card-cascade .card-body .price .number,
+.skin-light .app-promotion-show .price .number {
     font-size: 1.2rem !important;
     font-weight: 600 !important;
 }
 
 .skin-light .home-room-promotion .card.card-cascade .card-body .price .info,
-.skin-light .home-room .card.card-cascade .card-body .price .info {
+.skin-light .home-room .card.card-cascade .card-body .price .info,
+.skin-light .app-promotion-show .price .info {
     position: relative;
     bottom: 6px;
     left: 2px;
     font-size: .7rem !important;
+}
+
+.skin-light .home-room-promotion .card.card-cascade .card-body .booking-btn {
+    position: relative;
+    bottom: 6.5px;
 }
 
 .skin-light .home-room .card.card-cascade .card-body .price-detail {
@@ -3836,15 +3927,15 @@ label.btn input[type="radio"].with-gap:checked+label:after {
     }
 
    .skin-light .home-room-promotion .content-data.one {
-        height: 41rem !important;
+        height: 43.3rem !important;
     }
 
     .skin-light .home-room-promotion .content-data.two {
-        height: 72rem !important;
+        height: 77.2rem !important;
     }
 
     .skin-light .home-room-promotion .content-data.three {
-        height: 103rem !important;
+        height: 112.5rem !important;
     }
 }
 
@@ -3866,6 +3957,26 @@ label.btn input[type="radio"].with-gap:checked+label:after {
         left: 2px;
         font-size: .6rem !important;
     }
+}
+
+.skin-light .app-promotion-show .promotion-remise {
+    color: #FFFFFF;
+    padding: 2px 10px;
+    font-weight: 600;
+    font-size: 1.3rem;
+}
+
+.skin-light .app-promotion-show .promotion-date {
+    color: #FFFFFF;
+    padding: 2px 15px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 1.3rem;
+}
+
+.skin-light .app-promotion-show .price .number small s {
+    position: relative;
+    top: 8px;
 }
 
 .skin-light .home-room a.controls i {
@@ -4062,63 +4173,6 @@ label.btn input[type="radio"].with-gap:checked+label:after {
 }*/
 
 /*
-#app-room-booking-modal .booking-form .checkin,
-#app-room-booking-modal .booking-form .checkout,
-#app-room-booking-modal .booking-form .user {
-    cursor: pointer;
-    padding-top: 10px;
-    padding-bottom: 9px;
-    padding-left: 25px;
-    padding-right: 17px;
-    border: 1.6px solid #eee;
-}
-
-#app-room-booking-modal .booking-form .checkin:hover,
-#app-room-booking-modal .booking-form .checkout:hover,
-#app-room-booking-modal .booking-form .user:hover,
-#app-room-booking-modal .booking-form .checkin.active,
-#app-room-booking-modal .booking-form .checkout.active,
-#app-room-booking-modal .booking-form .user.active {
-    border: 1.6px solid #FF9A16;
-    -webkit-box-shadow: 0 2px 5px 0 rgba(255, 154, 22, 0.16), 0 2px 10px 0 rgba(255, 154, 22, 0.12) !important;
-    box-shadow: 0 2px 5px 0 rgba(255, 154, 22, 0.16), 0 2px 10px 0 rgba(255, 154, 22, 0.12) !important
-}
-
-#app-room-booking-modal .booking-form .checkin .icon,
-#app-room-booking-modal .booking-form .checkout .icon,
-#app-room-booking-modal .booking-form .user .icon {
-    font-size: 1.1rem;
-    !*padding-right: 15px;*!
-}
-
-#app-room-booking-modal .booking-form .checkin .icon i,
-#app-room-booking-modal .booking-form .checkout .icon i,
-#app-room-booking-modal .booking-form .user .icon i {
-    font-size: 1.2rem;
-}
-
-#app-room-booking-modal .booking-form .checkin .title,
-#app-room-booking-modal .booking-form .checkout .title,
-#app-room-booking-modal .booking-form .user .title {
-    font-weight: 600;
-    font-size: 1.4rem;
-}
-
-#app-room-booking-modal .booking-form .checkin .date-content,
-#app-room-booking-modal .booking-form .checkout .date-content,
-#app-room-booking-modal .booking-form .user .date-content {
-    font-size: .9rem;
-    font-weight: 500;
-}
-
-#app-room-booking-modal.modal {
-    z-index: 999 !important;
-    margin-top: 4.38rem !important;
-}
-
-!*#app-room-booking-modal.modal .modal-dialog.modal-right {
-    right: 1rem !important
-}*!
 
 @media (min-width: 576px) {
     #app-modal-booking-user .modal-sm {
@@ -4168,11 +4222,13 @@ label.btn input[type="radio"].with-gap:checked+label:after {
     background-color: rgba(255, 255, 255, 1);
 }*/
 
+
+
 #booking-data-form {
     position: relative;
-    bottom: 4rem;
-    z-index: 999 !important;
-    margin-bottom: -3rem !important;
+    bottom: 2.3rem;
+    z-index: 1030 !important;
+    margin-bottom: -4rem !important;
 }
 
 #booking-data-form .booking-form-bulk .booking-form {
@@ -4304,7 +4360,106 @@ label.btn input[type="radio"].with-gap:checked+label:after {
 }
 
 
+@media (min-width: 768px) and (max-width: 1024px) {
+    #booking-data-form {
+        bottom: 1.75rem;
+        margin-bottom: -2rem !important;
+    }
 
+    #booking-data-form .booking-form-bulk .booking-form {
+        width: 28rem;
+        height: 58px;
+        padding: 2.8px 3px;
+    }
+
+    #booking-data-form .booking-form-sticky .booking-form-bulk .booking-form .checkin,
+    #booking-data-form .booking-form-sticky .booking-form-bulk .booking-form .checkout,
+    #booking-data-form .booking-form-sticky .booking-form-bulk .booking-form .user {
+        cursor: pointer;
+        padding-top: 5px;
+        padding-bottom: 4px;
+        padding-left: 5px;
+        padding-right: 5px;
+        border: 1.6px solid rgba(255, 255, 255, 1);
+    }
+
+    #booking-data-form .booking-form-bulk .booking-form .checkin .icon,
+    #booking-data-form .booking-form-bulk .booking-form .checkout .icon,
+    #booking-data-form .booking-form-bulk .booking-form .user .icon {
+        font-size: .95rem;
+        padding-right: 10px;
+    }
+
+    #booking-data-form .booking-form-bulk .booking-form .checkin .icon i,
+    #booking-data-form .booking-form-bulk .booking-form .checkout .icon i,
+    #booking-data-form .booking-form-bulk .booking-form .user .icon i {
+        font-size: .95rem;
+    }
+
+    #booking-data-form .booking-form-bulk .booking-form .checkin .title,
+    #booking-data-form .booking-form-bulk .booking-form .checkout .title,
+    #booking-data-form .booking-form-bulk .booking-form .user .title {
+        font-weight: 600;
+        font-size: .9rem;
+    }
+
+    #booking-data-form .booking-form-bulk .booking-form .checkin .date-content,
+    #booking-data-form .booking-form-bulk .booking-form .checkout .date-content,
+    #booking-data-form .booking-form-bulk .booking-form .user .date-content {
+        font-size: .75rem;
+        font-weight: 500;
+    }
+
+    #booking-data-form .booking-form-bulk .booking-form-btn {
+        font-size: .95rem !important;
+        font-weight: 500 !important;
+        padding: 1.35rem 2.4rem;
+    }
+
+    #booking-data-form .booking-form-sticky.active {
+        padding: 1px;
+    }
+
+    #booking-data-form .booking-form-sticky.active .booking-form-bulk .booking-form {
+        background-color: rgba(255, 255, 255, 1);
+        /*width: 42rem;
+        height: 55px;*/
+        width: 31.5rem;
+        height: 53px;
+        padding: 2.8px 3px;
+        border-radius: 0;
+        /*padding: 3.5px 6px;*/
+    }
+    #booking-data-form .booking-form-sticky.active .booking-form-bulk .booking-form .checkin,
+    #booking-data-form .booking-form-sticky.active .booking-form-bulk .booking-form .checkout,
+    #booking-data-form .booking-form-sticky.active .booking-form-bulk .booking-form .user {
+        cursor: pointer;
+        /*padding-top: 2px;
+        padding-bottom: 1px;
+        padding-left: 15px;
+        padding-right: 15px;*/
+
+        padding-top: 2px;
+        padding-bottom: 1px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 1.6px solid rgba(255, 255, 255, 1);
+    }
+
+    #booking-data-form .booking-form-sticky.active .booking-form-bulk .booking-form .checkin,
+    #booking-data-form .booking-form-sticky.active .booking-form-bulk .booking-form .checkout {
+        padding-right: 0 !important;
+    }
+
+
+
+    #booking-data-form .booking-form-sticky.active .booking-form-bulk .booking-form-btn {
+        font-size: .95rem !important;
+        font-weight: 500 !important;
+        padding: 1.19rem 2rem !important;
+    }
+
+}
 
 
 
@@ -4348,7 +4503,8 @@ label.btn input[type="radio"].with-gap:checked+label:after {
     padding-bottom: 7px;
     padding-left: 20px;
     padding-right: 20px;
-    border: 1.9px solid rgba(255, 255, 255, 1);
+    /*border: 1.9px solid rgba(255, 255, 255, 1);*/
+    border: 1.9px solid rgba(48, 55, 55, .3);
 }
 
 #booking-select-data-form .booking-form-bulk .booking-form .checkin.active,
@@ -4389,11 +4545,40 @@ label.btn input[type="radio"].with-gap:checked+label:after {
     font-weight: 500;
 }
 
-#booking-data-form .booking-form-bulk .booking-form-btn {
+@media (max-width: 767px) {
+
+    #booking-select-data-form .booking-form-bulk .booking-form .checkin,
+    #booking-select-data-form .booking-form-bulk .booking-form .checkout {
+        display: inline-block;
+        width: 9.2rem !important;
+    }
+
+
+    #booking-select-data-form .booking-form-bulk .booking-form .checkin {
+        margin-right: 4px;
+    }
+
+    #booking-select-data-form .booking-form-bulk .booking-form .checkout {
+        margin-left: 4px;
+    }
+
+    #booking-select-data-form .booking-form-bulk .booking-form .checkin,
+    #booking-select-data-form .booking-form-bulk .booking-form .checkout,
+    #booking-select-data-form .booking-form-bulk .booking-form .user {
+        cursor: pointer;
+        padding-top: 7px;
+        padding-bottom: 7px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 1.9px solid rgba(48, 55, 55, .3);
+    }
+}
+
+/*#booking-data-form .booking-form-bulk .booking-form-btn {
     font-size: 1.1rem !important;
     font-weight: 500 !important;
     padding: 1.63rem 2.4rem;
-}
+}*/
 
 /*.skin-light .booking-data-info .booking-detail h5,
 .skin-light .booking-data-info .booking-price-detail h5 {
@@ -4515,13 +4700,80 @@ label.btn input[type="radio"].with-gap:checked+label:after {
 .rgba-black-strong,
 .rgba-black-strong:after {
     background-color: rgba(0, 0, 0, 0.7)
-}   
+}
+
+#app-room-booking-sm-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1030 !important;
+}
+
+#app-room-booking-sm-modal .modal-dialog {
+    max-width: 100% !important;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 400px;
+    height: auto;
+    min-height: 100%;
+    margin: 0;
+}
 
 
+#app-room-booking-sm-modal .booking-form .checkin,
+#app-room-booking-sm-modal .booking-form .checkout,
+#app-room-booking-sm-modal .booking-form .user {
+    cursor: pointer;
+    padding: 6px 10px 5px 10px;
+    border: 1.5px solid rgba(48, 55, 55, .3);
+}
 
+#app-room-booking-sm-modal .booking-form .checkin:hover,
+#app-room-booking-sm-modal .booking-form .checkout:hover,
+#app-room-booking-sm-modal .booking-form .user:hover,
+#app-room-booking-sm-modal .booking-form .checkin.active,
+#app-room-booking-sm-modal .booking-form .checkout.active,
+#app-room-booking-sm-modal .booking-form .user.active {
+    border: 1.5px solid #FF9A16;
+    -webkit-box-shadow: 0 2px 5px 0 rgba(255, 154, 22, 0.16), 0 2px 10px 0 rgba(255, 154, 22, 0.12) !important;
+    box-shadow: 0 2px 5px 0 rgba(255, 154, 22, 0.16), 0 2px 10px 0 rgba(255, 154, 22, 0.12) !important
+}
 
+#app-room-booking-sm-modal .booking-form .checkin .icon,
+#app-room-booking-sm-modal .booking-form .checkout .icon,
+#app-room-booking-sm-modal .booking-form .user .icon {
+    font-size: 1.1rem;
+    padding-right: 13px;
+}
 
+#app-room-booking-sm-modal .booking-form .checkin .icon i,
+#app-room-booking-sm-modal .booking-form .checkout .icon i,
+#app-room-booking-sm-modal .booking-form .user .icon i {
+    font-size: 1.1rem;
+}
 
+#app-room-booking-sm-modal .booking-form .checkin .title,
+#app-room-booking-sm-modal .booking-form .checkout .title,
+#app-room-booking-sm-modal .booking-form .user .title {
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+#app-room-booking-sm-modal .booking-form .checkin .date-content,
+#app-room-booking-sm-modal .booking-form .checkout .date-content,
+#app-room-booking-sm-modal .booking-form .user .date-content {
+    font-size: .9rem;
+    font-weight: 500;
+}
+
+.skin-light .app-room-info-bulk .price .number small s {
+    position: relative;
+    top: 10px;
+}
 
 
 

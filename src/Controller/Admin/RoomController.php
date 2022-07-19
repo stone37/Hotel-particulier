@@ -72,7 +72,7 @@ class RoomController extends AbstractController
 
             $this->dispatcher->dispatch($event, AdminCRUDEvent::PRE_CREATE);
 
-            $this->repository->add($room);
+            $this->repository->add($room, true);
 
             $this->dispatcher->dispatch($event, AdminCRUDEvent::POST_CREATE);
 
@@ -102,7 +102,7 @@ class RoomController extends AbstractController
 
             $this->dispatcher->dispatch($event, AdminCRUDEvent::PRE_CREATE);
 
-            $this->repository->add($room);
+            $this->repository->add($room, true);
 
             $this->dispatcher->dispatch($event, AdminCRUDEvent::POST_CREATE);
 
@@ -205,13 +205,13 @@ class RoomController extends AbstractController
         return new JsonResponse($response);
     }
 
-    #[Route(path: '/admin/rooms/bulk/delete', name: 'app_admin_room_bulk_delete', requirements: ['id' => '\d+'], options: ['expose' => true])]
+    #[Route(path: '/admin/rooms/bulk/delete', name: 'app_admin_room_bulk_delete', options: ['expose' => true])]
     public function deleteBulk(Request $request)
     {
-        $ids = (array) $request->query->get('data');
+        $ids = (array) json_decode($request->query->get('data'));
 
         if ($request->query->has('data'))
-            $request->getSession()->set('data', $request->query->get('data'));
+            $request->getSession()->set('data', $ids);
 
         $form = $this->deleteMultiForm();
 

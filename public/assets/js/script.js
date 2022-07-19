@@ -164,7 +164,7 @@ let options = {
     "hideMethod": "fadeOut"
 };
 
-function simpleModals(element, route, elementRacine) {
+/*function simpleModals(element, route, elementRacine) {
     element.click(function (e) {
         e.preventDefault();
 
@@ -204,7 +204,7 @@ function bulkModals(element, container, route, elementRacine) {
 
             $.ajax({
                 url: Routing.generate(route),
-                data: {'data': ids},
+                data: {'data': json},
                 type: 'GET',
                 success: function(data) {
                     hideLoading();
@@ -215,7 +215,7 @@ function bulkModals(element, container, route, elementRacine) {
             });
         }
     });
-}
+}*/
 
 function getMonthsShort (month) {
     let monthShortLists = ['Janv.', 'Févr.', 'Mars', 'Avr.', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'];

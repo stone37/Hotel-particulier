@@ -1,5 +1,5 @@
 {% macro homeList(promotion) %}
-    <div id="promotion_{{ promotion.id }}" class="col-12 col-md-4 px-lg-5">
+    <div id="promotion_{{ promotion.id }}" class="col-12 col-md-4 px-lg-5 px-md-2">
         <div class="card card-cascade z-depth-4 mb-4 wow fadeInRight">
             <div class="view view-cascade overlay">
                 <img class="card-img-top img-fluid" src="{{ vich_uploader_asset(promotion, 'file') }}" alt="Room promotion image">
@@ -7,7 +7,7 @@
                     <div class="mask rgba-black-light"></div>
                 </a>
             </div>
-            <div class="card-body card-body-cascade pt-3 pb-2 px-lg-3 p-md-2">
+            <div class="card-body card-body-cascade pt-3 pb-2 px-2 px-lg-3 p-md-2 ">
                 {#<div class="remise bg-primary z-depth-3">-{{ promotion.discount }}%</div>#}
                 <div class="remise pink darken-1 z-depth-3 small-9">Remise de {{ promotion.discount }}%</div>
                 <h5 class="card-title h5-responsive font-weight-stone-600">
@@ -23,8 +23,11 @@
                     {% endif %}
                     <li><i class="fas fa-wifi mr-2 mt-2 mb-1"></i> Accès Wi-Fi gratuit</li>
                 </ul>
+                <div class="detail mb-1">
+                    <a href="{{ path('app_promotion_show', {'slug': promotion.slug}) }}" class="card-link">Détail sur l'offre <i class="fas fa-angle-right ml-2"></i></a>
+                </div>
                 <div class="detail mb-4">
-                    <a href="{{ path('app_room_show', {'slug': promotion.room.slug}) }}" class="card-link">Detail sur la chambre <i class="fas fa-angle-right ml-2"></i></a>
+                    <a href="{{ path('app_room_show', {'slug': promotion.room.slug}) }}" class="card-link">Détail sur la chambre <i class="fas fa-angle-right ml-2"></i></a>
                 </div>
 
                 {% if not promotion.room.options|length > 0 %}
@@ -44,8 +47,91 @@
                             <div class="grey-text info font-weight-stone-500">Taxe et frais compris</div>
                         </div>
 
-                        <div class="pt-lg-1">
-                            <a href="{{ path('app_booking_check', {'id': promotion.room.id}) }}" class="btn btn-primary btn-md btn-rounded">Réserver</a>
+                        <div class="booking-btn">
+                            <a href="{{ path('app_booking_check', {'id': promotion.room.id}) }}" class="btn btn-primary btn-md">Réserver</a>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="d-flex justify-content-between align-items-end">
+                        <div class="price">
+                            <div class="dark-grey-text intro font-weight-stone-600 small-8 mt-2">A partir de</div>
+                            <div class="text-danger number">
+                                <div class="grey-text">
+                                    <small>
+                                        <s>{{ room_first_total_price(promotion.room)|format_currency('XOF') }}</s>
+                                    </small>
+                                </div>
+                                <div class="">
+                                    <strong>{{ room_promotion_first_total_price(promotion.room, promotion.discount)|format_currency('XOF') }}</strong>
+                                </div>
+                            </div>
+                            <div class="grey-text info font-weight-stone-500">Taxe et frais compris</div>
+                        </div>
+                        <div class="booking-btn">
+                            <a href="{{ path('app_room_show', {'slug': promotion.room.slug}) }}#room_{{ promotion.room.id }}_price_detail" class="btn btn-primary btn-md">Réserver</a>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro list(promotion) %}
+    <div id="promotion_{{ promotion.id }}" class="col-12 col-md-6 col-lg-4">
+        <div class="card card-cascade z-depth-4 mb-4 wow fadeInRight">
+            <div class="view view-cascade overlay">
+                <img class="card-img-top img-fluid" src="{{ vich_uploader_asset(promotion, 'file') }}" alt="Room promotion image">
+                <a>
+                    <div class="mask rgba-black-light"></div>
+                </a>
+            </div>
+            <div class="card-body card-body-cascade pt-3 pb-2 px-2 px-lg-3 p-md-2 ">
+                {#<div class="remise bg-primary z-depth-3">-{{ promotion.discount }}%</div>#}
+                <div class="remise pink darken-1 z-depth-3 small-9">Remise de {{ promotion.discount }}%</div>
+                <div class="promotion-date blue darken-1 z-depth-3 small-9">
+                    Du {{ promotion.start|format_datetime('medium', 'none', locale='fr') }} au
+                    {{ promotion.end|format_datetime('medium', 'none', locale='fr') }}
+                </div>
+                <h5 class="card-title h5-responsive font-weight-stone-600">
+                    <strong class="text-primary">{{ promotion.name }}</strong>
+                </h5>
+                <ul class="list-unstyled dark-grey-text">
+                    {% if promotion.room.area %}
+                        <li><i class="fas fa-border-style mr-2 my-2"></i>{{ promotion.room.area }} m²</li>
+                    {% endif %}
+                    <li><i class="fas fa-user-friends mr-2 my-2"></i> {{ promotion.room.maximumAdults + promotion.room.maximumOfChildren }} personnes</li>
+                    {% if promotion.room.couchage %}
+                        <li><i class="fas fa-bed mr-2 my-2"></i> {{ promotion.room.couchage }}</li>
+                    {% endif %}
+                    <li><i class="fas fa-wifi mr-2 mt-2 mb-1"></i> Accès Wi-Fi gratuit</li>
+                </ul>
+                <div class="detail mb-1">
+                    <a href="{{ path('app_promotion_show', {'slug': promotion.slug}) }}" class="card-link">Détail sur l'offre <i class="fas fa-angle-right ml-2"></i></a>
+                </div>
+                <div class="detail mb-4">
+                    <a href="{{ path('app_room_show', {'slug': promotion.room.slug}) }}" class="card-link">Détail sur la chambre <i class="fas fa-angle-right ml-2"></i></a>
+                </div>
+
+                {% if not promotion.room.options|length > 0 %}
+                    <div class="d-flex justify-content-between align-items-end">
+                        <div class="price">
+                            <div class="text-danger number">
+                                {#{{ promotion.room.price|format_currency('XOF') }}#}
+                                <div class="grey-text">
+                                    <small>
+                                        <s>{{ room_price_total_by_booking(promotion.room)|format_currency('XOF') }}</s>
+                                    </small>
+                                </div>
+                                <div class="">
+                                    <strong>{{ room_promotion_price_total_by_booking(promotion.room, promotion.discount)|format_currency('XOF') }}</strong>
+                                </div>
+                            </div>
+                            <div class="grey-text info font-weight-stone-500">Taxe et frais compris</div>
+                        </div>
+
+                        <div class="booking-btn">
+                            <a href="{{ path('app_booking_check', {'id': promotion.room.id}) }}" class="btn btn-primary btn-md">Réserver</a>
                         </div>
                     </div>
                 {% else %}

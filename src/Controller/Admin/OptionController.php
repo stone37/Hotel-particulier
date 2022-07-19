@@ -58,7 +58,7 @@ class OptionController extends AbstractController
 
             $this->dispatcher->dispatch($event, AdminCRUDEvent::PRE_CREATE);
 
-            $this->repository->add($option);
+            $this->repository->add($option, true);
 
             $this->dispatcher->dispatch($event, AdminCRUDEvent::POST_CREATE);
 
@@ -163,10 +163,10 @@ class OptionController extends AbstractController
     #[Route(path: '/admin/options/bulk/delete', name: 'app_admin_option_bulk_delete', options: ['expose' => true])]
     public function deleteBulk(Request $request)
     {
-        $ids = (array)$request->query->get('data');
+        $ids = (array) json_decode($request->query->get('data'));
 
         if ($request->query->has('data'))
-            $request->getSession()->set('data', $request->query->get('data'));
+            $request->getSession()->set('data', $ids);
 
         $form = $this->deleteMultiForm();
 

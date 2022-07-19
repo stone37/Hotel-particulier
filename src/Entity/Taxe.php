@@ -21,13 +21,13 @@ class Taxe
     private ?int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private ?string $name;
+    private ?string $name = '';
 
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $value;
+    private ?float $value = null;
 
     #[ORM\OneToMany(mappedBy: 'taxe', targetEntity: Room::class)]
-    private $rooms;
+    private $rooms = null;
 
     public function __construct()
     {

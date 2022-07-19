@@ -66,37 +66,36 @@ class Room
     #[ORM\Column(type: 'boolean', nullable: true)]
     private bool $taxeStatus = false;
 
-    #[ORM\OneToMany(mappedBy: 'room', targetEntity: Promotion::class, orphanRemoval: true)]
-    private ArrayCollection $promotions;
+    #[ORM\OneToMany(targetEntity: Promotion::class, mappedBy: 'room', orphanRemoval: true)]
+    private $promotions = null;
 
     #[ORM\ManyToOne(targetEntity: Taxe::class, inversedBy: 'rooms')]
     private ?Taxe $taxe;
 
-    #[ORM\ManyToMany(targetEntity: Supplement::class, mappedBy: 'rooms')]
-    private ArrayCollection $supplements;
+    #[ORM\ManyToMany(targetEntity: Supplement::class, inversedBy: 'rooms')]
+    private $supplements = null;
 
-    #[ORM\ManyToMany(targetEntity: Option::class, mappedBy: 'rooms')]
-    private ArrayCollection $options;
+    #[ORM\ManyToMany(targetEntity: Option::class, inversedBy: 'rooms')]
+    private $options = null;
 
-    #[ORM\ManyToMany(targetEntity: RoomEquipment::class, mappedBy: 'rooms', cascade: ['persist'])]
+    #[ORM\OneToMany(targetEntity: RoomGallery::class, mappedBy: 'room', cascade: ['ALL'])]
     #[ORM\OrderBy(['position' => 'ASC'])]
-    private Collection $equipments;
+    private $galleries = null;
 
-    #[ORM\OneToMany(mappedBy: 'room', targetEntity: RoomGallery::class, cascade: ['ALL'])]
-    #[ORM\OrderBy(['position' => 'ASC'])]
-    private ArrayCollection $galleries;
-
-    #[ORM\OneToMany(mappedBy: 'room', targetEntity: Booking::class)]
+    #[ORM\OneToMany(targetEntity: Booking::class, mappedBy: 'room')]
     private $bookings;
+
+    #[ORM\ManyToMany(targetEntity: RoomEquipment::class, inversedBy: 'rooms')]
+    private $equipments = null;
 
     public function __construct()
     {
         $this->promotions = new ArrayCollection();
         $this->supplements = new ArrayCollection();
         $this->options = new ArrayCollection();
-        $this->requipments = new ArrayCollection();
         $this->galleries = new ArrayCollection();
         $this->bookings = new ArrayCollection();
+        $this->equipments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -251,12 +250,12 @@ class Room
     /**
      * @return Collection<int, Promotion>
      */
-    public function getPromotions(): Collection
+    public function getPromotions(): ?Collection
     {
         return $this->promotions;
     }
 
-    public function addPromotion(Promotion $promotion): self
+    public function addPromotion(?Promotion $promotion): self
     {
         if (!$this->promotions->contains($promotion)) {
             $this->promotions[] = $promotion;
@@ -266,7 +265,7 @@ class Room
         return $this;
     }
 
-    public function removePromotion(Promotion $promotion): self
+    public function removePromotion(?Promotion $promotion): self
     {
         if ($this->promotions->removeElement($promotion)) {
             // set the owning side to null (unless already changed)
@@ -293,22 +292,21 @@ class Room
     /**
      * @return Collection<int, Supplement>
      */
-    public function getSupplements(): Collection
+    public function getSupplements(): ?Collection
     {
         return $this->supplements;
     }
 
-    public function addSupplement(Supplement $supplement): self
+    public function addSupplement(?Supplement $supplement): self
     {
         if (!$this->supplements->contains($supplement)) {
             $this->supplements[] = $supplement;
-            $supplement->addRoom($this);
         }
 
         return $this;
     }
 
-    public function removeSupplement(Supplement $supplement): self
+    public function removeSupplement(?Supplement $supplement): self
     {
         if ($this->supplements->removeElement($supplement)) {
             $supplement->removeRoom($this);
@@ -320,25 +318,84 @@ class Room
     /**
      * @return Collection<int, Option>
      */
-    public function getOptions(): Collection
+    public function getOptions(): ?Collection
     {
         return $this->options;
     }
 
-    public function addOption(Option $option): self
+    public function addOption(?Option $option): self
     {
         if (!$this->options->contains($option)) {
             $this->options[] = $option;
-            $option->addRoom($this);
         }
 
         return $this;
     }
 
-    public function removeOption(Option $option): self
+    public function removeOption(?Option $option): self
     {
         if ($this->options->removeElement($option)) {
             $option->removeRoom($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, RoomGallery>
+     */
+    public function getGalleries(): ?Collection
+    {
+        return $this->galleries;
+    }
+
+    public function addGallery(?RoomGallery $gallery): self
+    {
+        if (!$this->galleries->contains($gallery)) {
+            $this->galleries[] = $gallery;
+            $gallery->setRoom($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGallery(?RoomGallery $gallery): self
+    {
+        if ($this->galleries->removeElement($gallery)) {
+            // set the owning side to null (unless already changed)
+            if ($gallery->getRoom() === $this) {
+                $gallery->setRoom(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Booking>
+     */
+    public function getBookings(): ?Collection
+    {
+        return $this->bookings;
+    }
+
+    public function addBooking(?Booking $booking): self
+    {
+        if (!$this->bookings->contains($booking)) {
+            $this->bookings[] = $booking;
+            $booking->setRoom($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBooking(?Booking $booking): self
+    {
+        if ($this->bookings->removeElement($booking)) {
+            // set the owning side to null (unless already changed)
+            if ($booking->getRoom() === $this) {
+                $booking->setRoom(null);
+            }
         }
 
         return $this;
@@ -356,7 +413,6 @@ class Room
     {
         if (!$this->equipments->contains($equipment)) {
             $this->equipments[] = $equipment;
-            $equipment->addRoom($this);
         }
 
         return $this;
@@ -364,69 +420,7 @@ class Room
 
     public function removeEquipment(RoomEquipment $equipment): self
     {
-        if ($this->equipments->removeElement($equipment)) {
-            $equipment->removeRoom($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, RoomGallery>
-     */
-    public function getGalleries(): Collection
-    {
-        return $this->galleries;
-    }
-
-    public function addGallery(RoomGallery $gallery): self
-    {
-        if (!$this->galleries->contains($gallery)) {
-            $this->galleries[] = $gallery;
-            $gallery->setRoom($this);
-        }
-
-        return $this;
-    }
-
-    public function removeGallery(RoomGallery $gallery): self
-    {
-        if ($this->galleries->removeElement($gallery)) {
-            // set the owning side to null (unless already changed)
-            if ($gallery->getRoom() === $this) {
-                $gallery->setRoom(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Booking>
-     */
-    public function getBookings(): Collection
-    {
-        return $this->bookings;
-    }
-
-    public function addBooking(Booking $booking): self
-    {
-        if (!$this->bookings->contains($booking)) {
-            $this->bookings[] = $booking;
-            $booking->setRoom($this);
-        }
-
-        return $this;
-    }
-
-    public function removeBooking(Booking $booking): self
-    {
-        if ($this->bookings->removeElement($booking)) {
-            // set the owning side to null (unless already changed)
-            if ($booking->getRoom() === $this) {
-                $booking->setRoom(null);
-            }
-        }
+        $this->equipments->removeElement($equipment);
 
         return $this;
     }

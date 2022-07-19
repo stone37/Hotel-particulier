@@ -1,11 +1,7 @@
 {% set session = app.session.get('booking_data') %}
+{% set promotion = get_promotion(room) %}
 
-{#<section class="row app-room-title-bulk mb-4">
-    <div class="col-12 d-flex justify-content-between">
-        <h4 class="h4-responsive">{{ room.name }}</h4>
-    </div>
-</section>#}
-<section class="row app-room-gallery-bulk mb-4 mt-4">
+<section class="row app-room-gallery-bulk mb-4">
     <div class="col-12">
         {% include 'site/room/show/_gallery.html.twig' %}
     </div>
@@ -15,24 +11,9 @@
         <h5 class="h5-responsive text-primary font-weight-stone-500">Informations sur la chambre</h5>
         <p class="small-9">{{ room.description|raw }}</p>
     </div>
-    {#<div class="col-12 col-md-3 mt-3">
-        <div class="text-success font-weight-stone-500 small-8">Capacité maximale</div>
-        <span class="badge badge-success">{{ room.maximumAdults }} adultes</span>
-    </div>
-    <div class="col-12 col-md-3 mt-3">
-        <div class="text-success font-weight-stone-500 small-8">Superficie</div>
-        <span class="badge badge-success">{{ room.area }} m²</span>
-    </div>
-
-    {% if room.smoker %}
-        <div class="col-12 col-md-3 mt-3">
-            <div class="text-success font-weight-stone-500 small-8">Fumeurs ou non-fumeurs</div>
-            <span class="badge badge-success">{{ room.smoker }}</span>
-        </div>
-    {% endif %}#}
 
     {% if room.area %}
-        <div class="col-lg-2">
+        <div class="col-lg-2 col-md-3 col-6 mb-2">
             <div class="grey-text font-weight-stone-500 small-8">Superficie</div>
             <div class="badge badge-grey-dark font-weight-stone-500">
                 <i class="fas fa-border-style mr-2 text-white"></i> {{ room.area }} m²
@@ -40,7 +21,7 @@
         </div>
     {% endif %}
 
-    <div class="col-lg-2">
+    <div class="col-lg-2 col-md-3 col-6 mb-2">
         <div class="grey-text font-weight-stone-500 small-8">Capacité maximale</div>
         <div class="badge badge-grey-dark font-weight-stone-500">
             <i class="fas fa-user-friends mr-2 text-white"></i> {{ room.maximumAdults + room.maximumOfChildren }} personnes
@@ -48,7 +29,7 @@
     </div>
 
     {% if room.couchage %}
-        <div class="col-lg-2">
+        <div class="col-lg-2 col-md-3 col-6 mb-2">
             <div class="grey-text font-weight-stone-500 small-8">Couchage</div>
             <div class="badge badge-grey-dark font-weight-stone-500">
                 <i class="fas fa-bed mr-2 text-white"></i> {{ room.couchage }}
@@ -57,7 +38,7 @@
     {% endif %}
 
     {% if room.smoker %}
-        <div class="col-lg-2">
+        <div class="col-lg-2 col-md-3 col-6 mb-2">
             <div class="grey-text font-weight-stone-500 small-8">Fumeurs ou non-fumeurs</div>
             <div class="badge badge-grey-dark font-weight-stone-500">
                 {% if room.smoker == 'Fumeurs' %}<i class="fas fa-smoking mr-2"></i>
@@ -196,23 +177,34 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="price text-right">
-                                <div class="text-danger number mb-1">
-                                    {{ app_room_total_price(room, option)|format_currency('XOF') }}
+                                <div class="text-danger number">
+                                    {% if promotion %}
+                                        <div class="grey-text">
+                                            <small>
+                                                <s>{{ room_price_total_by_booking(room, option)|format_currency('XOF') }}</s>
+                                            </small>
+                                        </div>
+                                        <div class="">
+                                            <strong>{{ room_promotion_price_total_by_booking(room, promotion, option)|format_currency('XOF') }}</strong>
+                                        </div>
+                                    {% else %}
+                                        <strong>{{ room_price_total_by_booking(room, option)|format_currency('XOF') }}</strong>
+                                    {% endif %}
                                 </div>
+
                                 {% if session %}
                                     {% set room_number = session['room_nbr'] %}
                                     {% set booking_days = app_booking_days(session['checkin'], session['checkout']) %}
 
-                                    <div class="d-flex justify-content-end">
-                                        <div class="grey-text info text-right font-weight-stone-500 w-50">
-                                            {{ (app_room_total_unit_price(room, option)*room_number)|format_currency('XOF') }}
-                                            par nuit pour {{ room_number }} chambres.
-                                            Taxes et frais compris
-                                        </div>
+                                    <div class="grey-text info text-right font-weight-stone-500 w-50">
+                                        {{ (room_total_real_price(room, option)*room_number)|format_currency('XOF') }}
+                                        par nuit pour {{ room_number }} chambres.
+                                        Taxes et frais compris
                                     </div>
                                 {% else %}
                                     <div class="grey-text info font-weight-stone-500">Taxe et frais compris</div>
                                 {% endif %}
+
                             </div>
                             <div class="d-flex justify-content-end align-items-center">
                                 <div class="dropdown mr-2">
@@ -233,7 +225,7 @@
                                                                 box-shadow: none !important;">
                                                 <div class="title dark-grey-text">{{ room_number }} chambre x {{ booking_days }} nuit</div>
                                                 <div class="price dark-grey-text">
-                                                    {{ app_room_price(room, option)|format_currency('XOF') }}
+                                                    {{ room_price_by_booking(room, option)|format_currency('XOF') }}
                                                 </div>
                                             </div>
                                             <div class="dropdown-item d-flex justify-content-start" style="
@@ -243,18 +235,30 @@
                                                                 -webkit-box-shadow: none !important;
                                                                 box-shadow: none !important;">
                                                 <div class="small-6 font-weight-stone-500 text-primary">
-                                                    {{ app_room_unit_price(room, option)|format_currency('XOF') }} par chambre, par nuit
+                                                    {{ room_real_price(room, option)|format_currency('XOF') }} par chambre, par nuit
                                                 </div>
                                             </div>
                                         {% else %}
-                                            <div class="dropdown-item d-flex justify-content-between"
-                                                 style="
+                                            <div class="dropdown-item d-flex justify-content-between" style="
                                                          background-color: transparent !important;
                                                          -webkit-box-shadow: none !important;
                                                          box-shadow: none !important;">
                                                 <div class="title dark-grey-text">1 chambre x 1 nuit</div>
                                                 <div class="price dark-grey-text">
-                                                    {{ app_room_price(room, option)|format_currency('XOF') }}
+                                                    {{ room_price_by_booking(room, option)|format_currency('XOF') }}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+
+                                        {% if promotion %}
+                                            <div class="dropdown-item d-flex justify-content-between"
+                                                 style="background-color: transparent !important;
+                                                                -webkit-box-shadow: none !important;
+                                                                box-shadow: none !important;">
+                                                <div class="title dark-grey-text">Remise</div>
+                                                <div class="price dark-grey-text">
+                                                    {% set reduction = room_price_by_booking(room, option) - room_promotion_price_by_booking(room, promotion, option) %}
+                                                    {{ reduction|format_currency('XOF') }}
                                                 </div>
                                             </div>
                                         {% endif %}
@@ -263,14 +267,20 @@
                                              style="background-color: transparent !important; -webkit-box-shadow: none !important; box-shadow: none !important;">
                                             <div class="title dark-grey-text" style="font-size: 0.95rem !important;">Taxe et frais</div>
                                             <div class="price dark-grey-text" style="font-size: 0.95rem !important;">
-                                                {% set taxe = app_room_total_price(room, option) - app_room_price(room, option) %}
+                                                {% set taxe = room_price_total_by_booking(room, option) - room_price_by_booking(room, option) %}
                                                 {{ taxe|format_currency('XOF') }}
                                             </div>
                                         </div>
                                         <div class="dropdown-item d-flex justify-content-between"
                                              style="background-color: transparent !important; -webkit-box-shadow: none !important; box-shadow: none !important;">
                                             <div class="title text-dark font-weight-stone-600">Total</div>
-                                            <div class="price text-dark font-weight-stone-600">{{ app_room_total_price(room, option)|format_currency('XOF') }}</div>
+                                            <div class="price text-dark font-weight-stone-600">
+                                                {% if promotion %}
+                                                    {{ room_promotion_price_total_by_booking(room, promotion, option)|format_currency('XOF') }}
+                                                {% else %}
+                                                    {{ room_price_total_by_booking(room, option)|format_currency('XOF') }}
+                                                {% endif %}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -281,7 +291,7 @@
                                         </a>
                                     {% else %}
                                         <a href="{{ path('app_booking_check', {'id': room.id, 'option_id': option.id}) }}" class="btn btn-primary btn-md">
-                                            <i class="far fa-calendar-alt mr-2"></i> Réserver maintenant
+                                            <i class="far fa-calendar-alt mr-2"></i> Réserver
                                         </a>
                                     {% endif %}
                                 </div>
@@ -309,22 +319,34 @@
                 </div>
                 <div class="col-md-6 room-supplement">
                     <div class="price text-right">
-                        <div class="text-danger number mb-1">
-                            {{ app_room_simple_total_price(room)|format_currency('XOF') }}
+                       <div class="text-danger number">
+                           {% if promotion %}
+                               <div class="grey-text">
+                                   <small>
+                                       <s>{{ room_price_total_by_booking(room)|format_currency('XOF') }}</s>
+                                   </small>
+                               </div>
+                               <div class="">
+                                   <strong>{{ room_promotion_price_total_by_booking(room, promotion)|format_currency('XOF') }}</strong>
+                               </div>
+                           {% else %}
+                               <strong>{{ room_price_total_by_booking(room)|format_currency('XOF') }}</strong>
+                           {% endif %}
                         </div>
+
                         {% if session %}
                             {% set room_number = session['room_nbr'] %}
+
                             <div class="d-flex justify-content-end">
                                 <div class="grey-text info font-weight-stone-500 w-50">
-                                    {{ (app_room_simple_total_unit_price(room) * room_number)|format_currency('XOF') }}
+                                    {{ (room_total_real_price(room) * room_number)|format_currency('XOF') }}
                                     par nuit pour {{ room_number }} chambres.
                                     Taxes et frais compris
                                 </div>
                             </div>
                         {% else %}
-                            <div class="grey-text info font-weight-stone-500">Taxe et frais compris</div>
+                            <div class="grey-text info font-weight-stone-500">Taxes et frais compris</div>
                         {% endif %}
-
                     </div>
                     <div class="d-flex justify-content-end align-items-center">
                         <div class="dropdown mr-2">
@@ -339,44 +361,57 @@
                                     {% set room_number = session['room_nbr'] %}
                                     {% set booking_days = app_booking_days(session['checkin'], session['checkout']) %}
 
-                                    <div class="dropdown-item d-flex justify-content-between" style="background-color: transparent !important;
-                                                                -webkit-box-shadow: none !important;
-                                                                box-shadow: none !important;">
+                                    <div class="dropdown-item d-flex justify-content-between"
+                                         style="background-color: transparent !important; -webkit-box-shadow: none !important; box-shadow: none !important;">
                                         <div class="title dark-grey-text">{{ room_number }} chambre x {{ booking_days }} nuit</div>
                                         <div class="price dark-grey-text">
-                                            {{ app_room_simple_price(room)|format_currency('XOF') }}
+                                            {{ room_price_by_booking(room)|format_currency('XOF') }}
                                         </div>
                                     </div>
-                                    <div class="dropdown-item" style="
-                                                                 background-color: transparent !important;
-                                                                -webkit-box-shadow: none !important;
-                                                                box-shadow: none !important;
-                                                                position: absolute; top: 4rem">
+                                    <div class="dropdown-item" style="position: absolute; top: 4rem; background-color: transparent !important;
+                                         -webkit-box-shadow: none !important; box-shadow: none !important;">
                                         <div class="small-6 font-weight-stone-500 text-primary">
-                                            {{ app_room_simple_unit_price(room)|format_currency('XOF') }} par chambre, par nuit
+                                            {{ room_real_price(room)|format_currency('XOF') }} par chambre, par nuit
                                         </div>
                                     </div>
                                 {% else %}
-                                    <div class="dropdown-item d-flex justify-content-between">
+                                    <div class="dropdown-item d-flex justify-content-between"
+                                         style="background-color: transparent !important; -webkit-box-shadow: none !important; box-shadow: none !important;">
                                         <div class="title dark-grey-text">1 chambre x 1 nuit</div>
                                         <div class="price dark-grey-text">
-                                            {{ app_room_simple_price(room)|format_currency('XOF') }}
+                                            {{ room_price_by_booking(room)|format_currency('XOF') }}
                                         </div>
                                     </div>
                                 {% endif %}
 
+                                {% if promotion %}
+                                    <div class="dropdown-item d-flex justify-content-between"
+                                         style="background-color: transparent !important; -webkit-box-shadow: none !important; box-shadow: none !important;">
+                                        <div class="title dark-grey-text">Remise</div>
+                                        <div class="price dark-grey-text">
+                                            {% set reduction = room_price_by_booking(room) - room_promotion_price_by_booking(room, promotion) %}
+                                            {{ reduction|format_currency('XOF') }}
+                                        </div>
+                                    </div>
+                                {% endif %}
                                 <div class="dropdown-item d-flex justify-content-between"
                                      style="background-color: transparent !important; -webkit-box-shadow: none !important; box-shadow: none !important;">
                                     <div class="title dark-grey-text" style="font-size: 0.95rem !important;">Taxe et frais</div>
                                     <div class="price dark-grey-text" style="font-size: 0.95rem !important;">
-                                        {% set taxe = app_room_simple_total_price(room) - app_room_simple_price(room) %}
+                                        {% set taxe = room_price_total_by_booking(room) - room_price_by_booking(room) %}
                                         {{ taxe|format_currency('XOF') }}
                                     </div>
                                 </div>
                                 <div class="dropdown-item d-flex justify-content-between"
                                      style="background-color: transparent !important; -webkit-box-shadow: none !important; box-shadow: none !important;">
                                     <div class="title text-dark font-weight-stone-600">Total</div>
-                                    <div class="price text-dark font-weight-stone-600">{{ app_room_simple_total_price(room)|format_currency('XOF') }}</div>
+                                    <div class="price text-dark font-weight-stone-600">
+                                        {% if promotion %}
+                                            {{ room_promotion_price_total_by_booking(room, promotion)|format_currency('XOF') }}
+                                        {% else %}
+                                            {{ room_price_total_by_booking(room)|format_currency('XOF') }}
+                                        {% endif %}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -387,7 +422,7 @@
                                 </a>
                             {% else %}
                                 <a href="{{ path('app_booking_check', {'id': room.id}) }}" class="btn btn-primary ">
-                                    <i class="far fa-calendar-alt mr-2"></i> Réserver maintenant
+                                    <i class="far fa-calendar-alt mr-2"></i> Réserver
                                 </a>
                             {% endif %}
 

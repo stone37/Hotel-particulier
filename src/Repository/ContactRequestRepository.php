@@ -39,6 +39,11 @@ class ContactRequestRepository extends ServiceEntityRepository
         }
     }
 
+    public function flush(): void
+    {
+        $this->getEntityManager()->flush();
+    }
+
     public function findLastRequestForIp(string $ip): ?ContactRequest
     {
         return $this->createQueryBuilder('req')

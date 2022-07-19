@@ -39,6 +39,11 @@ class DiscountRepository extends ServiceEntityRepository
         }
     }
 
+    public function flush(): void
+    {
+        $this->getEntityManager()->flush();
+    }
+
     public function getAdmin()
     {
         $qb = $this->createQueryBuilder('d')

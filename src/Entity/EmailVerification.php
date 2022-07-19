@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Entity\Traits\TimestampableTrait;
 use App\Repository\EmailVerificationRepository;
 use DateTime;
 use DateTimeInterface;
@@ -17,17 +16,17 @@ class EmailVerification
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private ?string $email;
+    private ?string $email = '';
 
     #[ORM\Column(type: 'datetime')]
-    private ?DateTimeInterface $createdAt;
+    private ?DateTimeInterface $createdAt = null;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private ?string $token;
+    private ?string $token = '';
 
     #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
-    private User $author;
+    private ?User $author = null;
 
     public function getId(): ?int
     {
@@ -70,12 +69,12 @@ class EmailVerification
         return $this;
     }
 
-    public function getAuthor(): User
+    public function getAuthor(): ?User
     {
         return $this->author;
     }
 
-    public function setAuthor(User $author): self
+    public function setAuthor(?User $author): self
     {
         $this->author = $author;
 

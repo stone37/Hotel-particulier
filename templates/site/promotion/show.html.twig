@@ -1,0 +1,52 @@
+{% extends 'site/layout.html.twig' %}
+
+{% block title promotion.name ~ ' |  Nos offres' %}
+
+{% block meta %}
+    {% set content = promotion.description %}
+    <meta name="description" content="{{ content }}"/>
+    <meta property="og:description" content="{{ content }}" />
+{% endblock %}
+
+{% block app_intro %}
+    <div class="view intro" style="background-image: url({{ vich_uploader_asset(promotion, 'file') }}); background-repeat: no-repeat; background-size: cover;">
+        <div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
+            <div class="container mt-5">
+                <div class="row d-flex justify-content-center wow fadeIn">
+                    <div class="col-12 col-md-12 mb-4 text-primary text-center">
+                        <h1 class="display-4 font-weight-bold d-none d-md-block mt-md-4 pt-lg-4 text-center">{{ promotion.name }}</h1>
+                        <h1 class="display-6 font-weight-bold d-block d-md-none text-center mt-5 pt-4">{{ promotion.name }}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bc">
+        <div class="container">
+            {{ wo_render_breadcrumbs({viewTemplate: '_breadcrumb.html.twig', listClass: 'breadcrumb',
+                itemClass: 'breadcrumb-item', separator: '>', separatorClass: 'fas fa-angle-right'}) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block app_body %}
+    <section class="row mx-lg-4 mx-md-1 app-promotion-show">
+        <div class="col-12">
+            {{ include('site/promotion/show/content.html.twig') }}
+        </div>
+    </section>
+
+    {{ include('site/newsletter/_subscribe.html.twig') }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% include 'Ui/_stylesheets.html.twig' with {'path': 'assets/css/site/intro.css'} %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+

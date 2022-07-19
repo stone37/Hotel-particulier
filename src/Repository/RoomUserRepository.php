@@ -30,6 +30,11 @@ class RoomUserRepository extends ServiceEntityRepository
         }
     }
 
+    public function flush(): void
+    {
+        $this->getEntityManager()->flush();
+    }
+
     public function remove(RoomUser $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);

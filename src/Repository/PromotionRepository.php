@@ -41,6 +41,11 @@ class PromotionRepository extends ServiceEntityRepository
         }
     }
 
+    public function flush(): void
+    {
+        $this->getEntityManager()->flush();
+    }
+
     public function getEnabled()
     {
         $qb = $this->createQueryBuilder('p')
@@ -58,6 +63,39 @@ class PromotionRepository extends ServiceEntityRepository
             ->setParameter('end', new DateTime());
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function getAll()
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->leftJoin('p.room', 'room')
+            ->leftJoin('room.options', 'options')
+            ->leftJoin('options.supplements', 'opt_supplements')
+            ->addSelect('room')
+            ->addSelect('options')
+            ->addSelect('opt_supplements')
+            ->where('p.enabled = 1')
+            ->andWhere('p.end >= :end')
+            ->setParameter('end', new DateTime())
+            ->orderBy('p.position', 'asc');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function getBySlug(string $slug)
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->leftJoin('p.room', 'room')
+            ->leftJoin('room.options', 'options')
+            ->leftJoin('options.supplements', 'opt_supplements')
+            ->addSelect('room')
+            ->addSelect('options')
+            ->addSelect('opt_supplements')
+            ->where('p.enabled = 1')
+            ->andWhere('p.slug = :slug')
+            ->setParameter('slug', $slug);
+
+        return $qb->getQuery()->getOneOrNullResult();
     }
 
     public function findLimit(int $limit)

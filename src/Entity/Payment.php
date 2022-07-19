@@ -25,28 +25,28 @@ class Payment
     private ?int $discount = 0;
 
     #[ORM\Column(type: 'integer', nullable: true)]
-    private ?int $taxe;
+    private ?int $taxe = null;
 
     #[ORM\Column(type: 'boolean', nullable: true)]
     private $refunded = false;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private ?string $firstname;
+    private ?string $firstname = '';
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private ?string $lastname;
+    private ?string $lastname = '';
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private ?string $address;
+    private ?string $address = '';
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private ?string $country;
+    private ?string $country = '';
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private ?string $city;
+    private ?string $city = '';
 
     #[ORM\OneToOne(mappedBy: 'payment', targetEntity: Commande::class, cascade: ['persist', 'remove'])]
-    private $commande;
+    private ?Commande $commande = null;
 
     public function getId(): ?int
     {

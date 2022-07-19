@@ -58,7 +58,7 @@ class PromotionController extends AbstractController
 
             $this->dispatcher->dispatch($event, AdminCRUDEvent::PRE_CREATE);
 
-            $this->repository->add($promotion);
+            $this->repository->add($promotion, true);
 
             $this->dispatcher->dispatch($event, AdminCRUDEvent::POST_CREATE);
 
@@ -170,10 +170,10 @@ class PromotionController extends AbstractController
     #[Route(path: '/admin/promotions/bulk/delete', name: 'app_admin_promotion_bulk_delete', options: ['expose' => true])]
     public function deleteBulk(Request $request)
     {
-        $ids = (array)$request->query->get('data');
+        $ids = (array) json_decode($request->query->get('data'));
 
         if ($request->query->has('data'))
-            $request->getSession()->set('data', $request->query->get('data'));
+            $request->getSession()->set('data', $ids);
 
         $form = $this->deleteMultiForm();
 

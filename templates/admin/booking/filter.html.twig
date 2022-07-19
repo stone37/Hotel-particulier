@@ -21,11 +21,9 @@
                 {% elseif isActive('app_admin_booking_archive_index') %}
                     {% set path = path('app_admin_booking_archive_index') %}
                 {% elseif isActive('app_admin_booking_user') %}
-                    {% set path = path('app_admin_booking_user') %}
-                {% elseif isActive('app_admin_booking_hostel') %}
-                    {% set path = path('app_admin_booking_hostel') %}
+                    {% set path = path('app_admin_booking_user', {'id': user.id}) %}
                 {% elseif isActive('app_admin_booking_room') %}
-                    {% set path = path('app_admin_booking_room') %}
+                    {% set path = path('app_admin_booking_room', {'id': room.id}) %}
                 {% else %}
                     {% set path = path('app_admin_booking_index') %}
                 {% endif %}

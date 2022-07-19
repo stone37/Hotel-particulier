@@ -40,6 +40,11 @@ class PasswordResetTokenRepository extends ServiceEntityRepository
         }
     }
 
+    public function flush(): void
+    {
+        $this->getEntityManager()->flush();
+    }
+
     /**
      * Supprime les anciennes demande de verification d'email.
      */

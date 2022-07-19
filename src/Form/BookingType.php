@@ -41,23 +41,23 @@ class BookingType extends AbstractType
         /** @var ?User $user */
         $user = $this->security->getUser();
 
-        if ($user && empty($user->getFirstName())) {
+        if (!$user || empty($user->getFirstName())) {
             $builder->add('firstname', TextType::class, ['label' => 'Prénom']);
         }
 
-        if ($user && empty($user->getLastName())) {
+        if (!$user || empty($user->getLastName())) {
             $builder->add('lastname', TextType::class, ['label' => 'Nom']);
         }
 
-        if ($user && empty($user->getEmail())) {
+        if (!$user || empty($user->getEmail())) {
             $builder->add('email', EmailType::class, ['label' => 'Adresse e-mail']);
         }
 
-        if ($user && empty($user->getPhone())) {
+        if (!$user || empty($user->getPhone())) {
             $builder->add('phone', TextType::class, ['label' => 'Numéro de téléphone']);
         }
 
-        if ($user && empty($user->getCountry())) {
+        if (!$user || empty($user->getCountry())) {
             $builder->add('country', CountryType::class, [
                 'label' => 'Pays (facultatif)',
                 'attr' => [
@@ -68,7 +68,7 @@ class BookingType extends AbstractType
             ]);
         }
 
-        if ($user && empty($user->getCity())) {
+        if (!$user || empty($user->getCity())) {
             $builder->add('city', TextType::class, ['label' => 'Ville (facultatif)', 'required' => false]);
         }
 

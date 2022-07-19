@@ -52,12 +52,6 @@ $(document).ready(function() {
 
     $('.toast').toast(options)
 
-    /* Back history */
-    $('#btn-back').click(function (e) {
-        e.preventDefault();
-        window.history.back();
-    })
-
     // Gestion des notification serveur
     flashes($('.notify'));
 });
@@ -135,18 +129,20 @@ function bulkModals(element, container, route, elementRacine) {
             }
         });
 
+        console.log(JSON.stringify(ids))
+
         if (ids.length) {
             let $modal = '#confirmMulti'+ids.length;
 
             $.ajax({
                 url: Routing.generate(route),
-                data: {'data': ids},
+                data: {'data': JSON.stringify(ids)},
                 type: 'GET',
                 success: function(data) {
                     hideLoading();
 
-                    $(elementRacine).html(data.html);
-                    $($modal).modal()
+                   $(elementRacine).html(data.html);
+                   $($modal).modal();
                 },
             });
         }
@@ -168,23 +164,5 @@ function notification(titre, message, options, type) {
     toastr[type](message, titre, options);
 }
 
-/*
-let options = {
-    "closeButton": false, // true/false
-    "debug": false, // true/false
-    "newestOnTop": false, // true/false
-    "progressBar": true, // true/false
-    "positionClass": "toast-top-right", // toast-top-right / toast-top-left / toast-bottom-right / toast-bottom-left
-    "preventDuplicates": false, //true/false
-    "onclick": null,
-    "showDuration": "300", // in milliseconds
-    "hideDuration": "1000", // in milliseconds
-    "timeOut": "8000", // in milliseconds
-    "extendedTimeOut": "1000", // in milliseconds
-    "showEasing": "swing",
-    "hideEasing": "linear",
-    "showMethod": "fadeIn",
-    "hideMethod": "fadeOut"
-};
-*/
+
 

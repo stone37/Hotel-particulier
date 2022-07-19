@@ -39,6 +39,11 @@ class NewsletterDataRepository extends ServiceEntityRepository
         }
     }
 
+    public function flush(): void
+    {
+        $this->getEntityManager()->flush();
+    }
+
     public function getNumber(): ?int
     {
         $qb = $this->createQueryBuilder('nd')

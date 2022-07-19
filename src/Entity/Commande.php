@@ -32,22 +32,22 @@ class Commande
     private ?int $amountTotal = 0;
 
     #[ORM\Column(type: 'integer', nullable: true)]
-    private ?int $taxeAmount;
+    private ?int $taxeAmount = null;
 
     #[ORM\Column(type: 'integer', nullable: true)]
-    private ?int $discountAmount;
+    private ?int $discountAmount = null;
 
     #[ORM\OneToOne(inversedBy: 'commande', targetEntity: Payment::class, cascade: ['persist', 'remove'])]
-    private ?Payment $payment;
+    private ?Payment $payment = null;
 
     #[ORM\ManyToOne(targetEntity: Discount::class, inversedBy: 'commandes')]
-    private ?Discount $discount;
+    private ?Discount $discount = null;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'commandes')]
-    private ?User $user;
+    private ?User $user = null;
 
     #[ORM\OneToOne(inversedBy: 'commande', targetEntity: Booking::class, cascade: ['persist', 'remove'])]
-    private $booking;
+    private ?Booking $booking = null;
 
     public function getId(): ?int
     {

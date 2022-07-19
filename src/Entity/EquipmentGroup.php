@@ -19,13 +19,13 @@ class EquipmentGroup
     private $id;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private ?string $name;
+    private ?string $name = '';
 
     #[ORM\Column(type: 'text', nullable: true)]
-    private ?string $description;
+    private ?string $description = '';
 
     #[ORM\OneToMany(targetEntity: Equipment::class, mappedBy: 'groupe')]
-    private $equipments;
+    private $equipments = null;
 
     public function __construct()
     {

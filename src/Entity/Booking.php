@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use App\Entity\Traits\TimestampableTrait;
 use App\Repository\BookingRepository;
-use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -90,16 +89,16 @@ class Booking
 
     #[ORM\ManyToOne(targetEntity: Room::class, inversedBy: 'bookings')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Room $room;
+    private ?Room $room = null;
 
     #[ORM\OneToMany(mappedBy: 'booking', targetEntity: RoomUser::class, cascade: ['persist', 'remove'])]
-    private ArrayCollection $occupants;
+    private $occupants = null;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'bookings')]
-    private ?User $user;
+    private ?User $user = null;
 
     #[ORM\OneToOne(mappedBy: 'booking', targetEntity: Commande::class, cascade: ['persist', 'remove'])]
-    private ?Commande $commande;
+    private ?Commande $commande = null;
 
     public function __construct()
     {
@@ -378,12 +377,12 @@ class Booking
     /**
      * @return Collection<int, RoomUser>
      */
-    public function getOccupants(): Collection
+    public function getOccupants(): ?Collection
     {
         return $this->occupants;
     }
 
-    public function addOccupant(RoomUser $occupant): self
+    public function addOccupant(?RoomUser $occupant): self
     {
         if (!$this->occupants->contains($occupant)) {
             $this->occupants[] = $occupant;
@@ -393,7 +392,7 @@ class Booking
         return $this;
     }
 
-    public function removeOccupant(RoomUser $occupant): self
+    public function removeOccupant(?RoomUser $occupant): self
     {
         if ($this->occupants->removeElement($occupant)) {
             // set the owning side to null (unless already changed)

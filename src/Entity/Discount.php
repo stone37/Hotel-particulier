@@ -24,22 +24,22 @@ class Discount
     private $id;
 
     #[ORM\Column(type: 'integer', nullable: true)]
-    private ?int $discount;
+    private ?int $discount = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private ?string $code;
+    private ?string $code = '';
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $type = Discount::PERCENT_REDUCTION;
 
     #[ORM\Column(type: 'integer', nullable: true)]
-    private ?int $utilisation;
+    private ?int $utilisation = null;
 
     #[ORM\Column(type: 'integer', nullable: true)]
-    private ?int $utiliser;
+    private ?int $utiliser = null;
 
     #[ORM\OneToMany(mappedBy: 'discount', targetEntity: Commande::class)]
-    private ArrayCollection $commandes;
+    private $commandes = null;
 
     public function __construct()
     {
@@ -114,12 +114,12 @@ class Discount
     /**
      * @return Collection<int, Commande>
      */
-    public function getCommandes(): Collection
+    public function getCommandes(): ?Collection
     {
         return $this->commandes;
     }
 
-    public function addCommande(Commande $commande): self
+    public function addCommande(?Commande $commande): self
     {
         if (!$this->commandes->contains($commande)) {
             $this->commandes[] = $commande;
@@ -129,7 +129,7 @@ class Discount
         return $this;
     }
 
-    public function removeCommande(Commande $commande): self
+    public function removeCommande(?Commande $commande): self
     {
         if ($this->commandes->removeElement($commande)) {
             // set the owning side to null (unless already changed)
